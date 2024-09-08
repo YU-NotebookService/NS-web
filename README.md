@@ -12,6 +12,12 @@ ex) feature/loginDesign
 -> 카멜 형식, 직관적인 이름(영어)로 작성해주세요
 ```
 
+### PR(Pull Requests) 제목
+```
+{브랜치 이름}: 작업 내용
+ex) feature/loginDesign: 로그인 컴포넌트 제작
+```
+
 ### 커밋 메시지
 ```
 {message}: {작업 내용}
