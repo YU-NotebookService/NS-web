@@ -47,7 +47,7 @@ function Login() {
             type="password"
           />
           <LoginButton type="submit" value="로그인" />
-          <CreateButton type = "submit" value = "회원가입"/>
+          <CreateButton type = "submit" value="회원가입" />
         </Right>
       </LoginBox>
     </Container>

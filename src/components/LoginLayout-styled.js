@@ -1,8 +1,8 @@
 import { styled } from "styled-components";
 
 export const Container = styled.div`
-  height: 100vh;
   width: 100%;
+  min-width: 850px;
   background-color: #ffffff;
   display: flex;
   flex-direction: row;
@@ -17,6 +17,7 @@ export const LoginBox = styled.div`
   justify-content: space-between;
   align-items: center;
   position: relative;
+  margin: 200px 50px;
 `;
 
 export const Input = styled.input`
@@ -29,12 +30,15 @@ export const Input = styled.input`
   background-color: #ffffff;
   color: #666666;
   box-sizing: border-box;
-  font-family: Inter;
-  font-size: 20px;
+  font-family: Inter; 
+  font-size: 16px;
   font-weight: 800;
   line-height: normal;
-  transition: 0.5s;
-  
+  &:focus{
+    border-color: #0d3f7a;
+    border-width: 2px;
+    outline: none;
+  }
 `;
 
 export const LoginButton = styled.input`
@@ -43,9 +47,8 @@ export const LoginButton = styled.input`
   background-color: #0d3f7a;
   color: white;
   border: none;
-  color: #FFF;
   font-family: Inter;
-  font-size: 20px;
+  font-size: 16px;
   font-weight: 800;
   line-height: normal;
   cursor: pointer;
@@ -53,19 +56,23 @@ export const LoginButton = styled.input`
 `;
 
 export const Logo = styled.img`
-  width: 300px;
-  
+  width: 290px;
+  margin-top: -10px;
+  margin-left: 30px;
 `;
 
-export const CreateButton = styled.div`
-  margin-left: 250px;
-  width: 100px;
+export const CreateButton = styled.input`
+  margin-top: 10px;
+  margin-left: 270px;
+  width: 80px;
   height: 30px;
-  background-color: black;
+  color: #0d3f7a;
+  background-color: white;
   font-family: Inter;
-  font-size: 20px;
+  font-size: 18px;
   font-weight: 800;
   line-height: normal;
+  border: none;
 `;
 
 export const Left = styled.div`
