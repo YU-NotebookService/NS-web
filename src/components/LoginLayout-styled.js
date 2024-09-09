@@ -23,7 +23,7 @@ export const LoginBox = styled.div`
 export const Input = styled.input`
   width: 350px;
   height: 50px;
-  margin: 10px 0;
+  margin: 10px 0; 
   padding: 5px;
   border-radius: 10px;
   border: 1px solid #B3AEAE;
