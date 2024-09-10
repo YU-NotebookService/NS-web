@@ -26,19 +26,7 @@ export const Logo = styled.img`
   margin-left: 30px;
 `;
 
-export const CreateButton = styled.input`
-  margin-top: 10px;
-  margin-left: 270px;
-  width: 80px;
-  height: 30px;
-  color: #0d3f7a;
-  background-color: white;
-  font-family: Inter;
-  font-size: 18px;
-  font-weight: 800;
-  line-height: normal;
-  border: none;
-`;
+
 
 export const Left = styled.div`
   width: 400px;
