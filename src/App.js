@@ -7,7 +7,6 @@ function App() {
   return (
     <>
       <GlobalStyles />
-      <Layout />
       <Login />
       <div className="Content">
       
