@@ -20,44 +20,9 @@ export const LoginBox = styled.div`
   margin: 200px 50px;
 `;
 
-export const Input = styled.input`
-  width: 350px;
-  height: 50px;
-  margin: 10px 0; 
-  padding: 8px;
-  border-radius: 10px;
-  border: 1px solid #B3AEAE;
-  background-color: #ffffff;
-  color: #666666;
-  box-sizing: border-box;
-  font-family: Inter; 
-  font-size: 16px;
-  font-weight: 800;
-  line-height: normal;
-  &:focus{
-    border-color: #0d3f7a;
-    border-width: 2px;
-    outline: none;
-  }
-`;
-
-export const LoginButton = styled.input`
-  width: 350px;
-  height: 50px;
-  background-color: #0d3f7a;
-  color: white;
-  border: none;
-  font-family: Inter;
-  font-size: 16px;
-  font-weight: 800;
-  line-height: normal;
-  cursor: pointer;
-  margin-top: 10px;
-`;
-
 export const Logo = styled.img`
   width: 290px;
-  margin-top: -10px;
+  margin-top: -30px;
   margin-left: 30px;
 `;
 

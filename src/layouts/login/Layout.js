@@ -4,12 +4,12 @@ import {
   Container, 
   LoginBox,
   Logo,
-  Input, 
-  LoginButton,
   CreateButton,
   Left,
   Right,
 } from '../../components/LoginLayout-styled';
+import Input from '../../components/common/Input';
+import Button from '../../components/common/Button';
 
 export const userContext = createContext();
 
@@ -38,6 +38,10 @@ function Login() {
             placeholder="학번"
             onChange={onChangeInput}
             name="studentId"
+            style={{
+              width: '300px',
+              height: '20px',
+            }}
           />
           <Input
             value={input.password}
@@ -45,9 +49,34 @@ function Login() {
             onChange={onChangeInput}
             name="password"
             type="password"
+            style={{
+              width: '300px',
+              height: '20px',
+              marginTop: '20px'
+            }}
           />
-          <LoginButton type="submit" value="로그인" />
-          <CreateButton type = "submit" value="회원가입" />
+          <Button 
+          style={{
+            width: '350px',
+            height: '50px',
+            marginTop: '20px'
+          }}
+          >
+            로그인
+          </Button>
+          <Button 
+          style={{
+            padding: '0px',
+            backgroundColor: 'white',
+            color: 'var(--main-color)',
+            fontSize: '20px',
+            height: '50px',
+            
+            marginLeft: '270px',
+          }}
+          >
+            회원가입
+          </Button>
         </Right>
       </LoginBox>
     </Container>
