@@ -26,8 +26,6 @@ export const Logo = styled.img`
   margin-left: 30px;
 `;
 
-
-
 export const Left = styled.div`
   width: 400px;
 `;
