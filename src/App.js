@@ -8,9 +8,9 @@ function App() {
     <>
       <GlobalStyles />
       <Layout />
-      <Login/>
+      <Login />
       <div className="Content">
-        
+      
       </div>
     </>
   );

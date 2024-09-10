@@ -16,7 +16,7 @@ export const userContext = createContext();
 function Login() {
   const [input, setInput] = useState({ 
     studentId: "",
-    name: "",
+    password: "",
   })
 
   function onChangeInput(e) {
