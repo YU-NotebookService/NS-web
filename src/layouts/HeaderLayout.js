@@ -1,21 +1,21 @@
 import React from 'react';
-import img_Logo_YU from '../../assets/img_Logo_YU.svg';
+import img_Logo_YU from '../assets/img_Logo_YU.svg';
 import {
   LogoContainer,
-  Logo,
+  HeaderLogo,
   Title,
   PageWrapper,
   PageItem,
   DivideLine,
   NavBar,
   NavItem,
-} from '../../components/HeaderLayout-styled';
-// TODO: 절대 경로 변경
-function Layout() {
+} from '../components/FrameLayout-styled';
+
+function HeaderLayout() {
   return (
     <>
       <LogoContainer>
-        <Logo src={img_Logo_YU} />
+        <HeaderLogo src={img_Logo_YU} />
         <Title>노트북대여</Title>
         <PageWrapper>
           {/* TODO: 추후 링크 연결 예정 */}
@@ -37,4 +37,4 @@ function Layout() {
   );
 }
 
-export default Layout;
+export default HeaderLayout;
