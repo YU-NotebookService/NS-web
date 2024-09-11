@@ -4,7 +4,6 @@ import {
   Container, 
   LoginBox,
   Logo,
-  CreateButton,
   Left,
   Right,
 } from '../../components/LoginLayout-styled';
@@ -71,7 +70,6 @@ function Login() {
             color: 'var(--main-color)',
             fontSize: '20px',
             height: '50px',
-            
             marginLeft: '270px',
           }}
           >
