@@ -74,7 +74,6 @@ function Register() {
         >
           가입하기
         </Button>
-
       </Form>
     </Container>
 
