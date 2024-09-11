@@ -42,7 +42,7 @@ function Register() {
           <Text>휴대폰 번호</Text>
           <Input
             style = {{
-              width: "35x"
+              width: "35px"
             }}
           />
           <NumText>-</NumText>
