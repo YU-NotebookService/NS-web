@@ -1,13 +1,20 @@
 import React from 'react';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import GlobalStyles from './GlobalStyles';
+import Layout from './layouts/Layout';
+import Main from './pages/main/Main';
 
 function App() {
   return (
     <>
       <GlobalStyles />
-      <div className="Content">
-        <div>Content</div>
-      </div>
+      <BrowserRouter>
+        <Routes>
+          <Route element={<Layout />}>
+            <Route path="" element={<Main />} />
+          </Route>
+        </Routes>
+      </BrowserRouter>
     </>
   );
 }
