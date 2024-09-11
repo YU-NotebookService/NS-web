@@ -9,9 +9,9 @@ import {
   DivideLine,
   NavBar,
   NavItem,
-} from '../components/FrameLayout-styled';
-
-function HeaderLayout() {
+} from '../styles/layouts/HeaderLayout-styled';
+// TODO: 절대 경로 설정
+const HeaderLayout = () => {
   return (
     <>
       <LogoContainer>
@@ -35,6 +35,6 @@ function HeaderLayout() {
       </NavBar>
     </>
   );
-}
+};
 
 export default HeaderLayout;

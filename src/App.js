@@ -1,12 +1,15 @@
 import React from 'react';
 import GlobalStyles from './GlobalStyles';
-import Layout from './layouts/header/Layout';
+import FooterLayout from './layouts/FooterLayout';
+import HeaderLayout from './layouts/HeaderLayout';
 
 function App() {
   return (
     <>
       <GlobalStyles />
-      <Layout />
+
+      <HeaderLayout />
+      <FooterLayout />
     </>
   );
 }
