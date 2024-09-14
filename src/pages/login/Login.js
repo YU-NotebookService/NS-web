@@ -3,9 +3,7 @@ import LoginLayout from "../../layouts/login/LoginLayout"
 
 function Login() {
   return (  
-
     <LoginLayout />
-
   );
 }
 

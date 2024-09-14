@@ -1,13 +1,12 @@
 import { useState, createContext } from "react";
 import img_Logo_YU from '../../assets/login/img_Logo_YU.svg';
 import {
-  Content,
   Container, 
   LoginBox,
   Logo,
   Left,
   Right,
-} from '../../components/login/LoginLayout-styled';
+} from '../../styles/LoginLayout-styled';
 import Input from '../../components/common/Input';
 import Button from '../../components/common/Button';
 
@@ -27,7 +26,6 @@ function LoginLayout() {
   }
 
   return (
-    <Content className="Content">
     <Container>
       <LoginBox>
         <Left>
@@ -80,7 +78,6 @@ function LoginLayout() {
         </Right>
       </LoginBox>
     </Container>
-    </Content>
   );
 }
 

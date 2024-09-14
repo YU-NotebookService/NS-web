@@ -8,7 +8,11 @@ function App() {
   return (
     <>
       <GlobalStyles />
-      <Login />
+      <BrowserRouter>
+        <Routes>
+          <Route path="" element = {<Login />} />
+        </Routes>
+      </BrowserRouter>
     </>
   );
 }
