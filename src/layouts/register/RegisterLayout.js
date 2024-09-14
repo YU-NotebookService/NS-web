@@ -6,7 +6,7 @@ import {
   Form,
   FormItem,
   NumText
-} from '../../components/RegisterLayout-styled';
+} from '../../styles/RegisterLayout-styled';
 import Button from '../../components/common/Button';
 import Input from '../../components/common/Input';
 
