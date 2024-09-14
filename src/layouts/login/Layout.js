@@ -1,5 +1,5 @@
 import { useState, createContext } from "react";
-import img_Logo_YU from '../../assets/img_Logo_YU2.svg';
+import img_Logo_YU from '../../assets/login/img_Logo_YU.svg';
 import {
   Container, 
   LoginBox,
