@@ -16,26 +16,15 @@ function Register() {
       <Form>
         <FormItem>
           <Text>학번</Text>
-          <Input
-          style = {{
-            width: "270px"
-          }}/>
+          <RegisterInput />
         </FormItem>
         <FormItem>
           <Text>이름</Text>
-            <Input
-              style = {{
-                width: "270px"
-              }}
-            />
+          <RegisterInput />
         </FormItem>
         <FormItem>
           <Text>새 비밀번호</Text>
-          <Input
-            style = {{
-              width: "270px"
-            }}
-          />
+          <RegisterInput />
         </FormItem>
         <FormItem>
           <Text>휴대폰 번호</Text>
@@ -47,27 +36,25 @@ function Register() {
         </FormItem>
         <FormItem>
           <Text>이메일</Text>
-          <Input
-            style = {{
-              width: "270px"
-            }}
-          />
+          <RegisterInput />
         </FormItem>
-        <Button
-          style = {{
-            width: "450px",
-            marginTop: "30px"
-          }}
-        >
-          가입하기
-        </Button>
+        <RegisterButton>등록하기</RegisterButton>
       </Form>
     </>
   );
 }
 
+const RegisterInput = styled(Input)`
+  width: 270px;
+`;
+
 const NumInput = styled(Input)`
   width: 35px;
+`;
+
+const RegisterButton = styled(Button)`
+  width: 450px;
+  margin-top: 30px;
 `;
 
 export default Register;
