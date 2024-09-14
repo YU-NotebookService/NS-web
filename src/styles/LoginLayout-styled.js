@@ -1,17 +1,6 @@
 import { styled } from "styled-components";
 
-export const Container = styled.div`
-  width: 100%;
-  min-width: 850px;
-  background-color: #ffffff;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center; 
-`;
-
 export const LoginBox = styled.div`
-  
   border-radius: 10px;
   display: flex;
   justify-content: space-between;
