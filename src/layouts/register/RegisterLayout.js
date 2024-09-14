@@ -47,12 +47,14 @@ function Register() {
           />
           <NumText>-</NumText>
           <Input
+            maxLength={4}
             style = {{
               width: "35px"
             }}
           />
           <NumText>-</NumText>
           <Input
+            maxLength={4}
             style = {{
               width: "35px"
             }}
