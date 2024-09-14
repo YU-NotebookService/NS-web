@@ -7,7 +7,7 @@ import {
 } from '../../styles/RegisterLayout-styled';
 import Button from '../../components/common/Button';
 import Input from '../../components/common/Input';
-import styled from "styled-components";
+import { styled } from "styled-components";
 
 function Register() {
   return (  
