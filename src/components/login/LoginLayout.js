@@ -1,7 +1,6 @@
 import { useState } from "react";
 import img_Logo_YU from '../../assets/login/img_Logo_YU.svg';
 import {
-  Container, 
   LoginBox,
   Logo,
   Left,
@@ -24,7 +23,7 @@ function LoginLayout() {
   }
 
   return (
-    <Container>
+    <>
       <LoginBox>
         <Left>
           <Logo src={img_Logo_YU}/>
@@ -75,7 +74,7 @@ function LoginLayout() {
           </Button>
         </Right>
       </LoginBox>
-    </Container>
+    </>
   );
 }
 
