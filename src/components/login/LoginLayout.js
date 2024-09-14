@@ -8,7 +8,7 @@ import {
 } from '../../styles/LoginLayout-styled';
 import Input from '../../components/common/Input';
 import Button from '../../components/common/Button';
-import styled from "styled-components";
+import { styled } from "styled-components";
 
 function LoginLayout() {
   const [input, setInput] = useState({ 
