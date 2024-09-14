@@ -7,6 +7,7 @@ import {
 } from '../../styles/RegisterLayout-styled';
 import Button from '../../components/common/Button';
 import Input from '../../components/common/Input';
+import styled from "styled-components";
 
 function Register() {
   return (  
@@ -38,25 +39,11 @@ function Register() {
         </FormItem>
         <FormItem>
           <Text>휴대폰 번호</Text>
-          <Input
-            style = {{
-              width: "35px"
-            }}
-          />
+          <NumInput/>
           <NumText>-</NumText>
-          <Input
-            maxLength={4}
-            style = {{
-              width: "35px"
-            }}
-          />
+          <NumInput maxLength={4} />
           <NumText>-</NumText>
-          <Input
-            maxLength={4}
-            style = {{
-              width: "35px"
-            }}
-          />
+          <NumInput maxLength={4} />
         </FormItem>
         <FormItem>
           <Text>이메일</Text>
@@ -78,5 +65,9 @@ function Register() {
     </>
   );
 }
+
+const NumInput = styled(Input)`
+  width: 35px;
+`;
 
 export default Register;
