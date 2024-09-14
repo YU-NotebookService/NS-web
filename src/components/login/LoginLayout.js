@@ -8,6 +8,7 @@ import {
 } from '../../styles/LoginLayout-styled';
 import Input from '../../components/common/Input';
 import Button from '../../components/common/Button';
+import styled from "styled-components";
 
 function LoginLayout() {
   const [input, setInput] = useState({ 
@@ -29,37 +30,20 @@ function LoginLayout() {
           <Logo src={img_Logo_YU}/>
         </Left>
         <Right>
-          <Input
+          <LoginInput
             value={input.studentId}
             placeholder="학번"
             onChange={onChangeInput}
             name="studentId"
-            style={{
-              width: '300px',
-              height: '20px',
-            }}
           />
-          <Input
+          <LoginInput
             value={input.password}
             placeholder="비밀번호"
             onChange={onChangeInput}
             name="password"
             type="password"
-            style={{
-              width: '300px',
-              height: '20px',
-              marginTop: '20px'
-            }}
           />
-          <Button 
-          style={{
-            width: '350px',
-            height: '50px',
-            marginTop: '20px'
-          }}
-          >
-            로그인
-          </Button>
+          <LoginButton>로그인</LoginButton>
           <Button 
           style={{
             padding: '0px',
@@ -77,5 +61,19 @@ function LoginLayout() {
     </>
   );
 }
+
+const LoginInput = styled(Input)`
+  width: 300px;
+  height: 25px;
+  margin-top: 20px;
+`;
+
+const LoginButton = styled(Button)`
+  width: 350px;
+  height: 50px;
+  margin-top: 20px;
+`;
+
+
 
 export default LoginLayout;
