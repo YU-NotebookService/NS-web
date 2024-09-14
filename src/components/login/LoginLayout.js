@@ -53,7 +53,7 @@ function LoginLayout() {
 
 const LoginInput = styled(Input)`
   width: 300px;
-  height: 25px;
+  height: 20px;
   margin-top: 20px;
 `;
 
