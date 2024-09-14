@@ -9,7 +9,7 @@ function App() {
       <GlobalStyles />
       <BrowserRouter>
         <Routes>
-          <Route path="" element = {""} />
+          
         </Routes>
       </BrowserRouter>
     </>
