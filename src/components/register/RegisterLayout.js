@@ -1,6 +1,4 @@
-import { useState } from 'react';
 import {
-  Container,
   Title,
   Text,
   Form,
@@ -12,7 +10,7 @@ import Input from '../../components/common/Input';
 
 function Register() {
   return (  
-    <Container>
+    <>
       <Title>회원가입</Title>
       <Form>
         <FormItem>
@@ -77,8 +75,7 @@ function Register() {
           가입하기
         </Button>
       </Form>
-    </Container>
- 
+    </>
   );
 }
 
