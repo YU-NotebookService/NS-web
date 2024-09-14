@@ -32,6 +32,7 @@ export const DivideLine = styled.div`
 `;
 export const NavBar = styled.div`
   display: flex;
+  padding-bottom: 20px;
 `;
 export const NavItem = styled.div`
   color: black;

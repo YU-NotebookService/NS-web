@@ -3,9 +3,8 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import GlobalStyles from './GlobalStyles';
 import Layout from './layouts/Layout';
 import Main from './pages/main/Main';
-import FooterLayout from './layouts/FooterLayout';
-import HeaderLayout from './layouts/HeaderLayout';
 import Login from './pages/login/Login';
+import Register from './pages/login/Register';
 
 function App() {
   return (
@@ -13,10 +12,11 @@ function App() {
       <GlobalStyles />
       <BrowserRouter>
         <Routes>
-          <Route element={<Layout />}>
-            <Route path="" element={<Main />} />
-          </Route>
           <Route path="" element={<Login />} />
+          <Route path="register" element={<Register />} />
+          <Route element={<Layout />}>
+            <Route path="main" element={<Main />} />
+          </Route>
         </Routes>
       </BrowserRouter>
     </>

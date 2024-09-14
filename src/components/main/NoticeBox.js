@@ -1,5 +1,5 @@
 import React from 'react';
-import { NoticeBoxWrapper, TitleBox } from '../../styles/mainStyled';
+import { NoticeBoxWrapper, TitleBox } from '../../styles/Main-styled';
 import Button from '../common/Button';
 import ContentCard from './ContentCard';
 
