@@ -1,5 +1,5 @@
 import React from "react";
-import RegisterLayout from "../../layouts/register/RegisterLayout";
+import RegisterLayout from "../../components/register/RegisterLayout";
 
 function Register() {
   return ( 
