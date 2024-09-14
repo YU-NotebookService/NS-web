@@ -10,7 +10,7 @@ function Login() {
   );
 }
 
-export const Container = styled.div`
+const Container = styled.div`
   width: 100%;
   min-width: 850px;
   background-color: #ffffff;
