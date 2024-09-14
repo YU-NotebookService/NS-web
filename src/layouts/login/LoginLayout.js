@@ -1,6 +1,7 @@
 import { useState, createContext } from "react";
 import img_Logo_YU from '../../assets/login/img_Logo_YU.svg';
 import {
+  Content,
   Container, 
   LoginBox,
   Logo,
@@ -12,7 +13,7 @@ import Button from '../../components/common/Button';
 
 export const userContext = createContext();
 
-function Login() {
+function LoginLayout() {
   const [input, setInput] = useState({ 
     studentId: "",
     password: "",
@@ -26,6 +27,7 @@ function Login() {
   }
 
   return (
+    <Content className="Content">
     <Container>
       <LoginBox>
         <Left>
@@ -78,7 +80,8 @@ function Login() {
         </Right>
       </LoginBox>
     </Container>
+    </Content>
   );
 }
 
-export default Login;
+export default LoginLayout;
