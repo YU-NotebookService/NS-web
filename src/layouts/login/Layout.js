@@ -6,7 +6,7 @@ import {
   Logo,
   Left,
   Right,
-} from '../../components/LoginLayout-styled';
+} from '../../components/login/LoginLayout-styled';
 import Input from '../../components/common/Input';
 import Button from '../../components/common/Button';
 
