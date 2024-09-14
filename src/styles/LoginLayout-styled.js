@@ -1,5 +1,7 @@
 import { styled } from "styled-components";
 
+export const Content = styled.div``;
+
 export const Container = styled.div`
   width: 100%;
   min-width: 850px;
@@ -11,7 +13,7 @@ export const Container = styled.div`
 `;
 
 export const LoginBox = styled.div`
-  padding: 20px;
+  
   border-radius: 10px;
   display: flex;
   justify-content: space-between;
