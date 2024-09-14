@@ -44,18 +44,7 @@ function LoginLayout() {
             type="password"
           />
           <LoginButton>로그인</LoginButton>
-          <Button 
-          style={{
-            padding: '0px',
-            backgroundColor: 'white',
-            color: 'var(--main-color)',
-            fontSize: '20px',
-            height: '50px',
-            marginLeft: '270px',
-          }}
-          >
-            회원가입
-          </Button>
+          <RegisterButton>회원가입</RegisterButton>
         </Right>
       </LoginBox>
     </>
@@ -74,6 +63,13 @@ const LoginButton = styled(Button)`
   margin-top: 20px;
 `;
 
-
+const RegisterButton = styled(Button)`
+  padding: 0px;
+  background-color: white;
+  color: var(--main-color);
+  font-size: 20px;
+  height: 50px;
+  margin-left: 270px;
+`;
 
 export default LoginLayout;
