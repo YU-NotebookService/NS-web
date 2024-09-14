@@ -1,4 +1,4 @@
-import { useState, createContext } from "react";
+import { useState } from "react";
 import img_Logo_YU from '../../assets/login/img_Logo_YU.svg';
 import {
   Container, 
@@ -9,8 +9,6 @@ import {
 } from '../../styles/LoginLayout-styled';
 import Input from '../../components/common/Input';
 import Button from '../../components/common/Button';
-
-export const userContext = createContext();
 
 function LoginLayout() {
   const [input, setInput] = useState({ 
