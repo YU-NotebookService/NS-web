@@ -1,7 +1,7 @@
 import React from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import GlobalStyles from './GlobalStyles';
-import Register from './pages/register/Register';
+
 
 function App() {
   return (
@@ -9,7 +9,7 @@ function App() {
       <GlobalStyles />
       <BrowserRouter>
         <Routes>
-          <Route path="" element = {<Register />} />
+          <Route path="" element = {""} />
         </Routes>
       </BrowserRouter>
     </>
