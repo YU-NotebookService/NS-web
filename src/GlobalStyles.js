@@ -1,4 +1,4 @@
-import { createGlobalStyle } from "styled-components";
+import { createGlobalStyle } from 'styled-components';
 
 const GlobalStyles = createGlobalStyle`
     :root {
@@ -9,8 +9,7 @@ const GlobalStyles = createGlobalStyle`
         font-family : pretendard;
     }
     .Content {
-      width: 100%;
-      padding: 0px 230px;
+      padding: 20px 230px;
     }
 `;
 

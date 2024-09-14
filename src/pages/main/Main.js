@@ -1,7 +1,17 @@
 import React from 'react';
+import Banner from '../../components/main/Banner';
+import MainBoxs from '../../components/main/MainBoxs';
+import { Wrapper, Content } from '../../styles/mainStyled';
 
 const Main = () => {
-  return <div>메인 페이지입니다.</div>;
+  return (
+    <Wrapper>
+      <Content className="Content">
+        <Banner />
+        <MainBoxs />
+      </Content>
+    </Wrapper>
+  );
 };
 
 export default Main;
