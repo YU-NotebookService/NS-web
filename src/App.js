@@ -9,9 +9,7 @@ function App() {
       <GlobalStyles />
       <BrowserRouter>
         <Routes>
-          <Route element={<Layout />}>
-            <Route path="" element={<Main />} />
-          </Route>
+          <Route path="" element = {<Register />} />
         </Routes>
       </BrowserRouter>
     </>
