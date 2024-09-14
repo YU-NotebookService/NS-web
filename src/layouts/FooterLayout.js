@@ -1,5 +1,5 @@
 import React from 'react';
-import img_Logo_YU_Footer from '../assets/img_Logo_YU_Footer.svg';
+import img_Logo_YU_Footer from '../assets/layout/img_Logo_YU_Footer.svg';
 import {
   FooterContainer,
   FooterWrapper,

@@ -4,11 +4,6 @@ export const FooterContainer = styled.div`
   width: 100%;
   height: 150px;
   background: #333945;
-  margin-top: 20px;
-
-  position: fixed;
-  bottom: 0;
-  left: 0;
 `;
 
 export const FooterWrapper = styled.div`

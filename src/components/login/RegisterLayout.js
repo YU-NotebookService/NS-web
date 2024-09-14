@@ -3,14 +3,14 @@ import {
   Text,
   Form,
   FormItem,
-  NumText
-} from '../../styles/RegisterLayout-styled';
+  NumText,
+} from '../../styles/login/RegisterLayout-styled';
 import Button from '../../components/common/Button';
 import Input from '../../components/common/Input';
-import { styled } from "styled-components";
+import { styled } from 'styled-components';
 
 function Register() {
-  return (  
+  return (
     <>
       <Title>회원가입</Title>
       <Form>
@@ -28,7 +28,7 @@ function Register() {
         </FormItem>
         <FormItem>
           <Text>휴대폰 번호</Text>
-          <NumInput/>
+          <NumInput />
           <NumText>-</NumText>
           <NumInput maxLength={4} />
           <NumText>-</NumText>

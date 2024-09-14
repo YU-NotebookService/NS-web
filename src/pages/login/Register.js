@@ -1,12 +1,12 @@
-import { styled } from "styled-components";
-import RegisterLayout from "../../components/register/RegisterLayout";
+import { styled } from 'styled-components';
+import RegisterLayout from '../../components/login/RegisterLayout';
 
 function Register() {
-  return ( 
+  return (
     <Container>
       <RegisterLayout />
     </Container>
-   );
+  );
 }
 
 const Container = styled.div`
@@ -16,8 +16,7 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center; 
+  justify-content: center;
 `;
-
 
 export default Register;

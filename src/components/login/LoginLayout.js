@@ -1,25 +1,25 @@
-import { useState } from "react";
+import { useState } from 'react';
 import img_Logo_YU from '../../assets/login/img_Logo_YU.svg';
 import {
   LoginBox,
   Logo,
   Left,
   Right,
-} from '../../styles/LoginLayout-styled';
+} from '../../styles/login/LoginLayout-styled';
 import Input from '../../components/common/Input';
 import Button from '../../components/common/Button';
-import { styled } from "styled-components";
+import { styled } from 'styled-components';
 
 function LoginLayout() {
-  const [input, setInput] = useState({ 
-    studentId: "",
-    password: "",
-  })
+  const [input, setInput] = useState({
+    studentId: '',
+    password: '',
+  });
 
   function onChangeInput(e) {
     setInput({
       ...input,
-      [e.target.name]: e.target.value
+      [e.target.name]: e.target.value,
     });
   }
 
@@ -27,7 +27,7 @@ function LoginLayout() {
     <>
       <LoginBox>
         <Left>
-          <Logo src={img_Logo_YU}/>
+          <Logo src={img_Logo_YU} />
         </Left>
         <Right>
           <LoginInput

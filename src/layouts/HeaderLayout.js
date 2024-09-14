@@ -1,5 +1,5 @@
 import React from 'react';
-import img_Logo_YU from '../assets/img_Logo_YU.svg';
+import img_Logo_YU from '../assets/layout/img_Logo_YU.svg';
 import {
   LogoContainer,
   HeaderLogo,
