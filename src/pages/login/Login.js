@@ -1,5 +1,5 @@
 import React from "react";
-import LoginLayout from "../../layouts/login/LoginLayout"
+import LoginLayout from "../../components/login/LoginLayout"
 
 function Login() {
   return (  
