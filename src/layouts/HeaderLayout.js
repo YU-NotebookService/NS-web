@@ -10,7 +10,7 @@ import {
   NavBar,
   NavItem,
 } from '../styles/layouts/HeaderLayout-styled';
-// TODO: 절대 경로 설정
+// TODO: 절대 경로 설정.
 const HeaderLayout = () => {
   return (
     <>
