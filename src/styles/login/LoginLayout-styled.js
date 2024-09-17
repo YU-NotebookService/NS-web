@@ -6,7 +6,7 @@ export const LoginBox = styled.div`
   justify-content: space-between;
   align-items: center;
   position: relative;
-  margin: 200px 50px;
+  margin: 170px 50px;
 `;
 
 export const Logo = styled.img`

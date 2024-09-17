@@ -12,9 +12,9 @@ function App() {
       <GlobalStyles />
       <BrowserRouter>
         <Routes>
-          <Route path="" element={<Login />} />
-          <Route path="register" element={<Register />} />
           <Route element={<Layout />}>
+            <Route path="" element={<Login />} />
+            <Route path="register" element={<Register />} />
             <Route path="main" element={<Main />} />
           </Route>
         </Routes>
