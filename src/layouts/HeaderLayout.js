@@ -29,7 +29,7 @@ const HeaderLayout = () => {
       <DivideLine>
         <hr />
       </DivideLine>
-      {location.pathname !== "/" && location.pathname !=="/register" && (
+      {location.pathname !== "/" && location.pathname !=="/register" && ( //로그인, 회원가입 페이지에만 보이지 않음
       <NavBar>
         {/* TODO: Navigate 구현 예정 */}
         <NavItem>노트북 대여</NavItem>
