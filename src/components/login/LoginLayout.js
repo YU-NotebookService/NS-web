@@ -6,11 +6,14 @@ import {
   Left,
   Right,
 } from '../../styles/login/LoginLayout-styled';
+import { useNavigate } from 'react-router-dom';
 import Input from '../../components/common/Input';
 import Button from '../../components/common/Button';
 import { styled } from 'styled-components';
 
 function LoginLayout() {
+  const navigate = useNavigate()
+
   const [input, setInput] = useState({
     studentId: '',
     password: '',
@@ -21,6 +24,10 @@ function LoginLayout() {
       ...input,
       [e.target.name]: e.target.value,
     });
+  }
+
+  function onChangePage(){
+    navigate('/register');
   }
 
   return (
@@ -44,7 +51,7 @@ function LoginLayout() {
             type="password"
           />
           <LoginButton>로그인</LoginButton>
-          <RegisterButton>회원가입</RegisterButton>
+          <RegisterButton onClick = {onChangePage}>회원가입</RegisterButton>
         </Right>
       </LoginBox>
     </>

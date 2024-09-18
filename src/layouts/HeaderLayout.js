@@ -10,8 +10,11 @@ import {
   NavBar,
   NavItem,
 } from '../styles/layouts/HeaderLayout-styled';
+import { useLocation } from 'react-router-dom';
 // TODO: 절대 경로 설정.
 const HeaderLayout = () => {
+  const location = useLocation();
+
   return (
     <>
       <LogoContainer>
@@ -26,6 +29,7 @@ const HeaderLayout = () => {
       <DivideLine>
         <hr />
       </DivideLine>
+      {location.pathname !== "/" && location.pathname !=="/register" && ( //로그인, 회원가입 페이지에만 보이지 않음
       <NavBar>
         {/* TODO: Navigate 구현 예정 */}
         <NavItem>노트북 대여</NavItem>
@@ -33,6 +37,7 @@ const HeaderLayout = () => {
         <NavItem>1:1문의</NavItem>
         <NavItem>마이페이지</NavItem>
       </NavBar>
+      )}
     </>
   );
 };

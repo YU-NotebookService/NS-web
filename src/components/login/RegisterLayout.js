@@ -12,8 +12,8 @@ import { styled } from 'styled-components';
 function Register() {
   return (
     <>
-      <Title>회원가입</Title>
       <Form>
+        <Title>회원가입</Title>
         <FormItem>
           <Text>학번</Text>
           <RegisterInput />
@@ -55,6 +55,7 @@ const NumInput = styled(Input)`
 const RegisterButton = styled(Button)`
   width: 450px;
   margin-top: 30px;
+  margin-bottom: 30px;
 `;
 
 export default Register;

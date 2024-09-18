@@ -1,10 +1,9 @@
 import { styled } from "styled-components";
 
 export const Title = styled.div`
-  margin-top: 30px;
   font-size: 30px;
   font-style: normal;
-  font-weight: 500;
+  font-weight: 700;
   line-height: normal;
 `;
 
@@ -13,12 +12,14 @@ export const Text = styled.span`
   font-size: 16px;
   font-style: normal;
   font-weight: 500;
+  line-height: normal;
   padding-right: 20px;
   color: var(--gray-color);
 `;
 
 export const Form = styled.div`
   display: flex;
+  margin: 50px 0;
   flex-direction: column;
   align-items: center;
 `;
