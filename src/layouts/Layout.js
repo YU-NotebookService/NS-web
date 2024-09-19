@@ -8,7 +8,9 @@ const Layout = () => {
   return (
     <Wrapper>
       <HeaderLayout />
-      <Outlet />
+      <Content>
+        <Outlet />
+      </Content>
       <FooterLayout />
     </Wrapper>
   );
@@ -18,6 +20,10 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   min-height: 100vh;
+`;
+
+const Content = styled.div`
+  flex-grow: 1;
 `;
 
 export default Layout;
