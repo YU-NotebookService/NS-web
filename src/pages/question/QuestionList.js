@@ -23,30 +23,6 @@ function QuestionList() {
       date: "asdasdsa",
       state: "답변완료",
     },
-    {
-      title: "asd",
-      user: "td",
-      date: "asdasdsa",
-      state: "답변완료",
-    },
-    {
-      title: "asd",
-      user: "td",
-      date: "asdasdsa",
-      state: "답변완료",
-    },
-    {
-      title: "asd",
-      user: "td",
-      date: "asdasdsa",
-      state: "답변완료",
-    },
-    {
-      title: "asd",
-      user: "td",
-      date: "asdasdsa",
-      state: "답변완료",
-    },
   ]
   
   return (  
