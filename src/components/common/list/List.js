@@ -5,10 +5,10 @@ import {
   ListCount,
   ListWrapper,
   Top,
-} from '../../../styles/list/List-styled';
-import SearchBox from '../../common/SearchBox';
+} from '../../../styles/common/List-styled';
+import SearchBox from '../SearchBox';
 import InfoCard from './InfoCard';
-import Button from '../../common/Button';
+import Button from '../Button';
 
 const List = ({ itemText, columns, data, buttonText }) => {
   return (

@@ -1,26 +1,45 @@
 import React from 'react';
-import { Wrapper, Content } from '../../styles/list/List-styled';
-import Banner from '../../components/list/Banner';
-import Title from '../../components/list/listComponent/Title';
-import List from '../../components/list/listComponent/List';
+import { Wrapper, Content } from '../../styles/common/List-styled';
+import Banner from '../../components/common/list/Banner';
+import Title from '../../components/common/list/Title';
+import List from '../../components/common/list/List';
+import questionBanner from '../../assets/notebook/notebookBanner.png';
 
 function QuestionList() {
-  const bannerImage = '../../assets/notebook/notebookBanner.png';
+  
+
   const columns = [
-    { label: '번호', width: '10%' },
-    { label: '제목', width: '50%' },
-    { label: '작성자', width: '20%' },
-    { label: '작성일', width: '20%' },
-    { label: '답변 상태', width: '20%' },
+    { label: '번호', width: '5%' },
+    { label: '제목', width: '50%', key: 'title'},
+    { label: '작성자', width: '15%', key: 'user'},
+    { label: '작성일', width: '25%', key: 'date'},
+    { label: '답변상태', width: '10%', key: 'state'},
   ];
 
   const questionData = [
-
+    {
+      title: "asd",
+      user: "td",
+      date: "asdasdsa",
+      state: "답변완료",
+    },
+    {
+      title: "asd",
+      user: "td",
+      date: "asdasdsa",
+      state: "답변완료",
+    },
+    {
+      title: "asd",
+      user: "td",
+      date: "asdasdsa",
+      state: "답변완료",
+    },
   ]
-
+  
   return (  
     <Wrapper>
-      <Banner backgroundImage={bannerImage} />
+      <Banner data={questionBanner} text = "1:1문의"/>
         <Content className="Content">
         <Title
           locationText={"1:1문의"}
@@ -30,7 +49,7 @@ function QuestionList() {
           itemText="개의 게시물이 등록되어 있습니다." 
           columns={columns} 
           data={questionData} 
-          buttonText="질문 등록" 
+          buttonText="글쓰기" 
         />
       </Content>
     </Wrapper>
