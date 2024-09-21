@@ -4,6 +4,7 @@ import Banner from '../../components/common/list/Banner';
 import Title from '../../components/common/list/Title';
 import List from '../../components/common/list/List';
 import questionBanner from '../../assets/notebook/notebookBanner.png';
+import styled from "styled-components";
 
 function QuestionList() {
   
@@ -18,10 +19,10 @@ function QuestionList() {
 
   const questionData = [
     {
-      title: "asd",
-      user: "td",
+      title: "td",
+      user: "asd",
       date: "asdasdsa",
-      state: "답변완료",
+      state: <StateText>답변완료</StateText>
     },
   ]
   
@@ -43,5 +44,10 @@ function QuestionList() {
     </Wrapper>
   );
 }
+
+const StateText = styled.span`
+  color: var(--main-color);
+  font-weight: bold;
+`;
 
 export default QuestionList;

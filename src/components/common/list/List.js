@@ -30,9 +30,9 @@ const List = ({ itemText, columns, data, buttonText }) => {
           </div>
         ))}
       </HeadLine>
-      {data.map((el, index) => {
-        return <InfoCard key={index} el={el} index={index} columns={columns} />;
-      })}
+        {data.map((el, index) => {
+          return <InfoCard key={index} el={el} index={index} columns={columns} />;
+        })}
       <Bottom>
         <Button style={{ padding: '14px 40px' }}>{buttonText}</Button>
       </Bottom>
