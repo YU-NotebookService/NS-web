@@ -13,4 +13,4 @@ const Title = ({locationText, titleText}) => {
   );
 };
 
-export default Title; 
+export default Title;  

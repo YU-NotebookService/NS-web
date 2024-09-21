@@ -5,4 +5,4 @@ const Banner = ({data, text}) => {
   return <ListBanner backgroundImage = {data}>{text}</ListBanner>;
 };
 
-export default Banner; 
+export default Banner;

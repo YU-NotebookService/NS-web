@@ -16,4 +16,4 @@ const InfoCard = ({ el, index, columns }) => {
   );
 };
 
-export default InfoCard; 
+export default InfoCard;
