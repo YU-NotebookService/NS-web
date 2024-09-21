@@ -9,7 +9,7 @@ function QuestionList() {
   
 
   const columns = [
-    { label: '번호', width: '5%' },
+    { label: '번호', width: '5%'},
     { label: '제목', width: '50%', key: 'title'},
     { label: '작성자', width: '15%', key: 'user'},
     { label: '작성일', width: '25%', key: 'date'},
@@ -17,6 +17,18 @@ function QuestionList() {
   ];
 
   const questionData = [
+    {
+      title: "asd",
+      user: "td",
+      date: "asdasdsa",
+      state: "답변완료",
+    },
+    {
+      title: "asd",
+      user: "td",
+      date: "asdasdsa",
+      state: "답변완료",
+    },
     {
       title: "asd",
       user: "td",

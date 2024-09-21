@@ -31,7 +31,7 @@ const List = ({ itemText, columns, data, buttonText }) => {
         ))}
       </HeadLine>
       {data.map((el, index) => {
-        return <InfoCard el={el} index={index} />;
+        return <InfoCard key={index} el={el} index={index} columns={columns} />;
       })}
       <Bottom>
         <Button style={{ padding: '14px 40px' }}>{buttonText}</Button>
