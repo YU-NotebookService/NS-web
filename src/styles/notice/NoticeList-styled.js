@@ -78,5 +78,8 @@ export const CardWrapper = styled.div`
 export const Bottom = styled.div`
   display: flex;
   justify-content: end;
+
   margin-top: 15px;
 `;
+
+export const PagingButton = styled.div``;

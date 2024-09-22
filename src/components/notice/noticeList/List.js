@@ -9,6 +9,8 @@ import {
 import SearchBox from '../../common/SearchBox';
 import InfoCard from './InfoCard';
 import Button from '../../common/Button';
+import { PagingButton } from '../../../styles/notice/NoticeList-styled';
+// TODO: 절대 경로 변경
 
 const List = () => {
   const [currentPage, setCurrentPage] = useState(1);
@@ -39,6 +41,7 @@ const List = () => {
       </Top>
       <HeadLine>
         <div style={{ width: '10%' }}>번호</div>
+        {/* TODO: 필독 표시 구현 */}
         <div style={{ width: '65%' }}>제목</div>
         <div style={{ width: '15%' }}>작성자</div>
         <div style={{ width: '10%' }}>작성일</div>
@@ -48,23 +51,35 @@ const List = () => {
         return <InfoCard el={el} index={displayIndex} key={index} />;
       })}
       <Bottom>
-        <div>
+        <div
+          style={{ display: 'flex', justifyContent: 'center', margin: 'auto' }}
+        >
           {Array.from({ length: totalPages }, (_, index) => (
-            <Button
+            <PagingButton
               key={index}
               style={{
+                display: 'flex',
+                justifyContent: 'center',
                 padding: '8px 16px',
                 marginRight: '8px',
                 backgroundColor:
                   currentPage === index + 1 ? 'var(--main-color)' : '',
+                color: currentPage === index + 1 ? 'white' : '',
               }}
               onClick={() => handlePageChange(index + 1)}
             >
               {index + 1}
-            </Button>
+            </PagingButton>
           ))}
         </div>
-        <Button style={{ padding: '14px 40px' }}>글쓰기</Button>
+        <Button
+          style={{
+            padding: '14px 40px',
+          }}
+        >
+          글쓰기
+        </Button>
+        {/* TODO: 공지사항 글쓰기 기능 구현 */}
       </Bottom>
     </ListWrapper>
   );

@@ -3,7 +3,7 @@ import { CardWrapper } from '../../../styles/notice/NoticeList-styled';
 const InfoCard = ({ el, index }) => {
   return (
     <CardWrapper>
-      <div style={{ width: '10%' }}>{index + 1}</div>
+      <div style={{ width: '10%' }}>{index}</div>
       <div style={{ width: '65%', textAlign: 'start', paddingLeft: '40px' }}>
         {el.title}
       </div>
