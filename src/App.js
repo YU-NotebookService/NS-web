@@ -7,7 +7,7 @@ import Login from './pages/login/Login';
 import Register from './pages/login/Register';
 import NotebookList from './pages/notebook/NotebookList';
 import QuestionList from './pages/question/QuestionList';
-import QuestionListDetail from './pages/question/QuestionListDetail';
+import QuestionListDetail from './pages/question/QuestionListDetail'; 
 
 function App() {
   return (
