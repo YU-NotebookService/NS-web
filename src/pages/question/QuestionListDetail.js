@@ -1,5 +1,5 @@
 import { Wrapper, Content } from '../../styles/common/List-styled';
-import Banner from '../../components/common/list/Banner';
+import Banner from '../../components/common/Banner';
 import questionBanner from '../../assets/notebook/notebookBanner.png';
 import QuestionLayout from '../../components/question/QuestionListLayout'
 import styled from "styled-components";

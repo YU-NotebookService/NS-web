@@ -1,8 +1,8 @@
 import {
   ListTitle,
   TitleWrapper,
-} from '../../../styles/common/List-styled'
-import Location from '../Location';
+} from '../../styles/common/List-styled'
+import Location from './Location';
 
 const Title = ({locationText, titleText}) => {
   return (
