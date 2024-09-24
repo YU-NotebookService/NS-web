@@ -6,6 +6,7 @@ import Main from './pages/main/Main';
 import Login from './pages/login/Login';
 import Register from './pages/login/Register';
 import NotebookList from './pages/notebook/NotebookList';
+import NoticeList from './pages/notice/NoticeList';
 import QuestionList from './pages/question/QuestionList';
 
 function App() {
@@ -20,6 +21,9 @@ function App() {
             <Route path="main" element={<Main />} />
             <Route path="notebook">
               <Route path="list" element={<NotebookList />} />
+            </Route>
+            <Route path = "notice">
+              <Route path="list" element={<NoticeList />} />
             </Route>
             <Route path = "question">
               <Route path='list' element={<QuestionList />} />

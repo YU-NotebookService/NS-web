@@ -6,11 +6,11 @@ import NotebookListLayout from 'components/notebook/NotebookListLayout';
 function NoticeList() {
   return (
     <Wrapper>
-      <Banner data={notebookBanner} text = "노트북 대여"/>
+      <Banner data={""} text = "공지사항"/>
       <Content className="Content">
         <Title
-          locationText={"노트북 대여"}
-          titleText={"노트북 대여"}
+          locationText={"공지사항"}
+          titleText={"공지사항"}
         />
         <NotebookListLayout />
       </Content>
