@@ -6,8 +6,8 @@ function NoticeListLayout() {
   const columns = [
     { label: '번호', width: '10%'},
     { label: '제목', width: '65%', key: 'title'},
-    { label: '작성자', width: '25%', key: 'user'},
-    { label: '작성일', width: '10%', key: 'date'},
+    { label: '작성자', width: '25%', key: 'writer'},
+    { label: '작성일', width: '10%', key: 'dateOfPreparation'},
   ];
 
   const noticeData = Array(28).fill({
@@ -22,7 +22,7 @@ function NoticeListLayout() {
       <List 
         itemText="개의 게시물이 등록되어 있습니다." 
         columns={columns} 
-        currentData={Data} 
+        currentData={noticeData} 
         buttonText="글쓰기" 
       />
     </>
