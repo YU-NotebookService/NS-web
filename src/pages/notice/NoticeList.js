@@ -1,7 +1,7 @@
 import { Wrapper, Content } from '../../styles/common/List-styled';
 import Banner from '../../components/common/Banner';
 import Title from '../../components/common/Title';
-import NotebookListLayout from 'components/notebook/NotebookListLayout';
+import NoticeListLayout from 'components/notice/NoticeListLayout';
 
 function NoticeList() {
   return (
@@ -12,7 +12,7 @@ function NoticeList() {
           locationText={"공지사항"}
           titleText={"공지사항"}
         />
-        <NotebookListLayout />
+        <NoticeListLayout />
       </Content>
     </Wrapper>
   );

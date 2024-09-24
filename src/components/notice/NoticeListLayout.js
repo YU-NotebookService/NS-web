@@ -6,7 +6,7 @@ function NoticeListLayout() {
   const columns = [
     { label: '번호', width: '10%'},
     { label: '제목', width: '65%', key: 'title'},
-    { label: '작성자', width: '25%', key: 'writer'},
+    { label: '작성자', width: '15%', key: 'writer'},
     { label: '작성일', width: '10%', key: 'dateOfPreparation'},
   ];
 
