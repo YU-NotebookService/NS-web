@@ -7,7 +7,7 @@ import notebookBanner from '../../assets/notebook/notebookBanner.png';
 
 const NotebookList = () => {
   return (
-    <Wrapper>
+  <Wrapper>
     <Banner data={notebookBanner} text = "노트북 대여"/>
     <Content className="Content">
       <Title
