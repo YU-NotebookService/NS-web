@@ -5,11 +5,11 @@ export const Wrapper = styled.div`
 `;
 
 export const ListBanner = styled.div`
-  background-image: url(${props => props.backgroundImage});
+  background-color: var(--main-color);
   height: 120px;
   text-align: center;
   align-content: center;
-  color: #fff;
+  color: white;
   font-size: 32px;
   font-weight: 400;
   line-height: normal;
@@ -78,6 +78,7 @@ export const CardWrapper = styled.div`
 export const Bottom = styled.div`
   display: flex;
   justify-content: end;
+
   margin-top: 15px;
 `;
 
