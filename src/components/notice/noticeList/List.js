@@ -10,6 +10,7 @@ import SearchBox from '../../common/SearchBox';
 import InfoCard from './InfoCard';
 import Button from '../../common/Button';
 import { PagingButton } from '../../../styles/notice/NoticeList-styled';
+
 // TODO: 절대 경로 변경
 
 const List = () => {
@@ -55,21 +56,20 @@ const List = () => {
           style={{ display: 'flex', justifyContent: 'center', margin: 'auto' }}
         >
           {Array.from({ length: totalPages }, (_, index) => (
-            <PagingButton
+            <Button
               key={index}
               style={{
                 display: 'flex',
                 justifyContent: 'center',
                 padding: '8px 16px',
                 marginRight: '8px',
-                backgroundColor:
-                  currentPage === index + 1 ? 'var(--main-color)' : '',
-                color: currentPage === index + 1 ? 'white' : '',
+                backgroundColor: currentPage === index + 1 ? 'white' : '',
+                color: currentPage === index + 1 ? 'var(--main-color)' : '',
               }}
               onClick={() => handlePageChange(index + 1)}
             >
               {index + 1}
-            </PagingButton>
+            </Button>
           ))}
         </div>
         <Button
