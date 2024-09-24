@@ -11,21 +11,19 @@ function NoticeListLayout() {
     { label: '답변상태', width: '10%', key: 'state'},
   ];
 
-  const questionData = [
-    {
-      title: "td",
-      user: "asd",
-      date: "asdasdsa",
-      state: <StateText>답변완료</StateText>
-    },
-  ]
+  const noticeData = Array(28).fill({
+    title: '★☆ 컴퓨터학부 노트북 대여 시 주의사항 ☆★',
+    writer: '관리자',
+    dateOfPreparation: '24-09-04',
+  });
+  
 
   return (  
     <>
       <List 
         itemText="개의 게시물이 등록되어 있습니다." 
         columns={columns} 
-        currentData={questionData} 
+        currentData={Data} 
         buttonText="글쓰기" 
       />
     </>
