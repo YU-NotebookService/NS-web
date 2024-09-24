@@ -80,3 +80,5 @@ export const Bottom = styled.div`
   justify-content: end;
   margin-top: 15px;
 `;
+
+export const PagingButton = styled.div``;
