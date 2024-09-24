@@ -40,4 +40,4 @@ const List = ({ itemText, columns, data, buttonText }) => {
   );
 };
 
-export default List;
+export default List; 
