@@ -1,5 +1,4 @@
 import List from '../../components/common/list/List';
-import { styled } from "styled-components";
 
 function NotebookListLayout() {
   
