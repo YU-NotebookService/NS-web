@@ -66,7 +66,7 @@ function NotebookListLayout() {
   return (  
     <>
       <List 
-        itemText="개의 게시물이 등록되어 있습니다." 
+        itemText="개의 노트북이 등록되어 있습니다." 
         columns={columns} 
         data={nobtebookData} 
         buttonText="신규 등록" 
