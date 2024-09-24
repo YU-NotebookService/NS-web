@@ -4,11 +4,10 @@ function NoticeListLayout() {
   
   
   const columns = [
-    { label: '번호', width: '5%'},
-    { label: '제목', width: '50%', key: 'title'},
-    { label: '작성자', width: '15%', key: 'user'},
-    { label: '작성일', width: '25%', key: 'date'},
-    { label: '답변상태', width: '10%', key: 'state'},
+    { label: '번호', width: '10%'},
+    { label: '제목', width: '65%', key: 'title'},
+    { label: '작성자', width: '25%', key: 'user'},
+    { label: '작성일', width: '10%', key: 'date'},
   ];
 
   const noticeData = Array(28).fill({
