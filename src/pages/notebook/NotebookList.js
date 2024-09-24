@@ -1,18 +1,22 @@
 import React from 'react';
-import { Wrapper, Content } from '../../styles/notebook/NotebookList-styled';
-import Banner from '../../components/notebook/Banner';
-import Title from '../../components/notebook/notebookList/Title';
-import List from '../../components/notebook/notebookList/List';
+import { Wrapper, Content } from '../../styles/common/List-styled';
+import Banner from '../../components/common/Banner';
+import Title from '../../components/common/Title';
+import NotebookListLayout from 'components/notebook/NotebookListLayout';
+import notebookBanner from '../../assets/notebook/notebookBanner.png';
 
 const NotebookList = () => {
   return (
     <Wrapper>
-      <Banner />
-      <Content className="Content">
-        <Title />
-        <List />
-      </Content>
-    </Wrapper>
+    <Banner data={notebookBanner} text = "노트북 대여"/>
+    <Content className="Content">
+      <Title
+        locationText={"노트북 대여"}
+        titleText={"노트북 대여"}
+      />
+      <NotebookListLayout />
+    </Content>
+  </Wrapper>
   );
 };
 
