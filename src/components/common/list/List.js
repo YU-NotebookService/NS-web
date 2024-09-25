@@ -46,7 +46,7 @@ const List = ({ itemText, columns, currentData, buttonText }) => {
       </HeadLine>
         {currentItem.map((el, index) => {
           const displayIndex = (currentPage - 1) * itemsPerPage + index + 1;
-          return <InfoCard key={index} el={el} index={index} columns={columns} />;
+          return <InfoCard key={index} el={el} index={displayIndex} columns={columns} />;
         })}
       <Bottom>
       <div
