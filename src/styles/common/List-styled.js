@@ -1,16 +1,15 @@
 import styled from 'styled-components';
-import notebookBanner from '../../assets/notebook/notebookBanner.png';
 
 export const Wrapper = styled.div`
   padding-bottom: 50px;
 `;
 
-export const NotebookBanner = styled.div`
-  background-image: url(${notebookBanner});
+export const ListBanner = styled.div`
+  background-image: url(${props => props.backgroundImage});
   height: 120px;
   text-align: center;
   align-content: center;
-  color: #fff;
+  color: white;
   font-size: 32px;
   font-weight: 400;
   line-height: normal;
@@ -79,5 +78,8 @@ export const CardWrapper = styled.div`
 export const Bottom = styled.div`
   display: flex;
   justify-content: end;
+
   margin-top: 15px;
 `;
+
+export const PagingButton = styled.div``;
