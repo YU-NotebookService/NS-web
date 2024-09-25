@@ -16,6 +16,11 @@ const List = ({ itemText, columns, currentData, buttonText }) => {
 
   const totalPages = Math.ceil(currentData.length / itemsPerPage);
 
+  const currentItem = currentData.slice(
+    (currentPage - 1) * itemsPerPage,
+    currentPage * itemsPerPage,
+  );
+
   const handlePageChange = (page) => {
     setCurrentPage(page);
   };
@@ -39,7 +44,7 @@ const List = ({ itemText, columns, currentData, buttonText }) => {
           </div>
         ))}
       </HeadLine>
-        {currentData.map((el, index) => {
+        {currentItem.map((el, index) => {
           const displayIndex = (currentPage - 1) * itemsPerPage + index + 1;
           return <InfoCard key={index} el={el} index={index} columns={columns} />;
         })}
