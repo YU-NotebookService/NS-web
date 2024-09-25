@@ -5,7 +5,7 @@ export const Wrapper = styled.div`
 `;
 
 export const ListBanner = styled.div`
-  background-color: url(${props => props.backgroundImage});
+  background-image: url(${props => props.backgroundImage});
   height: 120px;
   text-align: center;
   align-content: center;
