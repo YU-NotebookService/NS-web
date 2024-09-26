@@ -9,7 +9,7 @@ export const ListBanner = styled.div`
   height: 120px;
   text-align: center;
   align-content: center;
-  color: #fff;
+  color: white;
   font-size: 32px;
   font-weight: 400;
   line-height: normal;
@@ -78,5 +78,8 @@ export const CardWrapper = styled.div`
 export const Bottom = styled.div`
   display: flex;
   justify-content: end;
+
   margin-top: 15px;
 `;
+
+export const PagingButton = styled.div``;

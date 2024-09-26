@@ -6,8 +6,8 @@ import Main from './pages/main/Main';
 import Login from './pages/login/Login';
 import Register from './pages/login/Register';
 import NotebookList from './pages/notebook/NotebookList';
+import NoticeList from './pages/notice/NoticeList';
 import QuestionList from './pages/question/QuestionList';
-import QuestionListDetail from './pages/question/QuestionListDetail'; 
 
 function App() {
   return (
@@ -22,9 +22,11 @@ function App() {
             <Route path="notebook">
               <Route path="list" element={<NotebookList />} />
             </Route>
+            <Route path = "notice">
+              <Route path="list" element={<NoticeList />} />
+            </Route>
             <Route path = "question">
               <Route path='list' element={<QuestionList />} />
-              <Route path='detail' element={<QuestionListDetail />} />
             </Route>
           </Route>
         </Routes>
