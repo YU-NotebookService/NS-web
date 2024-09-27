@@ -72,11 +72,13 @@ const LoginButton = styled(Button)`
 
 const RegisterButton = styled(Button)`
   padding: 0px;
+  border:none;
   background-color: white;
   color: var(--main-color);
   font-size: 20px;
-  height: 50px;
-  margin-left: 270px;
+  height: 20px;
+  margin-top: 10px;
+  margin-left: 275px;
 `;
 
 export default LoginLayout;
