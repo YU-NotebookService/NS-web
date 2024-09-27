@@ -12,11 +12,17 @@ const Button = styled.button`
   font-style: normal;
   font-weight: 500;
   line-height: normal;
-  border: none;
+  border: 1px solid var(--main-color);
   cursor: pointer;
   &:disabled {
     cursor: default;
     background-color: #ccc;
+  }
+
+  transition: 0.2s;
+  &:hover {
+    background: #fff;
+    color: var(--main-color);
   }
 `;
 
