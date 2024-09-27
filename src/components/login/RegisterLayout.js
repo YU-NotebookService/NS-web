@@ -4,9 +4,9 @@ import {
   Form,
   FormItem,
   NumText,
-} from '../../styles/login/RegisterLayout-styled';
-import Button from '../../components/common/Button';
-import Input from '../../components/common/Input';
+} from 'styles/login/RegisterLayout-styled';
+import Button from 'components/common/Button';
+import Input from 'components/common/Input';
 import { styled } from 'styled-components';
 
 function Register() {

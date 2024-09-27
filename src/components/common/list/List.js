@@ -5,7 +5,7 @@ import {
   ListCount,
   ListWrapper,
   Top,
-} from '../../../styles/common/List-styled';
+} from 'styles/common/List-styled';
 import SearchBox from '../SearchBox';
 import InfoCard from './InfoCard';
 import Button from '../Button';

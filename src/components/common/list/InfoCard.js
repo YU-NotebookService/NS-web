@@ -1,5 +1,5 @@
 import React from 'react';
-import { CardWrapper } from '../../../styles/common/List-styled';
+import { CardWrapper } from 'styles/common/List-styled';
 
 const InfoCard = ({ el, index, columns }) => {
   return (

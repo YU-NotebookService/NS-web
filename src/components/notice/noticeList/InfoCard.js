@@ -1,5 +1,5 @@
 import React from 'react';
-import { CardWrapper } from '../../../styles/notice/NoticeList-styled';
+import { CardWrapper } from 'styles/notice/NoticeList-styled';
 const InfoCard = ({ el, index }) => {
   return (
     <CardWrapper>

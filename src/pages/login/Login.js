@@ -1,5 +1,5 @@
 import React from "react";
-import LoginLayout from "../../components/login/LoginLayout";
+import LoginLayout from "components/login/LoginLayout";
 import { styled } from "styled-components";
 
 function Login() {

@@ -1,5 +1,5 @@
 import React from 'react';
-import { MainBoxWrapper } from '../../styles/Main-styled';
+import { MainBoxWrapper } from 'styles/Main-styled';
 import NoticeBox from './NoticeBox';
 
 const MainBoxs = () => {

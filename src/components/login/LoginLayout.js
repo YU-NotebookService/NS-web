@@ -1,14 +1,14 @@
 import { useState } from 'react';
-import img_Logo_YU from '../../assets/login/img_Logo_YU.svg';
+import img_Logo_YU from 'assets/login/img_Logo_YU.svg';
 import {
   LoginBox,
   Logo,
   Left,
   Right,
-} from '../../styles/login/LoginLayout-styled';
+} from 'styles/login/LoginLayout-styled';
 import { useNavigate } from 'react-router-dom';
-import Input from '../../components/common/Input';
-import Button from '../../components/common/Button';
+import Input from 'components/common/Input';
+import Button from 'components/common/Button';
 import { styled } from 'styled-components';
 
 function LoginLayout() {

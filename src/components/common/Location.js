@@ -1,5 +1,5 @@
 import React from 'react';
-import { Wrapper } from '../../styles/common/Location-styled';
+import { Wrapper } from 'styles/common/Location-styled';
 
 const Location = ({ locations }) => {
   return (

@@ -1,5 +1,5 @@
 import { styled } from 'styled-components';
-import RegisterLayout from '../../components/login/RegisterLayout';
+import RegisterLayout from 'components/login/RegisterLayout';
 
 function Register() {
   return (
