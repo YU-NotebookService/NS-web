@@ -10,6 +10,7 @@ import NoticeList from 'pages/notice/NoticeList';
 import QuestionList from 'pages/question/QuestionList';
 import NotebookInfo from 'pages/notebook/NotebookInfo';
 import QuestionDetail from 'pages/question/QuestionDetail'
+import NotebookReg from 'pages/notebook/NotebookReg';
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
             <Route path="notebook">
               <Route path="list" element={<NotebookList />} />
               <Route path="info" element={<NotebookInfo />} />
+              <Route path="reg" element={<NotebookReg />} />
             </Route>
             <Route path="notice">
               <Route path="list" element={<NoticeList />} />

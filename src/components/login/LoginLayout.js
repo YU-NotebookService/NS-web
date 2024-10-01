@@ -12,7 +12,7 @@ import Button from 'components/common/Button';
 import { styled } from 'styled-components';
 
 function LoginLayout() {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const [input, setInput] = useState({
     studentId: '',
@@ -26,7 +26,7 @@ function LoginLayout() {
     });
   }
 
-  function onChangePage(){
+  function onChangePage() {
     navigate('/register');
   }
 
@@ -51,7 +51,7 @@ function LoginLayout() {
             type="password"
           />
           <LoginButton>로그인</LoginButton>
-          <RegisterButton onClick = {onChangePage}>회원가입</RegisterButton>
+          <RegisterButton onClick={onChangePage}>회원가입</RegisterButton>
         </Right>
       </LoginBox>
     </>
