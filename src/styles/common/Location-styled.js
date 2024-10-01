@@ -7,4 +7,5 @@ export const Wrapper = styled.div`
   font-weight: 400;
   line-height: normal;
   text-align: end;
+  transition: 0.5s;
 `;
