@@ -103,6 +103,10 @@ export const PicWrapper = styled.div`
   position: relative;
 `;
 
+export const PicInput = styled(Input)`
+  display: none;
+`;
+
 export const Count = styled.div`
   font-size: 16px;
   font-style: normal;
@@ -123,4 +127,37 @@ export const PicTitle = styled.div`
   letter-spacing: 1.6px;
   width: 200px;
   padding-top: 12px;
+`;
+
+export const FileWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+`;
+
+export const DeleteWrapper = styled.div`
+  display: flex;
+  position: relative;
+`;
+
+export const DeleteBtn = styled.div`
+  display: flex;
+  cursor: pointer;
+  color: var(--main-color);
+  border-bottom: 1px solid var(--main-color);
+  position: absolute;
+  right: 15px;
+  top: 15px;
+`;
+
+export const PicNotice = styled.div`
+  padding: 14px 24px;
+  font-size: 15px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  border-radius: 10px;
+  border: 1px solid #dbdbdb;
+  color: #dbdbdb;
+  width: 500px;
 `;

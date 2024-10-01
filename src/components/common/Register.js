@@ -1,15 +1,20 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   ContentInput,
   ContentInputTitle,
   ContentInputWrapper,
   Count,
+  DeleteBtn,
+  DeleteWrapper,
   Error,
   ErrorWrapper,
+  FileWrapper,
   FormWrapper,
   InputTitle,
   InputWrapper,
   PicBtn,
+  PicInput,
+  PicNotice,
   PicTitle,
   PicWrapper,
   PostInput,
@@ -32,6 +37,21 @@ const Register = () => {
 
   const onSubmit = (data) => {
     console.log('제출된 데이터: ', data);
+  };
+
+  const [selectedFiles, setSelectedFiles] = useState([]);
+
+  const handleFileChange = (event) => {
+    const files = Array.from(event.target.files);
+    setSelectedFiles((prevFiles) => [...prevFiles, ...files]);
+  };
+
+  const handleDeleteFile = (index) => {
+    setSelectedFiles((prevFiles) => prevFiles.filter((_, i) => i !== index));
+  };
+
+  const handleFileClick = () => {
+    document.getElementById('fileInput').click();
   };
 
   return (
@@ -104,8 +124,32 @@ const Register = () => {
         <InputWrapper>
           <PicTitle>사진 첨부</PicTitle>
           <PicWrapper>
-            <PostInput placeholder="사진을 선택해주세요." />
-            <PicBtn>찾아보기</PicBtn>
+            {selectedFiles.length === 0 && (
+              <PicNotice>파일을 선택해주세요.</PicNotice>
+            )}
+            <FileWrapper>
+              {selectedFiles.map((file, index) => (
+                <DeleteWrapper>
+                  <PostInput
+                    key={index}
+                    value={file.name} // 파일 이름 출력
+                    readOnly
+                  />
+                  <DeleteBtn onClick={() => handleDeleteFile(index)}>
+                    삭제
+                  </DeleteBtn>
+                </DeleteWrapper>
+              ))}
+            </FileWrapper>
+            <PicInput
+              id="fileInput"
+              type="file"
+              style={{ display: 'none' }}
+              {...register('photos')} // 파일 배열 전달
+              onChange={handleFileChange}
+              multiple // 여러 개 파일 선택 가능
+            />
+            <PicBtn onClick={handleFileClick}>찾아보기</PicBtn>
           </PicWrapper>
         </InputWrapper>
       </FormWrapper>
