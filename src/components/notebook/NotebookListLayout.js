@@ -1,4 +1,4 @@
-import List from '../../components/common/list/List';
+import List from 'components/common/list/List';
 
 function NotebookListLayout() {
   

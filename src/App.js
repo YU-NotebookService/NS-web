@@ -9,6 +9,7 @@ import NotebookList from 'pages/notebook/NotebookList';
 import NoticeList from 'pages/notice/NoticeList';
 import QuestionList from 'pages/question/QuestionList';
 import NotebookInfo from 'pages/notebook/NotebookInfo';
+import QuestionDetail from 'pages/question/QuestionDetail'
 import NotebookReg from 'pages/notebook/NotebookReg';
 
 function App() {

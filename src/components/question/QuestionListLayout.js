@@ -1,4 +1,4 @@
-import List from '../../components/common/list/List';
+import List from 'components/common/list/List';
 import { styled } from "styled-components";
 
 function QuestionListLayout() {
@@ -14,9 +14,9 @@ function QuestionListLayout() {
 
   const questionData = [
     {
-      title: "td",
-      user: "asd",
-      date: "asdasdsa",
+      title: 'td',
+      user: 'asd',
+      date: 'asdasdsa',
       state: <StateText>답변완료</StateText>
     },
   ]
@@ -24,7 +24,7 @@ function QuestionListLayout() {
   return (  
     <>
       <List 
-        itemText="개의 게시물이 등록되어 있습니다." 
+        itemText='개의 게시물이 등록되어 있습니다.' 
         columns={columns} 
         currentData={questionData} 
         buttonText="글쓰기" 

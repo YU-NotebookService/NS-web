@@ -4,7 +4,7 @@ import {
   BannerContent,
   BannerText,
   ButtonWrapper,
-} from '../../styles/Main-styled';
+} from 'styles/Main-styled';
 import Button from '../common/Button';
 
 const Banner = () => {

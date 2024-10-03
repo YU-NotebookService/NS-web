@@ -1,8 +1,8 @@
 import React from 'react';
-import { Wrapper } from '../../styles/common/SearchBox-styled';
+import { Wrapper } from 'styles/common/SearchBox-styled';
 import Input from './Input';
 import Button from './Button';
-import { ReactComponent as SearchIcon } from '../../assets/common/searchIcon.svg';
+import { ReactComponent as SearchIcon } from 'assets/common/searchIcon.svg';
 
 const SearchBox = () => {
   return (

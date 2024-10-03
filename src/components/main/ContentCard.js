@@ -7,7 +7,7 @@ import {
   ContentBox,
   NoticeTitle,
   NoticeContent,
-} from '../../styles/Main-styled';
+} from 'styles/Main-styled';
 
 const ContentCard = ({ content }) => {
   console.log('읽어온 값', content);
