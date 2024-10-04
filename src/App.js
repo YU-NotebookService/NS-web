@@ -12,6 +12,7 @@ import NotebookInfo from 'pages/notebook/NotebookInfo';
 import QuestionInfo from 'pages/question/QuestionInfo'
 import NotebookReg from 'pages/notebook/NotebookReg';
 import QuestionReg from 'pages/question/QuestionReg';
+import MyPage from 'pages/MyPage';
 
 function App() {
   return (
@@ -36,6 +37,7 @@ function App() {
               <Route path="info" element={<QuestionInfo />} />
               <Route path="reg" element={<QuestionReg />} />
             </Route>
+            <Route path="mypage" element={<MyPage />} />
           </Route>
         </Routes>
       </BrowserRouter>
