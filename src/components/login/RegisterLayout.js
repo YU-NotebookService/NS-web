@@ -84,11 +84,22 @@ function Register() {
         <ErrorWrapper>
           <FormItem>
             <Text>휴대폰 번호</Text>
-            <NumInput />
+            <NumInput
+              value={input.NumText1}
+              onChange={onChangeInput}
+            />
             <NumText>-</NumText>
-            <NumInput maxLength={4} />
+            <NumInput
+              value={input.NumText2}
+              onChange={onChangeInput}
+              maxLength={4}
+            />
             <NumText>-</NumText>
-            <NumInput maxLength={4} />
+            <NumInput
+              value={input.NumText3}
+              onChange={onChangeInput}
+              maxLength={4}
+            />
           </FormItem>
         </ ErrorWrapper>
         <FormItem>
