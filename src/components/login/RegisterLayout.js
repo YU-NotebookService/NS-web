@@ -34,7 +34,12 @@ function Register() {
     NumText3: ''
   });
 
-
+  function onChangeInput(e) {
+    setInput({
+      ...input,
+      [e.target.name]: e.target.value,
+    });
+  };
 
   return (
     <RegisterWrapper>
