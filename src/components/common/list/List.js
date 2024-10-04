@@ -63,7 +63,7 @@ const List = ({ itemText, columns, currentData, buttonText }) => {
           {Array.from({ length: totalPages }, (_, index) => (
             <PagingBtn
               key={index}
-              isCurrentPage={!!currentPage === index + 1}
+              isCurrentPage={currentPage === index + 1}
               onClick={() => handlePageChange(index + 1)}
             >
               {index + 1}
