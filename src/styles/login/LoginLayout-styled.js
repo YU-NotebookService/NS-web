@@ -29,6 +29,7 @@ export const LoginInput = styled(Input)`
   width: 300px;
   height: 20px;
   margin-top: 20px;
+  border-color: var(--gray-color);
 `;
 
 export const LoginButton = styled(Button)`

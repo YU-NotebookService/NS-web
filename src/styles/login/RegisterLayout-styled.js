@@ -47,10 +47,12 @@ export const NumText = styled.span`
 
 export const RegisterInput = styled(Input)`
   width: 270px;
+  border-color: var(--gray-color);
 `;
 
 export const NumInput = styled(Input)`
   width: 35px;
+  border-color: var(--gray-color);
 `;
 
 export const RegisterButton = styled(Button)`
