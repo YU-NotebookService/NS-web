@@ -131,7 +131,7 @@ function Register() {
               })}
             />
           </FormItem>
-          {errors.studentId && <ErrorMessage>{errors.email.message}</ErrorMessage>}
+          {errors.email && <ErrorMessage>{errors.email.message}</ErrorMessage>}
         </ ErrorWrapper>
         <RegisterButton onClick={handleSubmit(onSubmit)}>등록하기</RegisterButton>
       </Form>
