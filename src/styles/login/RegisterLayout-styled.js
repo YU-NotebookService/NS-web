@@ -1,4 +1,7 @@
 import { styled } from "styled-components";
+import Input from "components/common/Input";
+import Button from "components/common/Button";
+
 
 export const Title = styled.div`
   font-size: 30px;
@@ -40,4 +43,18 @@ export const NumText = styled.span`
   font-weight: 500;
   margin: 0 12px;
   color: var(--gray-color);
+`;
+
+export const RegisterInput = styled(Input)`
+  width: 270px;
+`;
+
+export const NumInput = styled(Input)`
+  width: 35px;
+`;
+
+export const RegisterButton = styled(Button)`
+  width: 450px;
+  margin-top: 30px;
+  margin-bottom: 30px;
 `;

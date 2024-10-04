@@ -14,10 +14,10 @@ function QuestionInfoLayout() {
   return (
     <>
       <Detail
-        headLineText={'asd'}
+        headLineText={'제품에 문제가 있습니다'}
         writer={'tmd'}
         createdAt={'2024-09-03 18:49'}
-        contentText={'아래 사진과 같은 노트북입니다.'}
+        contentText={'아래와 같이 문제가 있습니다'}
         imgUrl={imgUrl}
         goToList={goToQuestionList}
       />
@@ -26,7 +26,7 @@ function QuestionInfoLayout() {
   );
 }
 
-const imgUrl = []
+const imgUrl = [];
 
 const AnswerContent = styled.div`
   margin-top: -50px;
@@ -36,6 +36,6 @@ const AnswerContent = styled.div`
   font-weight: 400;
   line-height: normal;  
   border-bottom: 1px solid #e1e1e1;
-`
+`;
 
 export default QuestionInfoLayout;

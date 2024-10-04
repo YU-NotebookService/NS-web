@@ -5,11 +5,11 @@ import {
   Logo,
   Left,
   Right,
+  LoginInput,
+  LoginButton,
+  RegisterButton
 } from 'styles/login/LoginLayout-styled';
 import { useNavigate } from 'react-router-dom';
-import Input from 'components/common/Input';
-import Button from 'components/common/Button';
-import { styled } from 'styled-components';
 
 function LoginLayout() {
   const navigate = useNavigate();
@@ -58,27 +58,5 @@ function LoginLayout() {
   );
 }
 
-const LoginInput = styled(Input)`
-  width: 300px;
-  height: 20px;
-  margin-top: 20px;
-`;
-
-const LoginButton = styled(Button)`
-  width: 350px;
-  height: 50px;
-  margin-top: 20px;
-`;
-
-const RegisterButton = styled(Button)`
-  padding: 0px;
-  border:none;
-  background-color: white;
-  color: var(--main-color);
-  font-size: 20px;
-  height: 20px;
-  margin-top: 10px;
-  margin-left: 275px;
-`;
 
 export default LoginLayout;

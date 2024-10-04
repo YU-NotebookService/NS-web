@@ -1,4 +1,6 @@
 import { styled } from "styled-components";
+import Input from "components/common/Input";
+import Button from "components/common/Button";
 
 export const LoginBox = styled.div`
   border-radius: 10px;
@@ -21,4 +23,27 @@ export const Left = styled.div`
 
 export const Right = styled.div`
   width: 400px;
+`;
+
+export const LoginInput = styled(Input)`
+  width: 300px;
+  height: 20px;
+  margin-top: 20px;
+`;
+
+export const LoginButton = styled(Button)`
+  width: 350px;
+  height: 50px;
+  margin-top: 20px;
+`;
+
+export const RegisterButton = styled(Button)`
+  padding: 0px;
+  border:none;
+  background-color: white;
+  color: var(--main-color);
+  font-size: 20px;
+  height: 20px;
+  margin-top: 10px;
+  margin-left: 275px;
 `;
