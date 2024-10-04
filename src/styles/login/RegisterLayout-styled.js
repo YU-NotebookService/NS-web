@@ -72,13 +72,13 @@ export const Count = styled.div`
 `;
 
 export const RegisterInput = styled(Input)`
-  width: 270px;
+  width: 275px;
   border: 1px solid ${props => props.isError ? 'red' : 'var(--gray-color)'};
 `;
 
 export const NumInput = styled(Input)`
   width: 35px;
-  border-color: var(--gray-color);
+  border: 1px solid ${props => props.isError ? 'red' : 'var(--gray-color)'};
 `;
 
 export const RegisterButton = styled(Button)`

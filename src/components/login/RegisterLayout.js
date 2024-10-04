@@ -15,7 +15,6 @@ import {
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 
-
 function Register() {
   const {
     register,
@@ -40,6 +39,10 @@ function Register() {
       [e.target.name]: e.target.value,
     });
   };
+
+  function numInputCheck() {
+    return input.NumText1 != '' && input.NumText2 != '' && input.NumText3 != '';
+  }
 
   return (
     <RegisterWrapper>
@@ -82,30 +85,54 @@ function Register() {
           {errors.password && <ErrorMessage>{errors.password.message}</ErrorMessage>}
         </ ErrorWrapper>
         <ErrorWrapper>
-          <FormItem>
+          <FormItem
+            isError={!!errors.num}
+            {...register('num', {
+              required: !numInputCheck() ? '휴대폰 번호를 입력해주세요' : false
+            })}
+          >
             <Text>휴대폰 번호</Text>
             <NumInput
               value={input.NumText1}
               onChange={onChangeInput}
+              name="NumText1"
+              isError={!!errors.num}
+              style={{
+                marginRight: "2px"
+              }}
             />
             <NumText>-</NumText>
             <NumInput
               value={input.NumText2}
               onChange={onChangeInput}
+              name="NumText2"
+              isError={!!errors.num}
               maxLength={4}
             />
             <NumText>-</NumText>
             <NumInput
               value={input.NumText3}
               onChange={onChangeInput}
+              name="NumText3"
+              isError={!!errors.num}
               maxLength={4}
+
             />
           </FormItem>
+          {errors.num && <ErrorMessage>{errors.num.message}</ErrorMessage>}
         </ ErrorWrapper>
-        <FormItem>
-          <Text>이메일</Text>
-          <RegisterInput />
-        </FormItem>
+        <ErrorWrapper>
+          <FormItem>
+            <Text>이메일</Text>
+            <RegisterInput
+              isError={!!errors.email}
+              {...register('email', {
+                required: '이메일을 입력해주세요'
+              })}
+            />
+          </FormItem>
+          {errors.studentId && <ErrorMessage>{errors.email.message}</ErrorMessage>}
+        </ ErrorWrapper>
         <RegisterButton onClick={handleSubmit(onSubmit)}>등록하기</RegisterButton>
       </Form>
     </RegisterWrapper>
