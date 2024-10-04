@@ -4,29 +4,29 @@ import React from 'react';
 import { styled } from "styled-components";
 import { useNavigate } from 'react-router-dom';
 
-function QuestionDetailLayout() {
+function QuestionInfoLayout() {
   const navigate = useNavigate();
 
   const goToQuestionList = () => {
     navigate('/question/list');
   };
 
-  return (  
-  <>
-    <Detail
-      headLineText={'asd'}
-      writer={'tmd'}
-      createdAt={'2024-09-03 18:49'}
-      contentText={'아래 사진과 같은 노트북입니다.'}
-      imgUrl={imgUrl}
-      goToList={goToQuestionList}
-    />
-    <AnswerContent>답변이 없습니다</AnswerContent>
+  return (
+    <>
+      <Detail
+        headLineText={'asd'}
+        writer={'tmd'}
+        createdAt={'2024-09-03 18:49'}
+        contentText={'아래 사진과 같은 노트북입니다.'}
+        imgUrl={imgUrl}
+        goToList={goToQuestionList}
+      />
+      <AnswerContent>답변이 없습니다</AnswerContent>
     </>
   );
 }
 
-const imgUrl = [ ]
+const imgUrl = []
 
 const AnswerContent = styled.div`
   margin-top: -50px;
@@ -38,4 +38,4 @@ const AnswerContent = styled.div`
   border-bottom: 1px solid #e1e1e1;
 `
 
-export default QuestionDetailLayout;
+export default QuestionInfoLayout;

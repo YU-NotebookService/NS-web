@@ -1,12 +1,12 @@
 import Register from 'components/common/Register';
 import { styled } from "styled-components";
 
-function QuestionWriteLayout() {
-  return (  
+function QuestionRegLayout() {
+  return (
     <>
       <Register />
     </>
   );
 }
 
-export default QuestionWriteLayout;
+export default QuestionRegLayout;
