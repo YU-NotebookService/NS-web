@@ -1,7 +1,7 @@
-import Button from 'components/common/Button';
 import Detail from 'components/common/Detail';
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import { ApplyBtn } from 'styles/notebook/NotebookInfo-styled';
 
 const NotebookInfoLayout = () => {
   const navigate = useNavigate();
@@ -21,7 +21,7 @@ const NotebookInfoLayout = () => {
         imgUrl={imgUrl}
         goToList={goToNotebookList}
       />
-      <Button style={{ width: '200px', margin: 'auto' }}>신청하기</Button>
+      <ApplyBtn>신청하기</ApplyBtn>
     </>
   );
 };

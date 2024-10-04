@@ -1,4 +1,6 @@
-import { styled } from "styled-components";
+import Button from 'components/common/Button';
+import Input from 'components/common/Input';
+import { styled } from 'styled-components';
 
 export const LoginBox = styled.div`
   border-radius: 10px;
@@ -21,4 +23,36 @@ export const Left = styled.div`
 
 export const Right = styled.div`
   width: 400px;
+`;
+
+export const LoginInput = styled(Input)`
+  width: 300px;
+  height: 20px;
+  margin-top: 20px;
+`;
+
+export const LoginButton = styled(Button)`
+  width: 350px;
+  height: 50px;
+  margin-top: 20px;
+`;
+
+export const RegisterButton = styled(Button)`
+  padding: 0px;
+  background-color: white;
+  color: var(--main-color);
+  font-size: 20px;
+  height: 50px;
+  margin-left: 270px;
+  border: none;
+`;
+
+export const Container = styled.div`
+  width: 100%;
+  min-width: 850px;
+  background-color: #ffffff;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
 `;

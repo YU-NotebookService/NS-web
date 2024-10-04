@@ -1,4 +1,6 @@
-import { styled } from "styled-components";
+import Button from 'components/common/Button';
+import Input from 'components/common/Input';
+import { styled } from 'styled-components';
 
 export const Title = styled.div`
   font-size: 30px;
@@ -25,12 +27,11 @@ export const Form = styled.div`
 `;
 
 export const FormItem = styled.div`
-   width: 500px;
-   margin-top: 30px;
-   display: flex;
-   align-items: center;
-   justify-content: center;
-
+  width: 500px;
+  margin-top: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `;
 
 export const NumText = styled.span`
@@ -40,4 +41,28 @@ export const NumText = styled.span`
   font-weight: 500;
   margin: 0 12px;
   color: var(--gray-color);
+`;
+
+export const RegisterInput = styled(Input)`
+  width: 270px;
+`;
+
+export const NumInput = styled(Input)`
+  width: 35px;
+`;
+
+export const RegisterButton = styled(Button)`
+  width: 450px;
+  margin-top: 30px;
+  margin-bottom: 30px;
+`;
+
+export const Container = styled.div`
+  width: 100%;
+  min-width: 850px;
+  background-color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 `;

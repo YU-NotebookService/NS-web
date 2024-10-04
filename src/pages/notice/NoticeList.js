@@ -1,6 +1,6 @@
 import { Wrapper, Content } from '../../styles/common/List-styled';
-import Banner from '../../components/common/Banner';
-import Title from '../../components/common/Title';
+import Banner from 'components/common/Banner';
+import Title from 'components/common/Title';
 import NoticeListLayout from 'components/notice/NoticeListLayout';
 
 function NoticeList() {

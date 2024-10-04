@@ -4,8 +4,8 @@ import {
   BannerContent,
   BannerText,
   ButtonWrapper,
-} from '../../styles/Main-styled';
-import Button from '../common/Button';
+  RentalBtn,
+} from 'styles/Main-styled';
 
 const Banner = () => {
   return (
@@ -18,13 +18,7 @@ const Banner = () => {
           시행합니다.
         </BannerText>
         <ButtonWrapper>
-          <Button
-            style={{
-              borderRadius: '6px',
-            }}
-          >
-            노트북 대여하기
-          </Button>
+          <RentalBtn>노트북 대여하기</RentalBtn>
         </ButtonWrapper>
       </BannerContent>
     </MainBanner>

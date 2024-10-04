@@ -4,10 +4,10 @@ import {
   Form,
   FormItem,
   NumText,
-} from '../../styles/login/RegisterLayout-styled';
-import Button from '../../components/common/Button';
-import Input from '../../components/common/Input';
-import { styled } from 'styled-components';
+  RegisterInput,
+  NumInput,
+  RegisterButton,
+} from 'styles/login/RegisterLayout-styled';
 
 function Register() {
   return (
@@ -43,19 +43,5 @@ function Register() {
     </>
   );
 }
-
-const RegisterInput = styled(Input)`
-  width: 270px;
-`;
-
-const NumInput = styled(Input)`
-  width: 35px;
-`;
-
-const RegisterButton = styled(Button)`
-  width: 450px;
-  margin-top: 30px;
-  margin-bottom: 30px;
-`;
 
 export default Register;

@@ -1,23 +1,13 @@
-import React from "react";
-import LoginLayout from "../../components/login/LoginLayout";
-import { styled } from "styled-components";
+import React from 'react';
+import LoginLayout from 'components/login/LoginLayout';
+import { Container } from 'styles/login/LoginLayout-styled';
 
 function Login() {
-  return (  
+  return (
     <Container>
       <LoginLayout />
     </Container>
   );
 }
-
-const Container = styled.div`
-  width: 100%;
-  min-width: 850px;
-  background-color: #ffffff;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center; 
-`;
 
 export default Login;
