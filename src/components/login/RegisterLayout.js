@@ -28,6 +28,13 @@ function Register() {
     console.log('제출된 데이터: ', data);
   };
 
+  const [input, setInput] = useState({
+    NumText1: '',
+    NumText2: '',
+    NumText3: ''
+  });
+
+
 
   return (
     <RegisterWrapper>
