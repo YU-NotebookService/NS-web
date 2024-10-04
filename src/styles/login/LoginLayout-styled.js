@@ -30,7 +30,7 @@ export const Right = styled.div`
 `;
 
 export const ErrorMessage = styled.div`
-  padding: 5px 0px 0px 24px;
+  padding: 5px 0px 0px 10px;
   font-size: 15px;
   font-style: normal;
   font-weight: 400;
@@ -38,7 +38,7 @@ export const ErrorMessage = styled.div`
 `;
 
 export const ErrorWrapper = styled.div`
-  width: 550px;
+  width: 500px;
 `;
 
 export const Count = styled.div`
@@ -57,6 +57,7 @@ export const LoginInput = styled(Input)`
   height: 20px;
   margin-top: 20px;
   border-color: var(--gray-color);
+  border: 1px solid ${props => props.isError ? 'red' : 'var(--gray-color)'};
 `;
 
 export const LoginButton = styled(Button)`

@@ -10,35 +10,26 @@ import {
   ErrorWrapper,
   Count,
   LoginInput,
+  LoginInputWrapper,
   LoginButton,
   RegisterButton
 } from 'styles/login/LoginLayout-styled';
-import { useForm, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import { useForm } from 'react-hook-form';
 
 function LoginLayout() {
   const {
-    login,
+    register,
     handleSubmit,
     watch,
     formState: { errors },
   } = useForm();
 
-  const studentId = watch('studentId', '');
-  const password = watch('password', '');
+  const onSubmit = (data) => {
+    console.log('제출된 데이터: ', data);
+  };
 
   const navigate = useNavigate();
-
-  const [input, setInput] = useState({
-    studentId: '',
-    password: '',
-  });
-
-  function onChangeInput(e) {
-    setInput({
-      ...input,
-      [e.target.name]: e.target.value,
-    });
-  }
 
   function onChangePage() {
     navigate('/register');
@@ -51,27 +42,31 @@ function LoginLayout() {
           <Logo src={img_Logo_YU} />
         </Left>
         <Right>
+
           <ErrorWrapper>
             <LoginInput
-              value={input.studentId}
               placeholder="학번"
-              onChange={onChangeInput}
-              name="studentId"
               isError={!!errors.studentId}
-              {...login('studentId', {
-                required: '학번을 입력해주세요',
+              {...register('studentId', {
+                required: '학번을 입력해주세요'
               })}
             />
             {errors.studentId && <ErrorMessage>{errors.studentId.message}</ErrorMessage>}
           </ ErrorWrapper>
-          <LoginInput
-            value={input.password}
-            placeholder="비밀번호"
-            onChange={onChangeInput}
-            name="password"
-            type="password"
-          />
-          <LoginButton>로그인</LoginButton>
+
+
+          <ErrorWrapper>
+            <LoginInput
+              placeholder="비밀번호"
+              isError={!!errors.password}
+              {...register('password', {
+                required: '비밀번호를 입력해주세요'
+              })}
+            />
+          </ ErrorWrapper>
+
+
+          <LoginButton type="button" onClick={handleSubmit(onSubmit)}>로그인</LoginButton>
           <RegisterButton onClick={onChangePage}>회원가입</RegisterButton>
         </Right>
       </LoginBox>
