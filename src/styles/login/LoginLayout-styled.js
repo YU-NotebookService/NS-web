@@ -56,7 +56,6 @@ export const LoginInput = styled(Input)`
   width: 300px;
   height: 20px;
   margin-top: 20px;
-  border-color: var(--gray-color);
   border: 1px solid ${props => props.isError ? 'red' : 'var(--gray-color)'};
 `;
 

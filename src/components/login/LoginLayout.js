@@ -10,7 +10,6 @@ import {
   ErrorWrapper,
   Count,
   LoginInput,
-  LoginInputWrapper,
   LoginButton,
   RegisterButton
 } from 'styles/login/LoginLayout-styled';
@@ -42,7 +41,6 @@ function LoginLayout() {
           <Logo src={img_Logo_YU} />
         </Left>
         <Right>
-
           <ErrorWrapper>
             <LoginInput
               placeholder="학번"
@@ -54,7 +52,6 @@ function LoginLayout() {
             {errors.studentId && <ErrorMessage>{errors.studentId.message}</ErrorMessage>}
           </ ErrorWrapper>
 
-
           <ErrorWrapper>
             <LoginInput
               placeholder="비밀번호"
@@ -63,10 +60,10 @@ function LoginLayout() {
                 required: '비밀번호를 입력해주세요'
               })}
             />
+            {errors.password && <ErrorMessage>{errors.password.message}</ErrorMessage>}
           </ ErrorWrapper>
 
-
-          <LoginButton type="button" onClick={handleSubmit(onSubmit)}>로그인</LoginButton>
+          <LoginButton onClick={handleSubmit(onSubmit)}>로그인</LoginButton>
           <RegisterButton onClick={onChangePage}>회원가입</RegisterButton>
         </Right>
       </LoginBox>
