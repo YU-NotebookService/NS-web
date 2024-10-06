@@ -1,13 +1,11 @@
-import List from '../../components/common/list/List';
+import List from 'components/common/list/List';
 
 function NotebookListLayout() {
-  
-  
   const columns = [
-    { label: '번호', width: '5%'},
-    { label: '모델명', width: '60%', key: 'model'},
-    { label: '운영체제', width: '25%', key: 'os'},
-    { label: '대여상태', width: '10%', key: 'rentalStatus'},
+    { label: '번호', width: '5%' },
+    { label: '모델명', width: '60%', key: 'model' },
+    { label: '운영체제', width: '25%', key: 'os' },
+    { label: '대여상태', width: '10%', key: 'rentalStatus' },
   ];
 
   const nobtebookData = [
@@ -62,14 +60,14 @@ function NotebookListLayout() {
       rentalStatus: '대여가능',
     },
   ];
-  
-  return (  
+
+  return (
     <>
-      <List 
-        itemText="개의 노트북이 등록되어 있습니다." 
-        columns={columns} 
-        currentData={nobtebookData} 
-        buttonText="신규 등록" 
+      <List
+        itemText="개의 노트북이 등록되어 있습니다."
+        columns={columns}
+        currentData={nobtebookData}
+        buttonText="신규 등록"
       />
     </>
   );

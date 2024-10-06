@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import mainBanner from '../assets/main/mainBanner.png';
+import Button from 'components/common/Button';
 
 export const Wrapper = styled.div`
   background-color: #f1f4fb;
@@ -113,4 +114,14 @@ export const NoticeContent = styled.div`
   font-style: normal;
   font-weight: 400;
   line-height: normal;
+`;
+
+export const RentalBtn = styled(Button)`
+  border-radius: 6px;
+`;
+
+export const PlustBtn = styled(Button)`
+  font-size: 30px;
+  align-content: center;
+  padding: 0px 9px 6px 9px;
 `;

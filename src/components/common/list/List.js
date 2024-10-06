@@ -4,11 +4,12 @@ import {
   HeadLine,
   ListCount,
   ListWrapper,
+  PagingBtn,
   Top,
-} from '../../../styles/common/List-styled';
-import SearchBox from '../SearchBox';
-import InfoCard from './InfoCard';
-import Button from '../Button';
+  WriteBtn,
+} from 'styles/common/List-styled';
+import SearchBox from 'components/common/SearchBox';
+import InfoCard from 'components/common/list/InfoCard';
 
 const List = ({ itemText, columns, currentData, buttonText }) => {
   const [currentPage, setCurrentPage] = useState(1);
@@ -44,33 +45,33 @@ const List = ({ itemText, columns, currentData, buttonText }) => {
           </div>
         ))}
       </HeadLine>
-        {currentItem.map((el, index) => {
-          const displayIndex = (currentPage - 1) * itemsPerPage + index + 1;
-          return <InfoCard key={index} el={el} index={displayIndex} columns={columns} />;
-        })}
+      {currentItem.map((el, index) => {
+        const displayIndex = (currentPage - 1) * itemsPerPage + index + 1;
+        return (
+          <InfoCard
+            key={index}
+            el={el}
+            index={displayIndex}
+            columns={columns}
+          />
+        );
+      })}
       <Bottom>
-      <div
+        <div
           style={{ display: 'flex', justifyContent: 'center', margin: 'auto' }}
         >
           {Array.from({ length: totalPages }, (_, index) => (
-            <Button
+            <PagingBtn
               key={index}
-              style={{
-                display: 'flex',
-                justifyContent: 'center',
-                padding: '8px 16px',
-                marginRight: '8px',
-                backgroundColor: currentPage === index + 1 ? 'white' : '',
-                color: currentPage === index + 1 ? 'var(--main-color)' : '',
-              }}
+              isCurrentPage={currentPage === index + 1}
               onClick={() => handlePageChange(index + 1)}
             >
               {index + 1}
-            </Button>
+            </PagingBtn>
           ))}
-          </div>
-        <Button style={{ padding: '14px 40px' }}>{buttonText}</Button>
-         {/* TODO: 공지사항 글쓰기 기능 구현 */}
+        </div>
+        <WriteBtn>{buttonText}</WriteBtn>
+        {/* TODO: 공지사항 글쓰기 기능 구현 */}
       </Bottom>
     </ListWrapper>
   );

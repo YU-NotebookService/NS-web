@@ -1,3 +1,4 @@
+import Button from 'components/common/Button';
 import styled from 'styled-components';
 
 export const DetailWrapper = styled.div`
@@ -79,4 +80,8 @@ export const PostBtn = styled.div`
   display: flex;
   align-items: center;
   gap: 5px;
+`;
+
+export const ListBtn = styled(Button)`
+  width: 150px;
 `;

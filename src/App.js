@@ -11,6 +11,7 @@ import QuestionList from 'pages/question/QuestionList';
 import NotebookInfo from 'pages/notebook/NotebookInfo';
 import NotebookReg from 'pages/notebook/NotebookReg';
 import MyPage from 'pages/MyPage';
+import Error from 'pages/Error';
 
 function App() {
   return (
@@ -34,6 +35,7 @@ function App() {
               <Route path="list" element={<QuestionList />} />
             </Route>
             <Route path="mypage" element={<MyPage />} />
+            <Route path="*" element={<Error />} />
           </Route>
         </Routes>
       </BrowserRouter>
