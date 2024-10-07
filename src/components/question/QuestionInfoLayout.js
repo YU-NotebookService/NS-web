@@ -1,7 +1,6 @@
-import Button from 'components/common/Button';
 import Detail from 'components/common/Detail';
 import React from 'react';
-import { styled } from "styled-components";
+import { AnswerContent } from 'styles/question/QuestionList-styled';
 import { useNavigate } from 'react-router-dom';
 
 function QuestionInfoLayout() {
@@ -27,15 +26,5 @@ function QuestionInfoLayout() {
 }
 
 const imgUrl = [];
-
-const AnswerContent = styled.div`
-  margin-top: -50px;
-  padding: 30px;
-  font-size: 18px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: normal;  
-  border-bottom: 1px solid #e1e1e1;
-`;
 
 export default QuestionInfoLayout;
