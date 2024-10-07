@@ -85,3 +85,13 @@ export const RegisterButton = styled(Button)`
   margin-top: 30px;
   margin-bottom: 30px;
 `;
+
+export const Container = styled.div`
+  width: 100%;
+  min-width: 850px;
+  background-color: #ffffff;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+`;

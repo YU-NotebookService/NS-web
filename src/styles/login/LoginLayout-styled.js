@@ -2,6 +2,10 @@ import Button from 'components/common/Button';
 import Input from 'components/common/Input';
 import { styled } from 'styled-components';
 
+export const LoginWrapper = styled.div`
+
+`;
+
 export const LoginBox = styled.div`
   border-radius: 10px;
   display: flex;
