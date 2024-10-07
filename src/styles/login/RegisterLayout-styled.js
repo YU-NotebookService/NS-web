@@ -76,7 +76,7 @@ export const RegisterInput = styled(Input)`
 `;
 
 export const NumInput = styled(Input)`
-  width: 35px;
+  width: 37px;
   border: 1px solid ${props => props.isError ? 'red' : 'var(--gray-color)'};
 `;
 

@@ -98,7 +98,8 @@ function Register() {
               name="NumText1"
               isError={!!errors.num}
               style={{
-                marginRight: "2px"
+                left: "120px",
+                width: "33px"
               }}
             />
             <NumText>-</NumText>
