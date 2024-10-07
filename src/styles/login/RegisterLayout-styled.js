@@ -1,6 +1,6 @@
-import { styled } from "styled-components";
-import Input from "components/common/Input";
-import Button from "components/common/Button";
+import Button from 'components/common/Button';
+import Input from 'components/common/Input';
+import { styled } from 'styled-components';
 
 export const RegisterWrapper = styled.div`
 
@@ -31,12 +31,11 @@ export const Form = styled.div`
 `;
 
 export const FormItem = styled.div`
-   width: 500px;
-   margin-top: 30px;
-   display: flex;
-   align-items: center;
-   justify-content: center;
-
+  width: 500px;
+  margin-top: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `;
 
 export const NumText = styled.span`

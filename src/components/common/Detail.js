@@ -8,10 +8,10 @@ import {
   DetailInfo,
   DetailWrapper,
   HeadLine,
+  ListBtn,
   PostBtn,
   PostBtnWrapper,
 } from 'styles/common/Detail-styled';
-import Button from 'components/common/Button';
 import { ReactComponent as ModifyIcon } from 'assets/common/modifyIcon.svg';
 import { ReactComponent as DeleteIcon } from 'assets/common/deleteIcon.svg';
 
@@ -44,9 +44,7 @@ const Detail = ({
             ))}
         </DetailImgWrapper>
         <BtnWrapper>
-          <Button style={{ width: '150px' }} onClick={goToList}>
-            목록
-          </Button>
+          <ListBtn onClick={goToList}>목록</ListBtn>
           <PostBtnWrapper>
             <PostBtn onClick={modifyPost}>
               글 수정

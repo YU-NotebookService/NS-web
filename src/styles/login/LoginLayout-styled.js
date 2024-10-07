@@ -1,10 +1,6 @@
-import { styled } from "styled-components";
-import Input from "components/common/Input";
-import Button from "components/common/Button";
-
-export const LoginWrapper = styled.div`
-
-`;
+import Button from 'components/common/Button';
+import Input from 'components/common/Input';
+import { styled } from 'styled-components';
 
 export const LoginBox = styled.div`
   border-radius: 10px;
@@ -74,4 +70,14 @@ export const RegisterButton = styled(Button)`
   height: 20px;
   margin-top: 10px;
   margin-left: 275px;
+`;
+
+export const Container = styled.div`
+  width: 100%;
+  min-width: 850px;
+  background-color: #ffffff;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
 `;

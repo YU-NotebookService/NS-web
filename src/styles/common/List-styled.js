@@ -1,11 +1,12 @@
 import styled from 'styled-components';
+import Button from 'components/common/Button';
 
 export const Wrapper = styled.div`
   padding-bottom: 50px;
 `;
 
 export const ListBanner = styled.div`
-  background-image: url(${props => props.backgroundImage});
+  background-image: url(${(props) => props.backgroundImage});
   height: 120px;
   text-align: center;
   align-content: center;
@@ -82,4 +83,15 @@ export const Bottom = styled.div`
   margin-top: 15px;
 `;
 
-export const PagingButton = styled.div``;
+export const PagingBtn = styled(Button)`
+  display: flex;
+  justify-content: center;
+  padding: 8px 16px;
+  margin-right: 8px;
+  background-color: ${(props) => (props.isCurrentPage ? 'white' : '')};
+  color: ${(props) => (props.isCurrentPage ? 'var(--main-color)' : '')};
+`;
+
+export const WriteBtn = styled(Button)`
+  padding: 14px 40px;
+`;

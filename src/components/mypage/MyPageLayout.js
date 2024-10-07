@@ -1,7 +1,7 @@
 import React from 'react';
 import { MyPageWrapper } from 'styles/MyPage-styled';
-import UserInfo from './UserInfo';
-import NotebookRentalInfo from './NotebookRentalInfo';
+import UserInfo from 'components/mypage/UserInfo';
+import NotebookRentalInfo from 'components/mypage/NotebookRentalInfo';
 
 const MyPageLayout = () => {
   return (
