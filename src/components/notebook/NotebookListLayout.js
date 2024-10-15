@@ -1,73 +1,46 @@
+import getNotebookList from 'api/notebook/getNotebookList';
 import List from 'components/common/list/List';
+import { useEffect, useState } from 'react';
 
 function NotebookListLayout() {
   const columns = [
-    { label: '번호', width: '5%' },
-    { label: '모델명', width: '60%', key: 'model' },
-    { label: '운영체제', width: '25%', key: 'os' },
-    { label: '대여상태', width: '10%', key: 'rentalStatus' },
+    { label: '번호', width: '10%' },
+    { label: '모델명', width: '55%', key: 'model' },
+    { label: '운영체제', width: '20%', key: 'os' },
+    { label: '대여상태', width: '15%', key: 'rentalStatus' },
   ];
 
-  const nobtebookData = [
-    {
-      model: 'LG 13세대 울트라북 LG ULTRA 15U50R (32G/512G)',
-      os: 'Windows 11',
-      rentalStatus: '대여가능',
-    },
-    {
-      model: '애플 맥북프로 14 M1 512GB 스페이스 그레이',
-      os: 'Mac OS',
-      rentalStatus: '대여가능',
-    },
-    {
-      model: 'LG 13세대 울트라북 LG ULTRA 15U50R (32G/512G)',
-      os: 'Windows 11',
-      rentalStatus: '대여가능',
-    },
-    {
-      model: '애플 맥북프로 14 M1 512GB 스페이스 그레이',
-      os: 'Mac OS',
-      rentalStatus: '대여가능',
-    },
-    {
-      model: 'LG 13세대 울트라북 LG ULTRA 15U50R (32G/512G)',
-      os: 'Windows 11',
-      rentalStatus: '대여가능',
-    },
-    {
-      model: 'LG 13세대 울트라북 LG ULTRA 15U50R (32G/512G)',
-      os: 'Windows 11',
-      rentalStatus: '대여가능',
-    },
-    {
-      model: '애플 맥북프로 14 M1 512GB 스페이스 그레이',
-      os: 'Mac OS',
-      rentalStatus: '대여가능',
-    },
-    {
-      model: '애플 맥북프로 14 M1 512GB 스페이스 그레이',
-      os: 'Mac OS',
-      rentalStatus: '대여가능',
-    },
-    {
-      model: '애플 맥북프로 14 M1 512GB 스페이스 그레이',
-      os: 'Mac OS',
-      rentalStatus: '대여가능',
-    },
-    {
-      model: '애플 맥북프로 14 M1 512GB 스페이스 그레이',
-      os: 'Mac OS',
-      rentalStatus: '대여가능',
-    },
-  ];
+  const [notebookList, setNotebookList] = useState([]);
+  const [currentPage, setCurrentPage] = useState(0);
+  const [totalPages, setTotalPages] = useState(0);
+  const [totalElements, setTotalElements] = useState(0);
+
+  useEffect(() => {
+    const fetchNotebookList = async () => {
+      try {
+        const response = await getNotebookList({ currentPage });
+        setNotebookList(response.content);
+        setTotalPages(response.totalPages);
+        setTotalElements(response.totalElements);
+        console.log('response', response);
+      } catch (error) {
+        console.log('error', error);
+      }
+    };
+    fetchNotebookList();
+  }, [currentPage]);
 
   return (
     <>
       <List
         itemText="개의 노트북이 등록되어 있습니다."
         columns={columns}
-        currentData={nobtebookData}
+        currentData={notebookList}
         buttonText="신규 등록"
+        currentPage={currentPage}
+        setCurrentPage={setCurrentPage}
+        totalPages={totalPages}
+        totalElements={totalElements}
       />
     </>
   );
