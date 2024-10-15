@@ -25,6 +25,7 @@ export const DetailContent = styled.div`
   flex-direction: column;
   gap: 20px;
   border-bottom: 1px solid #e1e1e1;
+  white-space: pre-wrap;
 `;
 
 export const DetailInfo = styled.div`
