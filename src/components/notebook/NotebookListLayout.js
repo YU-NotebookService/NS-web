@@ -24,7 +24,10 @@ function NotebookListLayout() {
         setTotalElements(response.totalElements);
         console.log('response', response);
       } catch (error) {
-        console.log('error', error);
+        console.error(
+          '노트북 리스트를 불러오는 데 실패하였습니다:',
+          error.message,
+        );
       }
     };
     fetchNotebookList();
