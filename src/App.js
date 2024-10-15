@@ -9,11 +9,13 @@ import NotebookList from 'pages/notebook/NotebookList';
 import NoticeList from 'pages/notice/NoticeList';
 import QuestionList from 'pages/question/QuestionList';
 import NotebookInfo from 'pages/notebook/NotebookInfo';
-import QuestionInfo from 'pages/question/QuestionInfo'
+import QuestionInfo from 'pages/question/QuestionInfo';
 import NotebookReg from 'pages/notebook/NotebookReg';
 import QuestionReg from 'pages/question/QuestionReg';
 import MyPage from 'pages/MyPage';
 import Error from 'pages/Error';
+import NoticeInfo from 'pages/notice/NoticeInfo';
+import NoticeReg from 'pages/notice/NoticeReg';
 
 function App() {
   return (
@@ -32,6 +34,8 @@ function App() {
             </Route>
             <Route path="notice">
               <Route path="list" element={<NoticeList />} />
+              <Route path="info" element={<NoticeInfo />} />
+              <Route path="reg" element={<NoticeReg />} />
             </Route>
             <Route path="question">
               <Route path="list" element={<QuestionList />} />
