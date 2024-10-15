@@ -15,22 +15,23 @@ function NotebookListLayout() {
   const [totalPages, setTotalPages] = useState(0);
   const [totalElements, setTotalElements] = useState(0);
 
+  const fetchNotebookList = async (page) => {
+    try {
+      const response = await getNotebookList({ currentPage: page });
+      setNotebookList(response.content);
+      setTotalPages(response.totalPages);
+      setTotalElements(response.totalElements);
+      console.log('response', response);
+    } catch (error) {
+      console.error(
+        '노트북 리스트를 불러오는 데 실패하였습니다:',
+        error.message,
+      );
+    }
+  };
+
   useEffect(() => {
-    const fetchNotebookList = async () => {
-      try {
-        const response = await getNotebookList({ currentPage });
-        setNotebookList(response.content);
-        setTotalPages(response.totalPages);
-        setTotalElements(response.totalElements);
-        console.log('response', response);
-      } catch (error) {
-        console.error(
-          '노트북 리스트를 불러오는 데 실패하였습니다:',
-          error.message,
-        );
-      }
-    };
-    fetchNotebookList();
+    fetchNotebookList(currentPage);
   }, [currentPage]);
 
   return (
