@@ -83,7 +83,9 @@ export const Bottom = styled.div`
   margin-top: 15px;
 `;
 
-export const PagingBtn = styled(Button)`
+export const PagingBtn = styled(Button).attrs((props) => ({
+  isCurrentPage: undefined, // DOM으로 전달되지 않도록 필터링
+}))`
   display: flex;
   justify-content: center;
   padding: 8px 16px;

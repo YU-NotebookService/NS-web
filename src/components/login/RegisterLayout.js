@@ -7,10 +7,9 @@ import {
   RegisterWrapper,
   ErrorMessage,
   ErrorWrapper,
-  Count,
   RegisterInput,
   NumInput,
-  RegisterButton
+  RegisterButton,
 } from 'styles/login/RegisterLayout-styled';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
@@ -19,7 +18,6 @@ function Register() {
   const {
     register,
     handleSubmit,
-    watch,
     formState: { errors },
   } = useForm();
 
@@ -30,7 +28,7 @@ function Register() {
   const [input, setInput] = useState({
     NumText1: '',
     NumText2: '',
-    NumText3: ''
+    NumText3: '',
   });
 
   function onChangeInput(e) {
@@ -38,10 +36,12 @@ function Register() {
       ...input,
       [e.target.name]: e.target.value,
     });
-  };
+  }
 
   function numInputCheck() {
-    return input.NumText1 != '' && input.NumText2 != '' && input.NumText3 != '';
+    return (
+      input.NumText1 !== '' && input.NumText2 !== '' && input.NumText3 !== ''
+    );
   }
 
   return (
@@ -54,41 +54,45 @@ function Register() {
             <RegisterInput
               isError={!!errors.studentId}
               {...register('studentId', {
-                required: '학번을 입력해주세요'
+                required: '학번을 입력해주세요',
               })}
             />
           </FormItem>
-          {errors.studentId && <ErrorMessage>{errors.studentId.message}</ErrorMessage>}
-        </ ErrorWrapper>
+          {errors.studentId && (
+            <ErrorMessage>{errors.studentId.message}</ErrorMessage>
+          )}
+        </ErrorWrapper>
         <ErrorWrapper>
           <FormItem>
             <Text>이름</Text>
             <RegisterInput
               isError={!!errors.name}
               {...register('name', {
-                required: '이름을 입력해주세요'
+                required: '이름을 입력해주세요',
               })}
             />
           </FormItem>
           {errors.name && <ErrorMessage>{errors.name.message}</ErrorMessage>}
-        </ ErrorWrapper>
+        </ErrorWrapper>
         <ErrorWrapper>
           <FormItem>
             <Text>새 비밀번호</Text>
             <RegisterInput
               isError={!!errors.password}
               {...register('password', {
-                required: '새 비밀번호를 입력해주세요'
+                required: '새 비밀번호를 입력해주세요',
               })}
             />
           </FormItem>
-          {errors.password && <ErrorMessage>{errors.password.message}</ErrorMessage>}
-        </ ErrorWrapper>
+          {errors.password && (
+            <ErrorMessage>{errors.password.message}</ErrorMessage>
+          )}
+        </ErrorWrapper>
         <ErrorWrapper>
           <FormItem
             isError={!!errors.num}
             {...register('num', {
-              required: !numInputCheck() ? '휴대폰 번호를 입력해주세요' : false
+              required: !numInputCheck() ? '휴대폰 번호를 입력해주세요' : false,
             })}
           >
             <Text>휴대폰 번호</Text>
@@ -98,8 +102,8 @@ function Register() {
               name="NumText1"
               isError={!!errors.num}
               style={{
-                left: "120px",
-                width: "33px"
+                left: '120px',
+                width: '33px',
               }}
             />
             <NumText>-</NumText>
@@ -117,28 +121,28 @@ function Register() {
               name="NumText3"
               isError={!!errors.num}
               maxLength={4}
-
             />
           </FormItem>
           {errors.num && <ErrorMessage>{errors.num.message}</ErrorMessage>}
-        </ ErrorWrapper>
+        </ErrorWrapper>
         <ErrorWrapper>
           <FormItem>
             <Text>이메일</Text>
             <RegisterInput
               isError={!!errors.email}
               {...register('email', {
-                required: '이메일을 입력해주세요'
+                required: '이메일을 입력해주세요',
               })}
             />
           </FormItem>
           {errors.email && <ErrorMessage>{errors.email.message}</ErrorMessage>}
-        </ ErrorWrapper>
-        <RegisterButton onClick={handleSubmit(onSubmit)}>등록하기</RegisterButton>
+        </ErrorWrapper>
+        <RegisterButton onClick={handleSubmit(onSubmit)}>
+          등록하기
+        </RegisterButton>
       </Form>
     </RegisterWrapper>
   );
 }
-
 
 export default Register;
