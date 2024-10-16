@@ -23,22 +23,25 @@ function Register() {
     formState: { errors },
   } = useForm();
 
-  const onSubmit = (data) => {
-    const phoneNumber = `${input.NumText1}-${input.NumText2}-${input.NumText3}`;
-    const { studentNumber, name, password, email } = data;
-    alert('제출된 데이터: ', { ...data, phoneNumber });
-    registerData(studentNumber, name, password, phoneNumber, email);
-  };
-
   const [input, setInput] = useState({
     NumText1: '',
     NumText2: '',
     NumText3: ''
   });
 
+  const onSubmit = (data) => {
+    const phoneNumber = `${input.NumText1}-${input.NumText2}-${input.NumText3}`;
+    const { studentNumber, name, password, email } = data;
+    alert([studentNumber, name, password, phoneNumber, email]);
+    registerData(studentNumber, name, password, phoneNumber, email);
+  };
+
   function onChangeInput(e) {
-    const data = e.target.value;
-    setInput(data);
+    const { name, value } = e.target;
+    setInput(prevInput => ({
+      ...prevInput,
+      [name]: value
+    }));
   }
 
   function numInputCheck() {
@@ -69,7 +72,7 @@ function Register() {
   }
 
   return (
-    <RegisterWrapper onSubmit={handleSubmit(onSubmit)}>
+    <RegisterWrapper>
       <Form>
         <Title>회원가입</Title>
         <ErrorWrapper>
@@ -158,7 +161,7 @@ function Register() {
           </FormItem>
           {errors.email && <ErrorMessage>{errors.email.message}</ErrorMessage>}
         </ ErrorWrapper>
-        <RegisterButton type='submit' onClick={handleSubmit(onSubmit)}>등록하기</RegisterButton>
+        <RegisterButton onClick={handleSubmit(onSubmit)}>등록하기</RegisterButton>
       </Form>
     </RegisterWrapper>
   );
