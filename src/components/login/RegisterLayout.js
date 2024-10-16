@@ -24,7 +24,10 @@ function Register() {
   } = useForm();
 
   const onSubmit = (data) => {
-    console.log('제출된 데이터: ', data);
+    const phoneNumber = `${input.NumText1}-${input.NumText2}-${input.NumText3}`;
+    const { studentNumber, name, password, email } = data;
+    alert('제출된 데이터: ', { ...data, phoneNumber });
+    registerData(studentNumber, name, password, phoneNumber, email);
   };
 
   const [input, setInput] = useState({
@@ -34,18 +37,39 @@ function Register() {
   });
 
   function onChangeInput(e) {
-    setInput({
-      ...input,
-      [e.target.name]: e.target.value,
-    });
-  };
+    const data = e.target.value;
+    setInput(data);
+  }
 
   function numInputCheck() {
     return input.NumText1 != '' && input.NumText2 != '' && input.NumText3 != '';
   }
 
+  function registerData(studentNumber, name, password, phoneNumber, email) {
+    fetch('http://3.39.198.156:8080/api/register', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ studentNumber, name, password, phoneNumber, email }),
+    })
+      .then((response) => response.json())
+      .then((result) => {
+        if (result.success) {
+          console.log('Registration successful');
+          alert('회원가입이 완료되었습니다');
+        } else {
+          console.error('Registration failed:', result.message);
+          alert('회원가입에 실패했습니다');
+        }
+      })
+      .catch((error) => {
+        console.error('Error during registration:', error);
+      });
+  }
+
   return (
-    <RegisterWrapper>
+    <RegisterWrapper onSubmit={handleSubmit(onSubmit)}>
       <Form>
         <Title>회원가입</Title>
         <ErrorWrapper>
@@ -134,7 +158,7 @@ function Register() {
           </FormItem>
           {errors.email && <ErrorMessage>{errors.email.message}</ErrorMessage>}
         </ ErrorWrapper>
-        <RegisterButton onClick={handleSubmit(onSubmit)}>등록하기</RegisterButton>
+        <RegisterButton type='submit' onClick={handleSubmit(onSubmit)}>등록하기</RegisterButton>
       </Form>
     </RegisterWrapper>
   );

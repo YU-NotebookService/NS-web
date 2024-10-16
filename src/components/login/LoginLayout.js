@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import img_Logo_YU from 'assets/login/img_Logo_YU.svg';
 import {
   LoginWrapper,
@@ -15,6 +15,7 @@ import {
 } from 'styles/login/LoginLayout-styled';
 import { useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
+import axios from 'axios';
 
 function LoginLayout() {
   const {
@@ -26,12 +27,25 @@ function LoginLayout() {
 
   const onSubmit = (data) => {
     console.log('제출된 데이터: ', data);
+    const { studentNumber, password } = data;
+    alert([studentNumber, password]);
+    loginData(studentNumber, password);
   };
 
   const navigate = useNavigate();
 
   function onChangePage() {
     navigate('/register');
+  }
+
+  function loginData(studentNumber, password) {
+    axios.post('http://localhost:3000/auth/login', {
+      studentNumber: studentNumber,
+      password: password
+    },
+      {}).then(res => {
+
+      })
   }
 
   return (
@@ -44,16 +58,17 @@ function LoginLayout() {
           <ErrorWrapper>
             <LoginInput
               placeholder="학번"
-              isError={!!errors.studentId}
-              {...register('studentId', {
+              isError={!!errors.studentNumber}
+              {...register('studentNumber', {
                 required: '학번을 입력해주세요'
               })}
             />
-            {errors.studentId && <ErrorMessage>{errors.studentId.message}</ErrorMessage>}
+            {errors.studentNumber && <ErrorMessage>{errors.studentNumber.message}</ErrorMessage>}
           </ ErrorWrapper>
 
           <ErrorWrapper>
             <LoginInput
+              type='password'
               placeholder="비밀번호"
               isError={!!errors.password}
               {...register('password', {
