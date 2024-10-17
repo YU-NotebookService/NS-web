@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import {
   Bottom,
   HeadLine,
@@ -11,21 +10,16 @@ import {
 import SearchBox from 'components/common/SearchBox';
 import InfoCard from 'components/common/list/InfoCard';
 
-const List = ({ itemText, columns, currentData, buttonText }) => {
-  const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 10;
-
-  const totalPages = Math.ceil(currentData.length / itemsPerPage);
-
-  const currentItem = currentData.slice(
-    (currentPage - 1) * itemsPerPage,
-    currentPage * itemsPerPage,
-  );
-
-  const handlePageChange = (page) => {
-    setCurrentPage(page);
-  };
-
+const List = ({
+  itemText,
+  columns,
+  currentData,
+  buttonText,
+  currentPage,
+  setCurrentPage,
+  totalPages,
+  totalElements,
+}) => {
   return (
     <ListWrapper>
       <Top>
@@ -45,13 +39,12 @@ const List = ({ itemText, columns, currentData, buttonText }) => {
           </div>
         ))}
       </HeadLine>
-      {currentItem.map((el, index) => {
-        const displayIndex = (currentPage - 1) * itemsPerPage + index + 1;
+      {currentData.map((el, index) => {
         return (
           <InfoCard
             key={index}
             el={el}
-            index={displayIndex}
+            index={totalElements - 10 * currentPage - index}
             columns={columns}
           />
         );
@@ -63,8 +56,10 @@ const List = ({ itemText, columns, currentData, buttonText }) => {
           {Array.from({ length: totalPages }, (_, index) => (
             <PagingBtn
               key={index}
-              isCurrentPage={currentPage === index + 1}
-              onClick={() => handlePageChange(index + 1)}
+              isCurrentPage={currentPage === index}
+              onClick={() => {
+                setCurrentPage(index);
+              }}
             >
               {index + 1}
             </PagingBtn>
