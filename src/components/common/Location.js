@@ -7,11 +7,12 @@ const Location = ({ locations }) => {
       HOME
       {locations.map((el, index) => {
         return index === locations.length - 1 ? (
-          <>
-            &gt; <span style={{ color: 'black', fontWeight: '500' }}>{el}</span>
-          </>
+          <span key={index}>
+            &gt;
+            <span style={{ color: 'black', fontWeight: '500' }}>{el}</span>
+          </span>
         ) : (
-          <>&gt; {el}</>
+          <span key={index}>&gt; {el}</span>
         );
       })}
     </Wrapper>

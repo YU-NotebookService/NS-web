@@ -16,7 +16,11 @@ const InfoCard = ({ el, index, columns }) => {
               textAlign: colIndex === 1 ? 'start' : 'center',
             }}
           >
-            {el[column.key]}
+            {el[column.key] === 'AVAILABLE'
+              ? '대여가능'
+              : el[column.key] === 'RESERVATION'
+                ? '대여불가'
+                : el[column.key]}
           </div>
         ),
       )}
