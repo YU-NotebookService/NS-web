@@ -1,6 +1,7 @@
 import getNotebookList from 'api/notebook/getNotebookList';
 import List from 'components/common/list/List';
-import { useEffect, useState } from 'react';
+import { LoadingBar } from 'components/common/LoadingBar';
+import { useCallback, useEffect, useState } from 'react';
 
 function NotebookListLayout() {
   const columns = [
@@ -10,29 +11,31 @@ function NotebookListLayout() {
     { label: '대여상태', width: '15%', key: 'rentalStatus' },
   ];
 
-  const [notebookList, setNotebookList] = useState([]);
+  const [notebookList, setNotebookList] = useState();
   const [currentPage, setCurrentPage] = useState(0);
   const [totalPages, setTotalPages] = useState(0);
   const [totalElements, setTotalElements] = useState(0);
 
-  const fetchNotebookList = async (page) => {
+  const fetchNotebookList = useCallback(async () => {
     try {
-      const response = await getNotebookList({ currentPage: page });
+      const response = await getNotebookList({ currentPage });
+      await new Promise((resolve) => setTimeout(resolve, 500)); // 로딩 지연
       setNotebookList(response.content);
       setTotalPages(response.totalPages);
       setTotalElements(response.totalElements);
-      console.log('response', response);
     } catch (error) {
       console.error(
         '노트북 리스트를 불러오는 데 실패하였습니다:',
         error.message,
       );
     }
-  };
+  }, [currentPage]);
 
   useEffect(() => {
-    fetchNotebookList(currentPage);
-  }, [currentPage]);
+    fetchNotebookList();
+  }, [fetchNotebookList]);
+
+  if (!notebookList) return <LoadingBar />;
 
   return (
     <>
