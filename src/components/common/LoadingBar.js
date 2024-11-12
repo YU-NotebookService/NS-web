@@ -30,6 +30,6 @@ export const LoadingBar = styled.div`
     height: 100%;
     width: 0;
     background-color: var(--main-color);
-    animation: ${loadingAnimation} 0.5s ease-in-out infinite;
+    animation: ${loadingAnimation} 0.6s ease-in-out infinite;
   }
 `;
