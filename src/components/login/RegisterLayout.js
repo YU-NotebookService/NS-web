@@ -12,8 +12,10 @@ import {
   NumInput,
   RegisterButton
 } from 'styles/login/RegisterLayout-styled';
+import registerData from 'api/userData/createUserData';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
+import { useNavigate } from 'react-router-dom';
 
 function Register() {
   const {
@@ -21,7 +23,10 @@ function Register() {
     handleSubmit,
     watch,
     formState: { errors },
+    trigger,
   } = useForm();
+
+  const navigate = useNavigate();
 
   const [input, setInput] = useState({
     NumText1: '',
@@ -30,10 +35,9 @@ function Register() {
   });
 
   const onSubmit = (data) => {
-    const phoneNumber = `${input.NumText1}-${input.NumText2}-${input.NumText3}`;
+    const phoneNumber = `${input.NumText1}${input.NumText2}${input.NumText3}`;
     const { studentNumber, name, password, email } = data;
-    alert([studentNumber, name, password, phoneNumber, email]);
-    registerData(studentNumber, name, password, phoneNumber, email);
+    fetchRegisterData(studentNumber, name, password, phoneNumber, email);
   };
 
   function onChangeInput(e) {
@@ -42,33 +46,27 @@ function Register() {
       ...prevInput,
       [name]: value
     }));
+    trigger('num');
   }
 
   function numInputCheck() {
     return input.NumText1 != '' && input.NumText2 != '' && input.NumText3 != '';
   }
 
-  function registerData(studentNumber, name, password, phoneNumber, email) {
-    fetch('http://3.39.198.156:8080/api/register', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ studentNumber, name, password, phoneNumber, email }),
-    })
-      .then((response) => response.json())
-      .then((result) => {
-        if (result.success) {
-          console.log('Registration successful');
-          alert('회원가입이 완료되었습니다');
-        } else {
-          console.error('Registration failed:', result.message);
-          alert('회원가입에 실패했습니다');
-        }
-      })
-      .catch((error) => {
-        console.error('Error during registration:', error);
-      });
+  async function fetchRegisterData(studentNumber, name, password, phoneNumber, email) {
+    try {
+      const res = await registerData(studentNumber, name, password, phoneNumber, email);
+
+      if (res.status === 200) {
+        alert(`학번 ${studentNumber} 회원가입이 완료되었습니다`);
+        navigate('/');
+      }
+
+    }
+    catch (error) {
+      console.error('Login failed:', error);
+      alert("이미 가입한 회원입니다");
+    }
   }
 
   return (
@@ -79,13 +77,13 @@ function Register() {
           <FormItem>
             <Text>학번</Text>
             <RegisterInput
-              isError={!!errors.studentId}
-              {...register('studentId', {
+              isError={!!errors.studentNumber}
+              {...register('studentNumber', {
                 required: '학번을 입력해주세요'
               })}
             />
           </FormItem>
-          {errors.studentId && <ErrorMessage>{errors.studentId.message}</ErrorMessage>}
+          {errors.studentNumber && <ErrorMessage>{errors.studentNumber.message}</ErrorMessage>}
         </ ErrorWrapper>
         <ErrorWrapper>
           <FormItem>
@@ -105,7 +103,11 @@ function Register() {
             <RegisterInput
               isError={!!errors.password}
               {...register('password', {
-                required: '새 비밀번호를 입력해주세요'
+                required: '새 비밀번호를 입력해주세요',
+                minLength: {
+                  value: 10,
+                  message: "비밀번호는 10자 이상 입력해주세요"
+                }
               })}
             />
           </FormItem>
@@ -136,6 +138,7 @@ function Register() {
               name="NumText2"
               isError={!!errors.num}
               maxLength={4}
+
             />
             <NumText>-</NumText>
             <NumInput

@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import loginData from 'api/userData/getUserData';
 import img_Logo_YU from 'assets/login/img_Logo_YU.svg';
 import {
   LoginWrapper,
@@ -8,14 +8,12 @@ import {
   Right,
   ErrorMessage,
   ErrorWrapper,
-  Count,
   LoginInput,
   LoginButton,
   RegisterButton
 } from 'styles/login/LoginLayout-styled';
 import { useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
-import axios from 'axios';
 
 function LoginLayout() {
   const {
@@ -28,8 +26,7 @@ function LoginLayout() {
   const onSubmit = (data) => {
     console.log('제출된 데이터: ', data);
     const { studentNumber, password } = data;
-    alert([studentNumber, password]);
-    loginData(studentNumber, password);
+    fetchLoginData(studentNumber, password);
   };
 
   const navigate = useNavigate();
@@ -38,14 +35,19 @@ function LoginLayout() {
     navigate('/register');
   }
 
-  function loginData(studentNumber, password) {
-    axios.post('http://localhost:3000/auth/login', {
-      studentNumber: studentNumber,
-      password: password
-    },
-      {}).then(res => {
+  async function fetchLoginData(studentNumber, password) {
+    try {
+      const res = await loginData(studentNumber, password);
 
-      })
+      if (res.status === 200) {
+        alert(`학번 ${studentNumber} 로그인이 완료되었습니다`);
+        navigate('/main');
+      }
+    }
+    catch (error) {
+      console.error('Login failed:', error);
+      alert('잘못된 학번 또는 비밀번호입니다');
+    }
   }
 
   return (
