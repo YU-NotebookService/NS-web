@@ -1,6 +1,8 @@
+import getNotebookInfo from 'api/notebook/getNotebookInfo';
 import Detail from 'components/common/Detail';
-import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import { LoadingBar } from 'components/common/LoadingBar';
+import React, { useCallback, useEffect, useState } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
 import { ApplyBtn } from 'styles/notebook/NotebookInfo-styled';
 
 const NotebookInfoLayout = () => {
@@ -10,13 +12,32 @@ const NotebookInfoLayout = () => {
     navigate('/notebook/list');
   };
 
+  const { notebookId } = useParams();
+  const [notebookInfo, setNotebookInfo] = useState();
+
+  const fetchNotebookInfo = useCallback(async () => {
+    try {
+      const response = await getNotebookInfo({ notebookId });
+      await new Promise((resolve) => setTimeout(resolve, 500));
+      setNotebookInfo(response);
+    } catch (error) {
+      console.error('노트북 정보를 불러오는 데 실패하였습니다:', error.message);
+    }
+  }, [notebookId]);
+
+  useEffect(() => {
+    fetchNotebookInfo();
+  }, [fetchNotebookInfo]);
+
+  if (!notebookInfo) return <LoadingBar />;
+
   return (
     <>
       <Detail
-        headLineText={'LG 13세대 울트라북 LG ULTRA 15U50R (32G/512G)'}
+        headLineText={notebookInfo.model}
         writer={'관리자'}
         createdAt={'2024-09-03 18:49'}
-        os={'Windosws 11'}
+        os={notebookInfo.os}
         contentText={'아래 사진과 같은 노트북입니다.'}
         imgUrl={imgUrl}
         goToList={goToNotebookList}
