@@ -35,6 +35,7 @@ function Register() {
   });
 
   const onSubmit = (data) => {
+    trigger('num');
     const phoneNumber = `${input.NumText1}${input.NumText2}${input.NumText3}`;
     const { studentNumber, name, password, email } = data;
     fetchRegisterData(studentNumber, name, password, phoneNumber, email);
@@ -46,7 +47,7 @@ function Register() {
       ...prevInput,
       [name]: value
     }));
-    trigger('num');
+
   }
 
   function numInputCheck() {

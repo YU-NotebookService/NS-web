@@ -14,6 +14,7 @@ import {
 } from 'styles/login/LoginLayout-styled';
 import { useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
+import { render } from '@testing-library/react';
 
 function LoginLayout() {
   const {
