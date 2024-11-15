@@ -29,7 +29,7 @@ function App() {
             <Route path="main" element={<Main />} />
             <Route path="notebook">
               <Route path="list" element={<NotebookList />} />
-              <Route path="info" element={<NotebookInfo />} />
+              <Route path="info/:notebookId" element={<NotebookInfo />} />
               <Route path="reg" element={<NotebookReg />} />
             </Route>
             <Route path="notice">
