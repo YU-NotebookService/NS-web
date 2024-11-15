@@ -2,9 +2,7 @@ import Button from 'components/common/Button';
 import Input from 'components/common/Input';
 import { styled } from 'styled-components';
 
-export const LoginWrapper = styled.div`
-
-`;
+export const LoginWrapper = styled.div``;
 
 export const LoginBox = styled.div`
   border-radius: 10px;
@@ -45,18 +43,19 @@ export const Count = styled.div`
   font-size: 16px;
   font-style: normal;
   font-weight: 500;
-  line-height: 23px; 
+  line-height: 23px;
   letter-spacing: 1.6px;
   width: 100%;
   text-align: end;
-  color: ${(props) => (props.isError ? 'red' : 'var(--gray-color)')};
+  color: ${({ $isError }) => ($isError ? 'red' : 'var(--gray-color)')};
 `;
 
 export const LoginInput = styled(Input)`
   width: 300px;
   height: 20px;
   margin-top: 20px;
-  border: 1px solid ${props => props.isError ? 'red' : 'var(--gray-color)'};
+  border: 1px solid
+    ${({ $isError }) => ($isError ? 'red' : 'var(--gray-color)')};
 `;
 
 export const LoginButton = styled(Button)`
@@ -67,7 +66,7 @@ export const LoginButton = styled(Button)`
 
 export const RegisterButton = styled(Button)`
   padding: 0px;
-  border:none;
+  border: none;
   background-color: white;
   color: var(--main-color);
   font-size: 20px;
