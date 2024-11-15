@@ -5,20 +5,27 @@ const login = async (data) => {
     const response = await api.post('login', data);
     return response.data;
   } catch (error) {
-    console.error('API 요청 중 오류 발생', error);
-    // 에러 유형에 따라 처리
+    console.error('전체 에러 객체:', error);
+
     if (error.response) {
-      // 서버가 응답했지만 오류 상태 코드가 반환됨
-      console.error('응답 오류:', error.response.data);
-      throw new Error('서버 오류 발생');
+      // 상태 코드와 응답 데이터 출력
+      console.error('응답 상태 코드:', error.response.status);
+      console.error('응답 데이터:', error.response.data);
+
+      // 상태 코드에 따른 에러 처리
+      if (error.response.status === 401) {
+        throw new Error('아이디 또는 비밀번호가 잘못되었습니다.');
+      } else if (error.response.status >= 500) {
+        throw new Error('서버 오류가 발생했습니다. 나중에 다시 시도해주세요.');
+      } else {
+        throw new Error(`오류 발생: ${error.response.status}`);
+      }
     } else if (error.request) {
-      // 요청이 전송되었지만 응답을 받지 못함
-      console.error('네트워크 오류 또는 서버 응답 없음');
-      throw new Error('네트워크 오류 또는 서버 응답 없음');
+      console.error('요청 객체:', error.request);
+      throw new Error('네트워크 문제 또는 서버가 응답하지 않습니다.');
     } else {
-      // 요청 설정 중 발생한 오류
       console.error('요청 설정 오류:', error.message);
-      throw new Error('요청 설정 오류');
+      throw new Error('요청 설정 오류가 발생했습니다.');
     }
   }
 };
