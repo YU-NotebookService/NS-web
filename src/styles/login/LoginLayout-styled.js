@@ -4,7 +4,7 @@ import { styled } from 'styled-components';
 
 export const LoginWrapper = styled.div``;
 
-export const LoginBox = styled.div`
+export const LoginBox = styled.form`
   border-radius: 10px;
   display: flex;
   justify-content: space-between;
