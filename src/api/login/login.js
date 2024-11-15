@@ -2,7 +2,7 @@ import api from 'api/axios';
 
 const login = async (data) => {
   try {
-    const response = await api.post(`login`);
+    const response = await api.post('login', data);
     return response.data;
   } catch (error) {
     console.error('API 요청 중 오류 발생', error);
