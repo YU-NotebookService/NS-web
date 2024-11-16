@@ -2,9 +2,7 @@ import Button from 'components/common/Button';
 import Input from 'components/common/Input';
 import { styled } from 'styled-components';
 
-export const RegisterWrapper = styled.div`
-
-`;
+export const RegisterWrapper = styled.div``;
 
 export const Title = styled.div`
   font-size: 30px;
@@ -23,7 +21,7 @@ export const Text = styled.span`
   color: var(--gray-color);
 `;
 
-export const Form = styled.div`
+export const Form = styled.form`
   display: flex;
   margin: 50px 0;
   flex-direction: column;
@@ -63,7 +61,7 @@ export const Count = styled.div`
   font-size: 16px;
   font-style: normal;
   font-weight: 500;
-  line-height: 23px; 
+  line-height: 23px;
   letter-spacing: 1.6px;
   width: 100%;
   text-align: end;
@@ -72,12 +70,12 @@ export const Count = styled.div`
 
 export const RegisterInput = styled(Input)`
   width: 275px;
-  border: 1px solid ${props => props.isError ? 'red' : 'var(--gray-color)'};
+  border: 1px solid ${(props) => (props.isError ? 'red' : 'var(--gray-color)')};
 `;
 
 export const NumInput = styled(Input)`
   width: 37px;
-  border: 1px solid ${props => props.isError ? 'red' : 'var(--gray-color)'};
+  border: 1px solid ${(props) => (props.isError ? 'red' : 'var(--gray-color)')};
 `;
 
 export const RegisterButton = styled(Button)`
