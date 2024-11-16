@@ -150,7 +150,7 @@ function Register() {
               {...register('email', {
                 required: '이메일을 입력해주세요',
                 pattern: {
-                  value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+                  value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
                   message: '올바른 이메일 형식을 입력해주세요.',
                 },
               })}
