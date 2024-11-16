@@ -13,7 +13,7 @@ import {
 } from 'styles/login/LoginLayout-styled';
 import { useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
-import login from 'api/common/login';
+import loginApi from 'api/common/loginApi';
 
 function LoginLayout() {
   const {
@@ -27,7 +27,7 @@ function LoginLayout() {
 
     try {
       // 로그인 API 호출
-      const response = await login(formData);
+      const response = await loginApi(formData);
       console.log('로그인 성공:', response);
       navigate('/main');
     } catch (error) {

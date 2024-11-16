@@ -13,16 +13,33 @@ import {
 } from 'styles/login/RegisterLayout-styled';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
+import registerApi from 'api/common/registerApi';
+import { useNavigate } from 'react-router-dom';
 
 function Register() {
+  const navigate = useNavigate();
+
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
 
-  const onSubmit = (data) => {
-    console.log('제출된 데이터: ', data);
+  const onSubmit = async (formData) => {
+    const phoneNumber = `${input.NumText1}-${input.NumText2}-${input.NumText3}`;
+    formData.phoneNumber = phoneNumber;
+
+    console.log('제출된 데이터: ', formData);
+
+    try {
+      const response = await registerApi(formData);
+      console.log('회원가입 성공: ', response);
+      alert('회원가입이 완료되었습니다.');
+      navigate('/');
+    } catch (error) {
+      console.error('회원가입 실패: ', error.message);
+      alert(error.message);
+    }
   };
 
   const [input, setInput] = useState({
@@ -46,20 +63,20 @@ function Register() {
 
   return (
     <RegisterWrapper>
-      <Form>
+      <Form onSubmit={handleSubmit(onSubmit)}>
         <Title>회원가입</Title>
         <ErrorWrapper>
           <FormItem>
             <Text>학번</Text>
             <RegisterInput
-              isError={!!errors.studentId}
-              {...register('studentId', {
+              isError={!!errors.studentNumber}
+              {...register('studentNumber', {
                 required: '학번을 입력해주세요',
               })}
             />
           </FormItem>
-          {errors.studentId && (
-            <ErrorMessage>{errors.studentId.message}</ErrorMessage>
+          {errors.studentNumber && (
+            <ErrorMessage>{errors.studentNumber.message}</ErrorMessage>
           )}
         </ErrorWrapper>
         <ErrorWrapper>
@@ -132,14 +149,16 @@ function Register() {
               isError={!!errors.email}
               {...register('email', {
                 required: '이메일을 입력해주세요',
+                pattern: {
+                  value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
+                  message: '올바른 이메일 형식을 입력해주세요.',
+                },
               })}
             />
           </FormItem>
           {errors.email && <ErrorMessage>{errors.email.message}</ErrorMessage>}
         </ErrorWrapper>
-        <RegisterButton onClick={handleSubmit(onSubmit)}>
-          등록하기
-        </RegisterButton>
+        <RegisterButton type="submit">등록하기</RegisterButton>
       </Form>
     </RegisterWrapper>
   );
