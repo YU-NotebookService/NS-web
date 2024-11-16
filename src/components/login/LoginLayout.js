@@ -13,7 +13,7 @@ import {
 } from 'styles/login/LoginLayout-styled';
 import { useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
-import login from 'api/login/login';
+import login from 'api/common/login';
 
 function LoginLayout() {
   const {
