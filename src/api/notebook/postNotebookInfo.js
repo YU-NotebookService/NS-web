@@ -1,25 +1,36 @@
 import axios from 'axios';
 
-const postNotebookInfo = async (data) => {
+const postNotebookInfo = async (data, user) => {
+  if (!user) {
+    throw new Error('로그인이 필요합니다.');
+  }
+  if (user.role !== 'ADMIN') {
+    throw new Error('해당 요청에 대한 권한이 없습니다.');
+  }
+
   try {
     const response = await axios.post(
       'http://52.78.65.211:8080/api/admin/notebooks/create',
       data,
-    ); // 노트북 생성 API 호출
+      {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      },
+    );
+
     return response.data;
   } catch (error) {
     console.error('전체 에러 객체:', error);
 
     if (error.response) {
-      // 상태 코드 및 예외 처리
-      const errorCode = error.response.data?.code; // 예외 코드 가져오기
-      const errorMessage = error.response.data?.message; // 예외 메시지 가져오기
+      const errorCode = error.response.data?.code;
+      const errorMessage = error.response.data?.message;
 
       console.error('응답 상태 코드:', error.response.status);
       console.error('응답 에러 코드:', errorCode);
       console.error('응답 에러 메시지:', errorMessage);
 
-      // 명세에 따른 예외 처리
       switch (errorCode) {
         case 'AE1':
           throw new Error('해당 요청에 대한 권한이 없습니다.');

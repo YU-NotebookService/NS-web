@@ -50,18 +50,42 @@ const Register = ({ onSubmit }) => {
     document.getElementById('fileInput').click();
   };
 
+  const onFormSubmit = (formData) => {
+    const data = new FormData();
+
+    // 필수 필드 추가
+    data.append('model', formData.title); // 제목을 model로 매핑
+    data.append('manufactureDate', '2023-11'); // 제조년월
+    data.append('os', formData.os); // 운영체제
+    data.append('size', 15); // 노트북 화면 크기 (예제값)
+
+    // 선택적 필드 (이미지) 추가
+    selectedFiles.forEach((file) => {
+      data.append('image', file);
+    });
+
+    // FormData 디버깅 출력
+    console.log('입력받은 FormData 내용: ');
+    data.forEach((value, key) => {
+      console.log(`${key}:`, value);
+    });
+
+    // FormData 전달
+    onSubmit(data);
+  };
+
   return (
-    <RegisterWrapper onSubmit={handleSubmit(onSubmit)}>
+    <RegisterWrapper onSubmit={handleSubmit(onFormSubmit)}>
       <FormWrapper>
         <InputWrapper>
           <InputTitle>
             제목<span style={{ color: 'var(--gray-color)' }}>(30자 이하)</span>
           </InputTitle>
           <ErrorWrapper>
-            <Count isError={!!errors.title}>{title.length}/30</Count>
+            <Count $isError={!!errors.title}>{title.length}/30</Count>
             <PostInput
               placeholder="제목을 입력해 주세요."
-              isError={!!errors.title}
+              $isError={!!errors.title}
               {...register('title', {
                 required: '제목은 필수 항목입니다.',
                 maxLength: {
@@ -74,17 +98,16 @@ const Register = ({ onSubmit }) => {
           </ErrorWrapper>
         </InputWrapper>
 
-        {/* 현재 URL 에 'notebook'이 포함될 시에만 출력 */}
         {window.location.pathname.includes('notebook') && (
           <InputWrapper>
             <InputTitle>
               OS<span style={{ color: 'var(--gray-color)' }}>(30자 이하)</span>
             </InputTitle>
             <ErrorWrapper>
-              <Count isError={!!errors.os}>{os.length}/30</Count>
+              <Count $isError={!!errors.os}>{os.length}/30</Count>
               <PostInput
                 placeholder="운영체제를 입력해 주세요."
-                isError={!!errors.os}
+                $isError={!!errors.os}
                 {...register('os', {
                   required: '운영체제는 필수 항목입니다.',
                   maxLength: {
@@ -102,10 +125,10 @@ const Register = ({ onSubmit }) => {
             내용<span style={{ color: 'var(--gray-color)' }}>(500자 이하)</span>
           </ContentInputTitle>
           <ErrorWrapper>
-            <Count isError={!!errors.content}>{content.length}/500</Count>
+            <Count $isError={!!errors.content}>{content.length}/500</Count>
             <ContentInput
               placeholder="내용을 입력해 주세요."
-              isError={!!errors.content}
+              $isError={!!errors.content}
               {...register('content', {
                 required: '내용은 필수 항목입니다.',
                 maxLength: {
