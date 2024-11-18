@@ -23,7 +23,7 @@ import {
 } from 'styles/common/Register-styled';
 import { useForm } from 'react-hook-form';
 
-const Register = () => {
+const Register = ({ onSubmit }) => {
   const {
     register,
     handleSubmit,
@@ -34,10 +34,6 @@ const Register = () => {
   const title = watch('title', '');
   const os = watch('os', '');
   const content = watch('content', '');
-
-  const onSubmit = (data) => {
-    console.log('제출된 데이터: ', data);
-  };
 
   const [selectedFiles, setSelectedFiles] = useState([]);
 
