@@ -14,6 +14,7 @@ import {
 import { useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import login from 'api/common/login';
+import { useAuth } from 'api/context/AuthProvider';
 
 function LoginLayout() {
   const {
@@ -22,6 +23,9 @@ function LoginLayout() {
     formState: { errors },
   } = useForm();
 
+  const { login: saveUser } = useAuth();
+  const navigate = useNavigate();
+
   const onSubmit = async (formData) => {
     console.log('전송 데이터:', formData);
 
@@ -29,6 +33,9 @@ function LoginLayout() {
       // 로그인 API 호출
       const response = await login(formData);
       console.log('로그인 성공:', response);
+
+      saveUser(response);
+
       navigate('/main');
     } catch (error) {
       // 에러 처리
@@ -36,8 +43,6 @@ function LoginLayout() {
       alert(error.message); // 사용자에게 에러 메시지 표시
     }
   };
-
-  const navigate = useNavigate();
 
   function onChangePage() {
     navigate('/register');
