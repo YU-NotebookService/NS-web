@@ -101,7 +101,7 @@ function Register() {
                 minLength: {
                   value: 10,
                   message: "비밀번호는 10자 이상 입력해주세요"
-                }
+                },
               })}
             />
           </FormItem>
