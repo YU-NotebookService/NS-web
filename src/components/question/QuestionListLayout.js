@@ -1,4 +1,7 @@
+import getQuestionList from 'api/question/getQuestionList';
 import List from 'components/common/list/List';
+import { LoadingBar } from 'components/common/LoadingBar';
+import { useCallback, useEffect, useState } from 'react';
 import { StateText } from 'styles/question/QuestionList-styled';
 
 function QuestionListLayout() {
@@ -12,22 +15,45 @@ function QuestionListLayout() {
     { label: '답변상태', width: '15%', key: 'state' },
   ];
 
-  const questionData = [
-    {
-      title: '제품에 문제가 있습니다',
-      user: 'tmd',
-      date: '2024-09-03',
-      state: <StateText>답변완료</StateText>
-    },
-  ];
+  const [questionList, setQuestionList] = useState();
+  const [currentPage, setCurrentPage] = useState(0);
+  const [totalPages, setTotalPages] = useState(0);
+  const [totalElements, setTotalElements] = useState(0);
+
+  const fetchQuestionList = useCallback(async () => {
+    try {
+      const response = await getQuestionList({ currentPage });
+      await new Promise((resolve) => setTimeout(resolve, 500)); // 로딩 지연
+      setQuestionList(response.content);
+      setTotalPages(response.totalPages);
+      setTotalElements(response.totalElements);
+    } catch (error) {
+      console.error(
+        '문의글 리스트를 불러오는 데 실패하였습니다:',
+        error.message,
+      );
+    }
+  }, [currentPage]);
+
+  useEffect(() => {
+    fetchQuestionList();
+  }, [fetchQuestionList]);
+
+  if (!questionList) return <LoadingBar />;
+
+
 
   return (
     <>
       <List
         itemText='개의 게시물이 등록되어 있습니다.'
         columns={columns}
-        currentData={questionData}
+        currentData={questionList}
         buttonText="글쓰기"
+        currentPage={currentPage}
+        setCurrentPage={setCurrentPage}
+        totalPages={totalPages}
+        totalElements={totalElements}
       />
     </>
   );
