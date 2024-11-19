@@ -9,8 +9,7 @@ import {
 } from 'styles/common/List-styled';
 import SearchBox from 'components/common/SearchBox';
 import InfoCard from 'components/common/list/InfoCard';
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 const List = ({
   itemText,
@@ -23,7 +22,7 @@ const List = ({
   totalElements,
 }) => {
 
-  const location = useState();
+  const location = useLocation();
   const navigate = useNavigate();
 
   function onChangePage() {
@@ -76,7 +75,7 @@ const List = ({
             </PagingBtn>
           ))}
         </div>
-        <WriteBtn>{buttonText}</WriteBtn>
+        <WriteBtn onClick={onChangePage}>{buttonText}</WriteBtn>
         {/* TODO: 공지사항 글쓰기 기능 구현 */}
       </Bottom>
     </ListWrapper>
