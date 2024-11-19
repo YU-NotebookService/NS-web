@@ -9,6 +9,8 @@ import {
 } from 'styles/common/List-styled';
 import SearchBox from 'components/common/SearchBox';
 import InfoCard from 'components/common/list/InfoCard';
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const List = ({
   itemText,
@@ -20,6 +22,15 @@ const List = ({
   totalPages,
   totalElements,
 }) => {
+
+  const location = useState();
+  const navigate = useNavigate();
+
+  function onChangePage() {
+    const currentPath = location.pathname.replace(/\/list$/, '');
+    navigate(`${currentPath}/reg`);
+  }
+
   return (
     <ListWrapper>
       <Top>
