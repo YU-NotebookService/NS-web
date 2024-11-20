@@ -1,6 +1,6 @@
 import api from 'api/axios';
 
-const login = async (data) => {
+const loginApi = async (data) => {
   try {
     const response = await api.post('login', data);
     return response.data;
@@ -30,4 +30,4 @@ const login = async (data) => {
   }
 };
 
-export default login;
+export default loginApi;
