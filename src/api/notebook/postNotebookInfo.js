@@ -1,4 +1,4 @@
-import axios from 'axios';
+import api from 'api/axios';
 
 const postNotebookInfo = async (data, user) => {
   if (!user) {
@@ -9,15 +9,11 @@ const postNotebookInfo = async (data, user) => {
   }
 
   try {
-    const response = await axios.post(
-      'http://52.78.65.211:8080/api/admin/notebooks/create',
-      data,
-      {
-        headers: {
-          'Content-Type': 'multipart/form-data',
-        },
+    const response = await api.post('admin/notebooks/create', data, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
       },
-    );
+    });
 
     return response.data;
   } catch (error) {
