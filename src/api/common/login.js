@@ -1,11 +1,8 @@
-import axios from 'axios';
+import api from 'api/axios';
 
 const login = async (data) => {
   try {
-    const response = await axios.post(
-      'http://52.78.65.211:8080/api/login',
-      data,
-    );
+    const response = await api.post('login', data);
     return response.data;
   } catch (error) {
     console.error('전체 에러 객체:', error);
