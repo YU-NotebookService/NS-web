@@ -28,6 +28,7 @@ const HeaderLayout = () => {
           >
             영남대 LMS
           </PageItem>
+          |
           <PageItem
             onClick={() =>
               (window.location.href = 'https://www.yu.ac.kr/main/index.do')
