@@ -12,6 +12,11 @@ const putNotebookInfo = async (notebookId, data, user) => {
     const response = await api.put(
       `admin/notebooks/${notebookId}/update`,
       data,
+      {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      },
     );
 
     return response.data;
