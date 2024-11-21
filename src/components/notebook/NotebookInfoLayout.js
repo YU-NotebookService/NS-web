@@ -13,13 +13,28 @@ const NotebookInfoLayout = () => {
   };
 
   const { notebookId } = useParams();
-  const [notebookInfo, setNotebookInfo] = useState();
+  const [notebookInfo, setNotebookInfo] = useState({
+    model: '',
+    manufactureDate: '',
+    os: '',
+    size: '',
+    imgUrl: [], // 초기값을 빈 배열로 설정
+  });
 
   const fetchNotebookInfo = useCallback(async () => {
     try {
       const response = await getNotebookInfo({ notebookId });
       await new Promise((resolve) => setTimeout(resolve, 500));
-      setNotebookInfo(response);
+
+      // imgUrl이 배열이 아닐 경우 처리
+      const normalizedResponse = {
+        ...response,
+        imgUrl: Array.isArray(response.imgUrl)
+          ? response.imgUrl
+          : [response.imgUrl], // 배열로 변환
+      };
+
+      setNotebookInfo(normalizedResponse);
     } catch (error) {
       console.error('노트북 정보를 불러오는 데 실패하였습니다:', error.message);
     }
@@ -29,27 +44,23 @@ const NotebookInfoLayout = () => {
     fetchNotebookInfo();
   }, [fetchNotebookInfo]);
 
-  if (!notebookInfo) return <LoadingBar />;
+  if (!notebookInfo.model) return <LoadingBar />;
 
   return (
     <>
       <Detail
         headLineText={notebookInfo.model}
         writer={'관리자'}
-        createdAt={'2024-09-03 18:49'}
+        manufactureDate={notebookInfo.manufactureDate}
         os={notebookInfo.os}
+        size={notebookInfo.size}
         contentText={'아래 사진과 같은 노트북입니다.'}
-        imgUrl={imgUrl}
+        imgUrl={notebookInfo.imgUrl}
         goToList={goToNotebookList}
       />
       <ApplyBtn>신청하기</ApplyBtn>
     </>
   );
 };
-
-const imgUrl = [
-  'https://b2c-contenthub.com/wp-content/uploads/2024/03/Alienware-m16-R2-starfield.jpg?quality=50&strip=all',
-  'https://i.pcmag.com/imagery/roundups/01LGL23MDBwSqivAsdTF3Ui-38..v1698792495.jpg',
-];
 
 export default NotebookInfoLayout;

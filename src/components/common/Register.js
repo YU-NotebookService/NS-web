@@ -35,17 +35,21 @@ const Register = ({ onSubmit }) => {
   const os = watch('os', '');
   const content = watch('content', '');
 
+  // 파일 상태 관리
   const [selectedFiles, setSelectedFiles] = useState([]);
 
+  // 파일 선택 처리
   const handleFileChange = (event) => {
     const files = Array.from(event.target.files);
     setSelectedFiles((prevFiles) => [...prevFiles, ...files]);
   };
 
+  // 파일 삭제 처리
   const handleDeleteFile = (index) => {
     setSelectedFiles((prevFiles) => prevFiles.filter((_, i) => i !== index));
   };
 
+  // 파일 첨부 버튼 클릭 처리
   const handleFileClick = () => {
     document.getElementById('fileInput').click();
   };
@@ -58,7 +62,7 @@ const Register = ({ onSubmit }) => {
       data.append('model', formData.title); // 제목을 model로 매핑
       data.append('manufactureDate', formData.manufactureDate); // 제조년월
       data.append('os', formData.os); // 운영체제
-      data.append('size', formData.size); // 노트북 화면 크기 (예제값)
+      data.append('size', formData.size); // 노트북 화면 크기
     }
 
     // 선택적 필드 (이미지) 추가
@@ -67,7 +71,7 @@ const Register = ({ onSubmit }) => {
     });
 
     // FormData 디버깅 출력
-    console.log('입력받은 FormData 내용: ');
+    console.log('입력받은 FormData 내용:');
     data.forEach((value, key) => {
       console.log(`${key}:`, value);
     });
@@ -124,14 +128,11 @@ const Register = ({ onSubmit }) => {
               </ErrorWrapper>
             </InputWrapper>
             <InputWrapper>
-              <InputTitle style={{ paddingTop: '16px' }}>
-                제조년월
-                <span style={{ color: 'var(--gray-color)' }}></span>
-              </InputTitle>
+              <InputTitle style={{ paddingTop: '16px' }}>제조년월</InputTitle>
               <ErrorWrapper>
                 <PostInput
                   placeholder="제조년월을 입력해 주세요. (YYYY-MM)"
-                  $isError={!!errors.os}
+                  $isError={!!errors.manufactureDate}
                   {...register('manufactureDate', {
                     required: '제조년월은 필수 항목입니다.',
                   })}
@@ -142,16 +143,13 @@ const Register = ({ onSubmit }) => {
               </ErrorWrapper>
             </InputWrapper>
             <InputWrapper>
-              <InputTitle style={{ paddingTop: '16px' }}>
-                화면 크기
-                <span style={{ color: 'var(--gray-color)' }}></span>
-              </InputTitle>
+              <InputTitle style={{ paddingTop: '16px' }}>화면 크기</InputTitle>
               <ErrorWrapper>
                 <PostInput
                   placeholder="화면 크기를 입력해 주세요. ex) 17"
                   $isError={!!errors.size}
-                  {...register('manufactureDate', {
-                    required: '화면크기는 필수 항목입니다.',
+                  {...register('size', {
+                    required: '화면 크기는 필수 항목입니다.',
                   })}
                 />
                 {errors.size && <Error>{errors.size.message}</Error>}
@@ -187,12 +185,8 @@ const Register = ({ onSubmit }) => {
             )}
             <FileWrapper>
               {selectedFiles.map((file, index) => (
-                <DeleteWrapper>
-                  <PostInput
-                    key={index}
-                    value={file.name} // 파일 이름 출력
-                    readOnly
-                  />
+                <DeleteWrapper key={index}>
+                  <PostInput value={file.name} readOnly />
                   <DeleteBtn onClick={() => handleDeleteFile(index)}>
                     삭제
                   </DeleteBtn>
@@ -203,15 +197,16 @@ const Register = ({ onSubmit }) => {
               id="fileInput"
               type="file"
               style={{ display: 'none' }}
-              {...register('photos')} // 파일 배열 전달
               onChange={handleFileChange}
-              multiple // 여러 개 파일 선택 가능
+              multiple
             />
-            <PicBtn onClick={handleFileClick}>찾아보기</PicBtn>
+            <PicBtn type="button" onClick={handleFileClick}>
+              찾아보기
+            </PicBtn>
           </PicWrapper>
         </InputWrapper>
       </FormWrapper>
-      <RegBtn>등록하기</RegBtn>
+      <RegBtn type="submit">등록하기</RegBtn>
     </RegisterWrapper>
   );
 };

@@ -18,8 +18,9 @@ import { ReactComponent as DeleteIcon } from 'assets/common/deleteIcon.svg';
 const Detail = ({
   headLineText,
   writer,
-  createdAt,
+  manufactureDate,
   os,
+  size,
   contentText,
   imgUrl,
   goToList,
@@ -31,9 +32,15 @@ const Detail = ({
       <HeadLine>{headLineText}</HeadLine>
 
       <DetailInfo>
-        {writer}&nbsp;&nbsp;|&nbsp;&nbsp;등록일 {createdAt}
+        {writer}
+        {/* manufactureDate가 있을 때만 출력 */}
+        {manufactureDate && (
+          <>&nbsp;&nbsp;|&nbsp;&nbsp;제조년월 {manufactureDate}</>
+        )}
         {/* os가 있을 때만 출력 */}
         {os && <>&nbsp;&nbsp;|&nbsp;&nbsp;운영체제 {os}</>}
+        {/* size가 있을 때만 출력 */}
+        {size && <>&nbsp;&nbsp;|&nbsp;&nbsp;사이즈 {size} inch</>}
       </DetailInfo>
       <DetailContent>
         {contentText && <ContentText>{contentText}</ContentText>}
