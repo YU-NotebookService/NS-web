@@ -54,10 +54,12 @@ const Register = ({ onSubmit }) => {
     const data = new FormData();
 
     // 필수 필드 추가
-    data.append('model', formData.title); // 제목을 model로 매핑
-    data.append('manufactureDate', '2023-11'); // 제조년월
-    data.append('os', formData.os); // 운영체제
-    data.append('size', 15); // 노트북 화면 크기 (예제값)
+    if (window.location.pathname.includes('notebook')) {
+      data.append('model', formData.title); // 제목을 model로 매핑
+      data.append('manufactureDate', formData.manufactureDate); // 제조년월
+      data.append('os', formData.os); // 운영체제
+      data.append('size', formData.size); // 노트북 화면 크기 (예제값)
+    }
 
     // 선택적 필드 (이미지) 추가
     selectedFiles.forEach((file) => {
@@ -99,26 +101,63 @@ const Register = ({ onSubmit }) => {
         </InputWrapper>
 
         {window.location.pathname.includes('notebook') && (
-          <InputWrapper>
-            <InputTitle>
-              OS<span style={{ color: 'var(--gray-color)' }}>(30자 이하)</span>
-            </InputTitle>
-            <ErrorWrapper>
-              <Count $isError={!!errors.os}>{os.length}/30</Count>
-              <PostInput
-                placeholder="운영체제를 입력해 주세요."
-                $isError={!!errors.os}
-                {...register('os', {
-                  required: '운영체제는 필수 항목입니다.',
-                  maxLength: {
-                    value: 30,
-                    message: '운영체제는 30자 이하로 입력해주세요.',
-                  },
-                })}
-              />
-              {errors.os && <Error>{errors.os.message}</Error>}
-            </ErrorWrapper>
-          </InputWrapper>
+          <>
+            <InputWrapper>
+              <InputTitle>
+                OS
+                <span style={{ color: 'var(--gray-color)' }}>(30자 이하)</span>
+              </InputTitle>
+              <ErrorWrapper>
+                <Count $isError={!!errors.os}>{os.length}/30</Count>
+                <PostInput
+                  placeholder="운영체제를 입력해 주세요."
+                  $isError={!!errors.os}
+                  {...register('os', {
+                    required: '운영체제는 필수 항목입니다.',
+                    maxLength: {
+                      value: 30,
+                      message: '운영체제는 30자 이하로 입력해주세요.',
+                    },
+                  })}
+                />
+                {errors.os && <Error>{errors.os.message}</Error>}
+              </ErrorWrapper>
+            </InputWrapper>
+            <InputWrapper>
+              <InputTitle style={{ paddingTop: '16px' }}>
+                제조년월
+                <span style={{ color: 'var(--gray-color)' }}></span>
+              </InputTitle>
+              <ErrorWrapper>
+                <PostInput
+                  placeholder="제조년월을 입력해 주세요. (YYYY-MM)"
+                  $isError={!!errors.os}
+                  {...register('manufactureDate', {
+                    required: '제조년월은 필수 항목입니다.',
+                  })}
+                />
+                {errors.manufactureDate && (
+                  <Error>{errors.manufactureDate.message}</Error>
+                )}
+              </ErrorWrapper>
+            </InputWrapper>
+            <InputWrapper>
+              <InputTitle style={{ paddingTop: '16px' }}>
+                화면 크기
+                <span style={{ color: 'var(--gray-color)' }}></span>
+              </InputTitle>
+              <ErrorWrapper>
+                <PostInput
+                  placeholder="화면 크기를 입력해 주세요. ex) 17"
+                  $isError={!!errors.size}
+                  {...register('manufactureDate', {
+                    required: '화면크기는 필수 항목입니다.',
+                  })}
+                />
+                {errors.size && <Error>{errors.size.message}</Error>}
+              </ErrorWrapper>
+            </InputWrapper>
+          </>
         )}
         <ContentInputWrapper>
           <ContentInputTitle>

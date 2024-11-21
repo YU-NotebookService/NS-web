@@ -1,6 +1,6 @@
 import api from 'api/axios';
 
-const postNotebookInfo = async (notebookId, data, user) => {
+const putNotebookInfo = async (notebookId, data, user) => {
   if (!user) {
     throw new Error('로그인이 필요합니다.');
   }
@@ -51,4 +51,4 @@ const postNotebookInfo = async (notebookId, data, user) => {
   }
 };
 
-export default postNotebookInfo;
+export default putNotebookInfo;
