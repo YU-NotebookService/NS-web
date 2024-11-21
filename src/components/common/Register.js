@@ -22,8 +22,11 @@ import {
   RegisterWrapper,
 } from 'styles/common/Register-styled';
 import { useForm } from 'react-hook-form';
+import { useLocation } from 'react-router-dom';
 
 const Register = ({ onSubmit }) => {
+  const location = useLocation();
+
   const {
     register,
     handleSubmit,
