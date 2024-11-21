@@ -57,15 +57,14 @@ const Register = ({ onSubmit }) => {
   const onFormSubmit = (formData) => {
     const data = new FormData();
 
-    // 필수 필드 추가
+    // 노트북일 경우, 공지사항, 1:1 문의는 이 부분 별도로 구현하시면 됩니다.
     if (window.location.pathname.includes('notebook')) {
-      data.append('model', formData.title); // 제목을 model로 매핑
-      data.append('manufactureDate', formData.manufactureDate); // 제조년월
-      data.append('os', formData.os); // 운영체제
-      data.append('size', formData.size); // 노트북 화면 크기
+      data.append('model', formData.title);
+      data.append('manufactureDate', formData.manufactureDate);
+      data.append('os', formData.os);
+      data.append('size', formData.size);
     }
 
-    // 선택적 필드 (이미지) 추가
     selectedFiles.forEach((file) => {
       data.append('image', file);
     });
