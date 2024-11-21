@@ -22,11 +22,8 @@ import {
   RegisterWrapper,
 } from 'styles/common/Register-styled';
 import { useForm } from 'react-hook-form';
-import { useLocation } from 'react-router-dom';
 
 const Register = ({ onSubmit }) => {
-  const location = useLocation();
-
   const {
     register,
     handleSubmit,
@@ -78,7 +75,7 @@ const Register = ({ onSubmit }) => {
     const files = Array.from(event.target.files).map((file) => ({
       name: file.name,
       type: 'file',
-      file,
+      value: file, // 실제 File 객체
     }));
 
     setSelectedFiles((prevFiles) => [...prevFiles, ...files]);
@@ -111,10 +108,6 @@ const Register = ({ onSubmit }) => {
       } else if (file.type === 'url') {
         data.append('image', file.value); // URL
       }
-    });
-
-    selectedFiles.forEach((file) => {
-      data.append('image', file);
     });
 
     // FormData 디버깅 출력
