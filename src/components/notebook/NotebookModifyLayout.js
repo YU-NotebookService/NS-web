@@ -2,9 +2,11 @@ import Register from 'components/common/Register';
 import React from 'react';
 import { useAuth } from 'api/context/AuthProvider'; // AuthProvider import
 import putNotebookInfo from 'api/notebook/putNotebookInfo';
+import { useNavigate } from 'react-router-dom';
 
 const NotebookModifyLayout = () => {
   const { user } = useAuth();
+  const navigate = useNavigate();
 
   const onSubmit = async (formData, id) => {
     try {
@@ -16,6 +18,7 @@ const NotebookModifyLayout = () => {
       const response = await putNotebookInfo(id, formData, user); // FormData 전달
       console.log('노트북 정보 등록 성공: ', response);
       alert('노트북 정보가 성공적으로 등록되었습니다.');
+      navigate('/notebook/list');
     } catch (error) {
       console.error('노트북 등록 실패: ', error.message);
       alert(error.message);
