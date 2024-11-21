@@ -97,6 +97,7 @@ const Register = ({ onSubmit }) => {
   const onFormSubmit = (formData) => {
     const data = new FormData();
     // 필수 필드 추가
+    // 공지사항 1:1 문의에 맞게 if문으로 작성하시면 됩니다!
     if (window.location.pathname.includes('notebook')) {
       data.append('model', formData.title);
       data.append('manufactureDate', formData.manufactureDate);
