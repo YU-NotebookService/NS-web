@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   ContentInput,
   ContentInputTitle,
@@ -22,25 +22,65 @@ import {
   RegisterWrapper,
 } from 'styles/common/Register-styled';
 import { useForm } from 'react-hook-form';
+import { useLocation } from 'react-router-dom';
 
 const Register = ({ onSubmit }) => {
+  const location = useLocation();
+
   const {
     register,
     handleSubmit,
+    setValue,
     watch,
     formState: { errors },
   } = useForm();
+
+  // 파일 및 URL 상태 관리
+  const [selectedFiles, setSelectedFiles] = useState([]);
+  const [id, setId] = useState();
+
+  useEffect(() => {
+    const data = location.state || {};
+
+    // imgUrl를 배열 형태로 변환하고 통합 관리
+    const initialFiles = Array.isArray(data.imgUrl)
+      ? data.imgUrl.map((url) => ({
+          name: url.split('/').pop(),
+          type: 'url',
+          value: url,
+        }))
+      : data.imgUrl
+        ? [
+            {
+              name: data.imgUrl.split('/').pop(),
+              type: 'url',
+              value: data.imgUrl,
+            },
+          ]
+        : [];
+
+    setSelectedFiles(initialFiles);
+
+    setValue('title', data.model || data.title || '');
+    setValue('os', data.os || '');
+    setValue('manufactureDate', data.manufactureDate || '');
+    setValue('size', data.size || '');
+    setValue('content', data.content || '');
+    setId(data.id);
+  }, [location.state, setValue]);
 
   const title = watch('title', '');
   const os = watch('os', '');
   const content = watch('content', '');
 
-  // 파일 상태 관리
-  const [selectedFiles, setSelectedFiles] = useState([]);
-
   // 파일 선택 처리
   const handleFileChange = (event) => {
-    const files = Array.from(event.target.files);
+    const files = Array.from(event.target.files).map((file) => ({
+      name: file.name,
+      type: 'file',
+      file,
+    }));
+
     setSelectedFiles((prevFiles) => [...prevFiles, ...files]);
   };
 
@@ -56,14 +96,22 @@ const Register = ({ onSubmit }) => {
 
   const onFormSubmit = (formData) => {
     const data = new FormData();
-
-    // 노트북일 경우, 공지사항, 1:1 문의는 이 부분 별도로 구현하시면 됩니다.
+    // 필수 필드 추가
     if (window.location.pathname.includes('notebook')) {
       data.append('model', formData.title);
       data.append('manufactureDate', formData.manufactureDate);
       data.append('os', formData.os);
       data.append('size', formData.size);
     }
+
+    // 모든 이미지 데이터를 `image`로 추가
+    selectedFiles.forEach((file) => {
+      if (file.type === 'file') {
+        data.append('image', file.value); // File 객체
+      } else if (file.type === 'url') {
+        data.append('image', file.value); // URL
+      }
+    });
 
     selectedFiles.forEach((file) => {
       data.append('image', file);
@@ -76,7 +124,7 @@ const Register = ({ onSubmit }) => {
     });
 
     // FormData 전달
-    onSubmit(data);
+    onSubmit(data, id);
   };
 
   return (

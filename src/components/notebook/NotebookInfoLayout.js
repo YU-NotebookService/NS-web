@@ -48,16 +48,7 @@ const NotebookInfoLayout = () => {
 
   return (
     <>
-      <Detail
-        headLineText={notebookInfo.model}
-        writer={'관리자'}
-        manufactureDate={notebookInfo.manufactureDate}
-        os={notebookInfo.os}
-        size={notebookInfo.size}
-        contentText={'아래 사진과 같은 노트북입니다.'}
-        imgUrl={notebookInfo.imgUrl}
-        goToList={goToNotebookList}
-      />
+      <Detail data={notebookInfo} goToList={goToNotebookList} />
       <ApplyBtn>신청하기</ApplyBtn>
     </>
   );
