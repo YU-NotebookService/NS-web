@@ -19,18 +19,19 @@ function QuestionListLayout() {
 
 
   useEffect(() => {
-    const fetchNotices = async () => {
+    const fetchQuestionList = async () => {
       try {
         const data = await getQuestionList(); // API 호출
-        if (data && data.notices) {
+        if (data && data.questions) {
           // API 응답 데이터가 존재하면 상태에 저장
-          setNotices(
-            data.notices.map((notice, index) => ({
+          setQuestionList(
+            data.questions.map((question, index) => ({
               index: index + 1, // 번호는 1부터 시작
-              noticeId: notice.noticeId, // API에서 받은 고유 ID
-              title: notice.title || '제목 없음', // 기본값 설정
-              writer: notice.writer || '', // 작성자 기본값
-              date: notice.date || '날짜 없음', // 날짜 기본값
+              questionId: question.questionId, // API에서 받은 고유 ID
+              title: question.title || '제목 없음', // 기본값 설정
+              writer: question.writer || '', // 작성자 기본값
+              date: question.date || '날짜 없음', // 날짜 기본값
+              state: question.state || '답변 없음',
             })),
           );
         } else {
@@ -38,13 +39,10 @@ function QuestionListLayout() {
         }
       } catch (err) {
         console.error('공지사항 불러오기 오류:', err);
-        setError(err.message || '공지사항을 불러오는 중 오류가 발생했습니다.');
-      } finally {
-        setIsLoading(false); // 로딩 종료
       }
     };
 
-    fetchNotices();
+    fetchQuestionList();
   }, []);
 
 
@@ -63,10 +61,6 @@ function QuestionListLayout() {
         columns={columns}
         currentData={questionList}
         buttonText="글쓰기"
-        currentPage={currentPage}
-        setCurrentPage={setCurrentPage}
-        totalPages={totalPages}
-        totalElements={totalElements}
       />
     </>
   );
