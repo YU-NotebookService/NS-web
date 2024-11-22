@@ -57,7 +57,7 @@ function QuestionListLayout() {
   return (
     <>
       <List
-        itemText={questionList.length}
+        itemText={`${questionList.length}개의 게시물이 등록되어 있습니다.`}
         columns={columns}
         currentData={questionList}
         buttonText="글쓰기"
