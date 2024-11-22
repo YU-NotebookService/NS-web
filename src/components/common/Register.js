@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   ContentInput,
   ContentInputTitle,
@@ -22,56 +22,106 @@ import {
   RegisterWrapper,
 } from 'styles/common/Register-styled';
 import { useForm } from 'react-hook-form';
+import { useLocation } from 'react-router-dom';
 
 const Register = ({ onSubmit }) => {
+  const location = useLocation();
+
   const {
     register,
     handleSubmit,
+    setValue,
     watch,
     formState: { errors },
   } = useForm();
+
+  // 파일 및 URL 상태 관리
+  const [selectedFiles, setSelectedFiles] = useState([]);
+  const [id, setId] = useState();
+
+  useEffect(() => {
+    const data = location.state || {};
+
+    // imgUrl를 배열 형태로 변환하고 통합 관리
+    const initialFiles = Array.isArray(data.imgUrl)
+      ? data.imgUrl.map((url) => ({
+          name: url.split('/').pop(),
+          type: 'url',
+          value: url,
+        }))
+      : data.imgUrl
+        ? [
+            {
+              name: data.imgUrl.split('/').pop(),
+              type: 'url',
+              value: data.imgUrl,
+            },
+          ]
+        : [];
+
+    setSelectedFiles(initialFiles);
+
+    setValue('title', data.model || data.title || '');
+    setValue('os', data.os || '');
+    setValue('manufactureDate', data.manufactureDate || '');
+    setValue('size', data.size || '');
+    setValue('content', data.content || '');
+    setId(data.id);
+  }, [location.state, setValue]);
 
   const title = watch('title', '');
   const os = watch('os', '');
   const content = watch('content', '');
 
-  const [selectedFiles, setSelectedFiles] = useState([]);
-
+  // 파일 선택 처리
   const handleFileChange = (event) => {
-    const files = Array.from(event.target.files);
+    const files = Array.from(event.target.files).map((file) => ({
+      name: file.name,
+      type: 'file',
+      value: file, // 실제 File 객체
+    }));
+
     setSelectedFiles((prevFiles) => [...prevFiles, ...files]);
   };
 
+  // 파일 삭제 처리
   const handleDeleteFile = (index) => {
     setSelectedFiles((prevFiles) => prevFiles.filter((_, i) => i !== index));
   };
 
+  // 파일 첨부 버튼 클릭 처리
   const handleFileClick = () => {
     document.getElementById('fileInput').click();
   };
 
   const onFormSubmit = (formData) => {
     const data = new FormData();
-
     // 필수 필드 추가
-    data.append('model', formData.title); // 제목을 model로 매핑
-    data.append('manufactureDate', '2023-11'); // 제조년월
-    data.append('os', formData.os); // 운영체제
-    data.append('size', 15); // 노트북 화면 크기 (예제값)
+    // 공지사항 1:1 문의에 맞게 if문으로 작성하시면 됩니다!
+    if (window.location.pathname.includes('notebook')) {
+      data.append('model', formData.title);
+      data.append('manufactureDate', formData.manufactureDate);
+      data.append('os', formData.os);
+      data.append('size', formData.size);
+    }
 
-    // 선택적 필드 (이미지) 추가
+    // 모든 이미지 데이터를 `image`로 추가
     selectedFiles.forEach((file) => {
-      data.append('image', file);
+      if (file.type === 'file') {
+        data.append('image', file.value); // File 객체
+      } else if (file.type === 'url') {
+        data.append('image', file.value); // URL
+      }
     });
 
     // FormData 디버깅 출력
-    console.log('입력받은 FormData 내용: ');
+    console.log('입력받은 FormData 내용:');
     data.forEach((value, key) => {
       console.log(`${key}:`, value);
     });
 
     // FormData 전달
-    onSubmit(data);
+    onSubmit(data, id);
   };
 
   return (
@@ -99,26 +149,57 @@ const Register = ({ onSubmit }) => {
         </InputWrapper>
 
         {window.location.pathname.includes('notebook') && (
-          <InputWrapper>
-            <InputTitle>
-              OS<span style={{ color: 'var(--gray-color)' }}>(30자 이하)</span>
-            </InputTitle>
-            <ErrorWrapper>
-              <Count $isError={!!errors.os}>{os.length}/30</Count>
-              <PostInput
-                placeholder="운영체제를 입력해 주세요."
-                $isError={!!errors.os}
-                {...register('os', {
-                  required: '운영체제는 필수 항목입니다.',
-                  maxLength: {
-                    value: 30,
-                    message: '운영체제는 30자 이하로 입력해주세요.',
-                  },
-                })}
-              />
-              {errors.os && <Error>{errors.os.message}</Error>}
-            </ErrorWrapper>
-          </InputWrapper>
+          <>
+            <InputWrapper>
+              <InputTitle>
+                OS
+                <span style={{ color: 'var(--gray-color)' }}>(30자 이하)</span>
+              </InputTitle>
+              <ErrorWrapper>
+                <Count $isError={!!errors.os}>{os.length}/30</Count>
+                <PostInput
+                  placeholder="운영체제를 입력해 주세요."
+                  $isError={!!errors.os}
+                  {...register('os', {
+                    required: '운영체제는 필수 항목입니다.',
+                    maxLength: {
+                      value: 30,
+                      message: '운영체제는 30자 이하로 입력해주세요.',
+                    },
+                  })}
+                />
+                {errors.os && <Error>{errors.os.message}</Error>}
+              </ErrorWrapper>
+            </InputWrapper>
+            <InputWrapper>
+              <InputTitle style={{ paddingTop: '16px' }}>제조년월</InputTitle>
+              <ErrorWrapper>
+                <PostInput
+                  placeholder="제조년월을 입력해 주세요. (YYYY-MM)"
+                  $isError={!!errors.manufactureDate}
+                  {...register('manufactureDate', {
+                    required: '제조년월은 필수 항목입니다.',
+                  })}
+                />
+                {errors.manufactureDate && (
+                  <Error>{errors.manufactureDate.message}</Error>
+                )}
+              </ErrorWrapper>
+            </InputWrapper>
+            <InputWrapper>
+              <InputTitle style={{ paddingTop: '16px' }}>화면 크기</InputTitle>
+              <ErrorWrapper>
+                <PostInput
+                  placeholder="화면 크기를 입력해 주세요. ex) 17"
+                  $isError={!!errors.size}
+                  {...register('size', {
+                    required: '화면 크기는 필수 항목입니다.',
+                  })}
+                />
+                {errors.size && <Error>{errors.size.message}</Error>}
+              </ErrorWrapper>
+            </InputWrapper>
+          </>
         )}
         <ContentInputWrapper>
           <ContentInputTitle>
@@ -148,12 +229,8 @@ const Register = ({ onSubmit }) => {
             )}
             <FileWrapper>
               {selectedFiles.map((file, index) => (
-                <DeleteWrapper>
-                  <PostInput
-                    key={index}
-                    value={file.name} // 파일 이름 출력
-                    readOnly
-                  />
+                <DeleteWrapper key={index}>
+                  <PostInput value={file.name} readOnly />
                   <DeleteBtn onClick={() => handleDeleteFile(index)}>
                     삭제
                   </DeleteBtn>
@@ -164,15 +241,16 @@ const Register = ({ onSubmit }) => {
               id="fileInput"
               type="file"
               style={{ display: 'none' }}
-              {...register('photos')} // 파일 배열 전달
               onChange={handleFileChange}
-              multiple // 여러 개 파일 선택 가능
+              multiple
             />
-            <PicBtn onClick={handleFileClick}>찾아보기</PicBtn>
+            <PicBtn type="button" onClick={handleFileClick}>
+              찾아보기
+            </PicBtn>
           </PicWrapper>
         </InputWrapper>
       </FormWrapper>
-      <RegBtn>등록하기</RegBtn>
+      <RegBtn type="submit">등록하기</RegBtn>
     </RegisterWrapper>
   );
 };

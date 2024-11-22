@@ -17,6 +17,7 @@ import Error from 'pages/Error';
 import NoticeInfo from 'pages/notice/NoticeInfo';
 import NoticeReg from 'pages/notice/NoticeReg';
 import { AuthProvider, useAuth } from 'api/context/AuthProvider';
+import NotebookModify from 'pages/notebook/NotebookModify';
 
 const ProtectedRoute = ({ children, requiredRole }) => {
   const { user } = useAuth();
@@ -80,9 +81,17 @@ function App() {
                 path="reg"
                 element={
                   <ProtectedRoute requiredRole="ADMIN">
-                    {' '}
                     {/* ADMIN 전용 */}
                     <NotebookReg />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="modify/:notebookId"
+                element={
+                  <ProtectedRoute requiredRole="ADMIN">
+                    {/* ADMIN 전용 */}
+                    <NotebookModify />
                   </ProtectedRoute>
                 }
               />

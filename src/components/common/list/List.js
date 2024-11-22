@@ -9,6 +9,7 @@ import {
 } from 'styles/common/List-styled';
 import SearchBox from 'components/common/SearchBox';
 import InfoCard from 'components/common/list/InfoCard';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 const List = ({
   itemText,
@@ -20,6 +21,16 @@ const List = ({
   totalPages,
   totalElements,
 }) => {
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  const goToRegister = () => {
+    const currentPath = location.pathname;
+    const newPath = currentPath.replace('/list', '/reg');
+
+    navigate(newPath);
+  };
+
   return (
     <ListWrapper>
       <Top>
@@ -65,7 +76,7 @@ const List = ({
             </PagingBtn>
           ))}
         </div>
-        <WriteBtn>{buttonText}</WriteBtn>
+        <WriteBtn onClick={goToRegister}>{buttonText}</WriteBtn>
         {/* TODO: 공지사항 글쓰기 기능 구현 */}
       </Bottom>
     </ListWrapper>
