@@ -39,9 +39,14 @@ function QuestionListLayout() {
     fetchQuestionList();
   }, [fetchQuestionList]);
 
+
   if (!questionList) return <LoadingBar />;
 
 
+  if (questionList.length == 0) {
+    alert("asd");
+    return;
+  }
 
   return (
     <>

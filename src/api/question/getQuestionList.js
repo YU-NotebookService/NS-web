@@ -3,7 +3,7 @@ import api from "api/axios";
 const getQuestionList = async ({ currentPage }) => {
     try {
         const response = await api.get(
-            `questions/read/${currentPage}?filterBy=none&selected=&onlyAvailable=false`,
+            `questions/read`,
         );
 
         return response.data;
