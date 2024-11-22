@@ -47,7 +47,7 @@ function QuestionListLayout() {
   }, []);
 
 
-  if (!questionList) return <LoadingBar />;
+  if (!questionList) return;
 
 
   if (questionList.length === 0) {

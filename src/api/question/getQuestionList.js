@@ -1,11 +1,10 @@
 import api from "api/axios";
 
-const getQuestionList = async ({ currentPage }) => {
+const getQuestionList = async () => {
     try {
         const response = await api.get(
             `questions/read`,
         );
-
         return response.data;
     } catch (error) {
         console.error('API 요청 중 오류 발생', error);
