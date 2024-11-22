@@ -29,7 +29,7 @@ function QuestionListLayout() {
               index: index + 1, // 번호는 1부터 시작
               noticeId: notice.noticeId, // API에서 받은 고유 ID
               title: notice.title || '제목 없음', // 기본값 설정
-              writer: notice.writer || '관리자', // 작성자 기본값
+              writer: notice.writer || '', // 작성자 기본값
               date: notice.date || '날짜 없음', // 날짜 기본값
             })),
           );
