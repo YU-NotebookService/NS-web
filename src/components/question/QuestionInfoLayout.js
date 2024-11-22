@@ -1,7 +1,9 @@
+import getQuestionInfo from 'api/question/getQuestionInfo'
 import Detail from 'components/common/Detail';
-import React from 'react';
+import { LoadingBar } from 'components/common/LoadingBar';
+import React, { useCallback, useEffect, useState } from 'react';
 import { AnswerContent } from 'styles/question/QuestionList-styled';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
 function QuestionInfoLayout() {
   const navigate = useNavigate();
@@ -10,21 +12,49 @@ function QuestionInfoLayout() {
     navigate('/question/list');
   };
 
+  const { questionId } = useParams();
+  const [questionInfo, setQuestionInfo] = useState({
+    title: '',
+    content: '',
+    state: false,
+    answer: '',
+    imgUrl: [],
+  });
+
+  const fetchQuestionInfo = useCallback(async () => {
+    try {
+      const response = await getQuestionInfo({ questionId });
+      await new Promise((resolve) => setTimeout(resolve, 500));
+
+      // imgUrl이 배열이 아닐 경우 처리
+      const normalizedResponse = {
+        ...response,
+        imgUrl: Array.isArray(response.imgUrl)
+          ? response.imgUrl
+          : [response.imgUrl], // 배열로 변환
+      };
+
+      setQuestionInfo(normalizedResponse);
+    } catch (error) {
+      console.error('게시글을 불러오는 데 실패하였습니다:', error.message);
+    }
+  }, [questionId]);
+
+  useEffect(() => {
+    fetchQuestionInfo();
+  }, [fetchQuestionInfo]);
+
+  if (!questionInfo.model) return <LoadingBar />;
+
   return (
     <>
       <Detail
-        headLineText={'제품에 문제가 있습니다'}
-        writer={'tmd'}
-        createdAt={'2024-09-03 18:49'}
-        contentText={'아래와 같이 문제가 있습니다'}
-        imgUrl={imgUrl}
+        data={questionInfo}
         goToList={goToQuestionList}
       />
       <AnswerContent>답변이 없습니다</AnswerContent>
     </>
   );
 }
-
-const imgUrl = [];
 
 export default QuestionInfoLayout;

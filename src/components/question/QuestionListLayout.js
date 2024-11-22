@@ -21,8 +21,7 @@ function QuestionListLayout() {
   useEffect(() => {
     const fetchQuestionList = async () => {
       try {
-        const data = await getQuestionList();
-        alert(data);// API 호출
+        const data = await getQuestionList(); // API 호출
         if (data && data.questions) {
           // API 응답 데이터가 존재하면 상태에 저장
           setQuestionList(
@@ -47,7 +46,7 @@ function QuestionListLayout() {
   }, []);
 
 
-  if (!questionList) return;
+  if (!questionList) return <LoadingBar />;
 
 
   if (questionList.length === 0) {
