@@ -43,12 +43,13 @@ function App() {
       <GlobalStyles />
       <BrowserRouter>
         <Routes>
-          {/* 로그인 및 회원가입 */}
-          <Route path="/" element={<Login />} />
-          <Route path="register" element={<Register />} />
-
-          {/* 레이아웃 적용된 라우트 */}
           <Route element={<Layout />}>
+            {/* 로그인 및 회원가입 */}
+            <Route path="/" element={<Login />} />
+            <Route path="register" element={<Register />} />
+
+            {/* 레이아웃 적용된 라우트 */}
+
             {/* 메인 페이지 */}
             <Route
               path="main"
