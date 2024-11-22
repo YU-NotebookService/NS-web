@@ -1,4 +1,5 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import {
   MainBanner,
   BannerContent,
@@ -8,6 +9,8 @@ import {
 } from 'styles/Main-styled';
 
 const Banner = () => {
+  const navigate = useNavigate();
+
   return (
     <MainBanner>
       <BannerContent>
@@ -18,7 +21,13 @@ const Banner = () => {
           시행합니다.
         </BannerText>
         <ButtonWrapper>
-          <RentalBtn>노트북 대여하기</RentalBtn>
+          <RentalBtn
+            onClick={() => {
+              navigate('/notebook/list');
+            }}
+          >
+            노트북 대여하기
+          </RentalBtn>
         </ButtonWrapper>
       </BannerContent>
     </MainBanner>
