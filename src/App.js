@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import GlobalStyles from 'GlobalStyles';
 import Layout from 'layouts/Layout';
 import Main from 'pages/main/Main';
@@ -16,38 +16,160 @@ import MyPage from 'pages/MyPage';
 import Error from 'pages/Error';
 import NoticeInfo from 'pages/notice/NoticeInfo';
 import NoticeReg from 'pages/notice/NoticeReg';
+import { AuthProvider, useAuth } from 'api/context/AuthProvider';
+import NotebookModify from 'pages/notebook/NotebookModify';
+
+const ProtectedRoute = ({ children, requiredRole }) => {
+  const { user } = useAuth();
+
+  console.log('현재 사용자:', user); // 디버깅용: 로그인된 사용자 정보 확인
+
+  if (!user) {
+    console.log('인증되지 않은 사용자. 로그인 페이지로 이동.');
+    return <Navigate to="/" replace />;
+  }
+
+  if (requiredRole && user.role !== requiredRole) {
+    console.log('권한 부족. 메인 페이지로 이동.');
+    return <Navigate to="/main" replace />;
+  }
+
+  return children;
+};
 
 function App() {
   return (
-    <>
+    <AuthProvider>
       <GlobalStyles />
       <BrowserRouter>
         <Routes>
+          {/* 로그인 및 회원가입 */}
+          <Route path="/" element={<Login />} />
+          <Route path="register" element={<Register />} />
+
+          {/* 레이아웃 적용된 라우트 */}
           <Route element={<Layout />}>
-            <Route path="" element={<Login />} />
-            <Route path="register" element={<Register />} />
-            <Route path="main" element={<Main />} />
+            {/* 메인 페이지 */}
+            <Route
+              path="main"
+              element={
+                <ProtectedRoute>
+                  <Main />
+                </ProtectedRoute>
+              }
+            />
+
+            {/* 노트북 관리 */}
             <Route path="notebook">
-              <Route path="list" element={<NotebookList />} />
-              <Route path="info/:notebookId" element={<NotebookInfo />} />
-              <Route path="reg" element={<NotebookReg />} />
+              <Route
+                path="list"
+                element={
+                  <ProtectedRoute>
+                    <NotebookList />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="info/:notebookId"
+                element={
+                  <ProtectedRoute>
+                    <NotebookInfo />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="reg"
+                element={
+                  <ProtectedRoute requiredRole="ADMIN">
+                    {/* ADMIN 전용 */}
+                    <NotebookReg />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="modify/:notebookId"
+                element={
+                  <ProtectedRoute requiredRole="ADMIN">
+                    {/* ADMIN 전용 */}
+                    <NotebookModify />
+                  </ProtectedRoute>
+                }
+              />
             </Route>
+
+            {/* 공지 관리 */}
             <Route path="notice">
-              <Route path="list" element={<NoticeList />} />
-              <Route path="info" element={<NoticeInfo />} />
-              <Route path="reg" element={<NoticeReg />} />
+              <Route
+                path="list"
+                element={
+                  <ProtectedRoute>
+                    <NoticeList />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="info"
+                element={
+                  <ProtectedRoute>
+                    <NoticeInfo />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="reg"
+                element={
+                  <ProtectedRoute requiredRole="ADMIN">
+                    {/* ADMIN 전용 */}
+                    <NoticeReg />
+                  </ProtectedRoute>
+                }
+              />
             </Route>
+
+            {/* 질문 관리 */}
             <Route path="question">
-              <Route path="list" element={<QuestionList />} />
-              <Route path="info" element={<QuestionInfo />} />
-              <Route path="reg" element={<QuestionReg />} />
+              <Route
+                path="list"
+                element={
+                  <ProtectedRoute>
+                    <QuestionList />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="info"
+                element={
+                  <ProtectedRoute>
+                    <QuestionInfo />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="reg"
+                element={
+                  <ProtectedRoute>
+                    <QuestionReg />
+                  </ProtectedRoute>
+                }
+              />
             </Route>
-            <Route path="mypage" element={<MyPage />} />
+
+            {/* 마이페이지 */}
+            <Route
+              path="mypage"
+              element={
+                <ProtectedRoute>
+                  <MyPage />
+                </ProtectedRoute>
+              }
+            />
+
+            {/* 에러 페이지 */}
             <Route path="*" element={<Error />} />
           </Route>
         </Routes>
       </BrowserRouter>
-    </>
+    </AuthProvider>
   );
 }
 

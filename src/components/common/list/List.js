@@ -21,14 +21,15 @@ const List = ({
   totalPages,
   totalElements,
 }) => {
-
-  const location = useLocation();
   const navigate = useNavigate();
+  const location = useLocation();
 
-  function onChangePage() {
-    const currentPath = location.pathname.replace(/\/list$/, '');
-    navigate(`${currentPath}/reg`);
-  }
+  const goToRegister = () => {
+    const currentPath = location.pathname;
+    const newPath = currentPath.replace('/list', '/reg');
+
+    navigate(newPath);
+  };
 
   return (
     <ListWrapper>
@@ -75,7 +76,7 @@ const List = ({
             </PagingBtn>
           ))}
         </div>
-        <WriteBtn onClick={onChangePage}>{buttonText}</WriteBtn>
+        <WriteBtn onClick={goToRegister}>{buttonText}</WriteBtn>
         {/* TODO: 공지사항 글쓰기 기능 구현 */}
       </Bottom>
     </ListWrapper>

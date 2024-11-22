@@ -1,12 +1,30 @@
 import React from 'react';
 import { MainBoxWrapper } from 'styles/Main-styled';
 import NoticeBox from 'components/main/NoticeBox';
+import { useNavigate } from 'react-router-dom';
 
 const MainBoxs = () => {
+  const navigate = useNavigate();
+
+  const goToNoticeList = () => {
+    navigate('/notice/list');
+  };
+
+  const goToQuestionList = () => {
+    navigate('/question/list');
+  };
   return (
     <MainBoxWrapper>
-      <NoticeBox text={'공지사항'} data={noticeData} />
-      <NoticeBox text={'1:1 문의'} data={questionData} />
+      <NoticeBox
+        text={'공지사항'}
+        data={noticeData}
+        clickHandler={goToNoticeList}
+      />
+      <NoticeBox
+        text={'1:1 문의'}
+        data={questionData}
+        clickHandler={goToQuestionList}
+      />
     </MainBoxWrapper>
   );
 };

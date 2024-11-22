@@ -14,39 +14,44 @@ import {
 } from 'styles/common/Detail-styled';
 import { ReactComponent as ModifyIcon } from 'assets/common/modifyIcon.svg';
 import { ReactComponent as DeleteIcon } from 'assets/common/deleteIcon.svg';
+import { useLocation, useNavigate } from 'react-router-dom';
 
-const Detail = ({
-  headLineText,
-  writer,
-  createdAt,
-  os,
-  contentText,
-  imgUrl,
-  goToList,
-  modifyPost,
-  deletePost,
-}) => {
+const Detail = ({ data, goToList, deletePost }) => {
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  const goToModify = () => {
+    const currentPath = location.pathname;
+    const newPath = currentPath.replace('/info', '/modify');
+
+    navigate(newPath, { state: data });
+  };
   return (
     <DetailWrapper>
-      <HeadLine>{headLineText}</HeadLine>
-
+      <HeadLine>{data.model}</HeadLine>
       <DetailInfo>
-        {writer}&nbsp;&nbsp;|&nbsp;&nbsp;등록일 {createdAt}
+        {data.writer || '관리자'}
+        {/* manufactureDate가 있을 때만 출력 */}
+        {data.manufactureDate && (
+          <>&nbsp;&nbsp;|&nbsp;&nbsp;제조년월 {data.manufactureDate}</>
+        )}
         {/* os가 있을 때만 출력 */}
-        {os && <>&nbsp;&nbsp;|&nbsp;&nbsp;운영체제 {os}</>}
+        {data.os && <>&nbsp;&nbsp;|&nbsp;&nbsp;운영체제 {data.os}</>}
+        {/* size가 있을 때만 출력 */}
+        {data.size && <>&nbsp;&nbsp;|&nbsp;&nbsp;사이즈 {data.size} inch</>}
       </DetailInfo>
       <DetailContent>
-        {contentText && <ContentText>{contentText}</ContentText>}
+        {data.contentText && <ContentText>{data.contentText}</ContentText>}
         <DetailImgWrapper>
-          {imgUrl &&
-            imgUrl.map((el, index) => (
+          {data.imgUrl &&
+            data.imgUrl.map((el, index) => (
               <DetailImg src={el} alt={`img ${index}`} key={index} />
             ))}
         </DetailImgWrapper>
         <BtnWrapper>
           <ListBtn onClick={goToList}>목록</ListBtn>
           <PostBtnWrapper>
-            <PostBtn onClick={modifyPost}>
+            <PostBtn onClick={goToModify}>
               글 수정
               <ModifyIcon />
             </PostBtn>

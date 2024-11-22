@@ -33,8 +33,8 @@ export const InputTitle = styled.div`
 
 export const PostInput = styled(Input)`
   width: 500px;
-  border: ${(props) =>
-    props.isError ? '1px solid red' : '1px solid #dbdbdb;'};
+  border: ${({ $isError }) =>
+    $isError ? '1px solid red' : '1px solid #dbdbdb;'};
 `;
 
 export const ContentInputWrapper = styled.div`
@@ -68,8 +68,8 @@ export const ContentInput = styled.textarea`
   &::placeholder {
     color: #dbdbdb;
   }
-  border: ${(props) =>
-    props.isError ? '1px solid red' : '1px solid #dbdbdb;'};
+  border: ${({ $isError }) =>
+    $isError ? '1px solid red' : '1px solid #dbdbdb;'};
 `;
 
 export const PicBtn = styled(Button)`
@@ -115,7 +115,7 @@ export const Count = styled.div`
   letter-spacing: 1.6px;
   width: 100%;
   text-align: end;
-  color: ${(props) => (props.isError ? 'red' : 'var(--gray-color)')};
+  color: ${({ $isError }) => ($isError ? 'red' : 'var(--gray-color)')};
 `;
 
 export const PicTitle = styled.div`
