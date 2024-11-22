@@ -8,7 +8,7 @@ function QuestionListLayout() {
 
 
   const columns = [
-    { label: '번호', width: '10%' },
+    { label: '번호', width: '10%', key: 'index' },
     { label: '제목', width: '50%', key: 'title' },
     { label: '작성자', width: '15%', key: 'user' },
     { label: '작성일', width: '25%', key: 'date' },
@@ -16,28 +16,36 @@ function QuestionListLayout() {
   ];
 
   const [questionList, setQuestionList] = useState();
-  const [currentPage, setCurrentPage] = useState(0);
-  const [totalPages, setTotalPages] = useState(0);
-  const [totalElements, setTotalElements] = useState(0);
 
-  const fetchQuestionList = useCallback(async () => {
-    try {
-      const response = await getQuestionList({ currentPage });
-      await new Promise((resolve) => setTimeout(resolve, 500)); // 로딩 지연
-      setQuestionList(response.content);
-      setTotalPages(response.totalPages);
-      setTotalElements(response.totalElements);
-    } catch (error) {
-      console.error(
-        '문의글 리스트를 불러오는 데 실패하였습니다:',
-        error.message,
-      );
-    }
-  }, [currentPage]);
 
   useEffect(() => {
-    fetchQuestionList();
-  }, [fetchQuestionList]);
+    const fetchNotices = async () => {
+      try {
+        const data = await getQuestionList(); // API 호출
+        if (data && data.notices) {
+          // API 응답 데이터가 존재하면 상태에 저장
+          setNotices(
+            data.notices.map((notice, index) => ({
+              index: index + 1, // 번호는 1부터 시작
+              noticeId: notice.noticeId, // API에서 받은 고유 ID
+              title: notice.title || '제목 없음', // 기본값 설정
+              writer: notice.writer || '관리자', // 작성자 기본값
+              date: notice.date || '날짜 없음', // 날짜 기본값
+            })),
+          );
+        } else {
+          throw new Error('공지사항 데이터가 없습니다.');
+        }
+      } catch (err) {
+        console.error('공지사항 불러오기 오류:', err);
+        setError(err.message || '공지사항을 불러오는 중 오류가 발생했습니다.');
+      } finally {
+        setIsLoading(false); // 로딩 종료
+      }
+    };
+
+    fetchNotices();
+  }, []);
 
 
   if (!questionList) return <LoadingBar />;
