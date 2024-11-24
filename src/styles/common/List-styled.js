@@ -69,7 +69,7 @@ export const CardWrapper = styled.div`
   font-size: 20px;
   font-style: normal;
   font-weight: 300;
-  line-height: 23px; /* 115% */
+  line-height: 23px;
   letter-spacing: 2px;
   display: flex;
   padding: 25px 0px;
@@ -84,7 +84,7 @@ export const Bottom = styled.div`
 `;
 
 export const PagingBtn = styled(Button).attrs((props) => ({
-  isCurrentPage: undefined, // DOM으로 전달되지 않도록 필터링
+  isCurrentPage: undefined,
 }))`
   display: flex;
   justify-content: center;
@@ -97,3 +97,6 @@ export const PagingBtn = styled(Button).attrs((props) => ({
 export const WriteBtn = styled(Button)`
   padding: 14px 40px;
 `;
+
+export const SidebarContainer = styled.div``;
+export const TitleContainer = styled.div``;
