@@ -16,7 +16,6 @@ import { useForm } from 'react-hook-form';
 import loginApi from 'api/common/loginApi';
 import { useAuth } from 'api/context/AuthProvider';
 
-
 function LoginLayout() {
   const {
     register,
@@ -24,24 +23,27 @@ function LoginLayout() {
     formState: { errors },
   } = useForm();
 
-  const { login: saveUser } = useAuth();
+  const { login } = useAuth();
   const navigate = useNavigate();
 
   const onSubmit = async (formData) => {
-    console.log('전송 데이터:', formData);
-
     try {
-      // 로그인 API 호출
       const response = await loginApi(formData);
-      console.log('로그인 성공:', response);
+      const { accessToken, ...user } = response;
 
-      saveUser(response);
+      console.log(
+        '로그인 성공! 반환된 사용자 정보:',
+        user,
+        'AccessToken:',
+        accessToken,
+      );
 
+      // 로그인 정보 저장
+      login({ user, token: accessToken });
       navigate('/main');
     } catch (error) {
-      // 에러 처리
       console.error('로그인 실패:', error.message);
-      alert(error.message); // 사용자에게 에러 메시지 표시
+      alert(error.message);
     }
   };
 
