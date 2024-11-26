@@ -16,7 +16,7 @@ import MyPage from 'pages/MyPage';
 import Error from 'pages/Error';
 import NoticeInfo from 'pages/notice/NoticeInfo';
 import NoticeReg from 'pages/notice/NoticeReg';
-import { AuthProvider, useAuth } from 'api/context/AuthProvider';
+import { useAuth } from 'api/context/AuthProvider';
 import NotebookModify from 'pages/notebook/NotebookModify';
 import { LoadingBar } from 'components/common/LoadingBar';
 
@@ -43,7 +43,7 @@ const ProtectedRoute = ({ children, requiredRole }) => {
 
 function App() {
   return (
-    <AuthProvider>
+    <>
       <GlobalStyles />
       <BrowserRouter>
         <Routes>
@@ -173,7 +173,7 @@ function App() {
           </Route>
         </Routes>
       </BrowserRouter>
-    </AuthProvider>
+    </>
   );
 }
 
