@@ -105,6 +105,7 @@ const Register = ({ onSubmit }) => {
       data.append('manufactureDate', formData.manufactureDate);
       data.append('os', formData.os);
       data.append('size', formData.size);
+      data.append('content', formData.content);
     }
 
     // 모든 이미지 데이터를 `image`로 추가
