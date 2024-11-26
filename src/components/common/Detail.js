@@ -28,7 +28,7 @@ const Detail = ({ data, goToList, deletePost }) => {
   };
   return (
     <DetailWrapper>
-      <HeadLine>{data.model}</HeadLine>
+      <HeadLine>{data.title || data.model || '제목 없음'}</HeadLine>
       <DetailInfo>
         {data.writer || '관리자'}
         {/* manufactureDate가 있을 때만 출력 */}
@@ -41,7 +41,11 @@ const Detail = ({ data, goToList, deletePost }) => {
         {data.size && <>&nbsp;&nbsp;|&nbsp;&nbsp;사이즈 {data.size} inch</>}
       </DetailInfo>
       <DetailContent>
-        {data.contentText && <ContentText>{data.contentText}</ContentText>}
+        {data.contentText || data.content ? (
+          <ContentText>{data.contentText || data.content}</ContentText>
+        ) : (
+          <p>내용이 없습니다.</p>
+        )}
         <DetailImgWrapper>
           {data.imgUrl &&
             data.imgUrl.map((el, index) => (

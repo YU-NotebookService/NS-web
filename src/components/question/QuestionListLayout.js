@@ -18,33 +18,36 @@ function QuestionListLayout() {
   const [questionList, setQuestionList] = useState();
 
 
-  useEffect(() => {
-    const fetchQuestionList = async () => {
-      try {
-        const data = await getQuestionList(); // API 호출
-        if (data && data.questions) {
-          // API 응답 데이터가 존재하면 상태에 저장
-          setQuestionList(
-            data.questions.map((question, index) => ({
-              index: Number(index + 1), // 번호는 1부터 시작
-              questionId: question.questionId, // API에서 받은 고유 ID
-              title: question.title || '제목 없음', // 기본값 설정
-              writer: question.writer || '', // 작성자 기본값
-              date: question.date || '날짜 없음', // 날짜 기본값
-              state: (<StateText>{question.state || '답변 없음'}</StateText>),
-            })),
-          );
-        } else {
-          throw new Error('공지사항 데이터가 없습니다.');
-        }
-      } catch (err) {
-        console.error('공지사항 불러오기 오류:', err);
+  const fetchQuestionList = async () => {
+    try {
+      const data = await getQuestionList(); // API 호출
+      console.log('API 응답 데이터:', data);
+
+      if (data && data.questions) {
+        // 데이터 변환
+        const transformedQuestions = data.questions.map((question, index) => ({
+          index: Number(index + 1), // 번호는 1부터 시작
+          questionId: question.questionId, // API에서 받은 고유 ID
+          title: question.title || '제목 없음', // 기본값 설정
+          writer: question.writer || '', // 작성자 기본값
+          date: question.date || '날짜 없음', // 날짜 기본값
+          state: question.state || '답변 없음', // 문자열로 우선 처리
+        }));
+
+        console.log('변환된 질문 데이터:', transformedQuestions);
+        setQuestionList(transformedQuestions);
+      } else {
+        throw new Error('공지사항 데이터가 없습니다.');
       }
-    };
+    } catch (err) {
+      console.error('공지사항 불러오기 오류:', err);
+    }
+  };
 
+
+  useEffect(() => {
     fetchQuestionList();
-  }, []);
-
+  }, [fetchQuestionList]);
 
   if (!questionList) return <LoadingBar />;
 
@@ -56,6 +59,7 @@ function QuestionListLayout() {
         columns={columns}
         currentData={questionList}
         buttonText="글쓰기"
+
       />
     </>
   );

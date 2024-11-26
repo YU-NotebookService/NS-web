@@ -138,7 +138,7 @@ function App() {
                 }
               />
               <Route
-                path="info"
+                path="info/:questionId"
                 element={
                   <ProtectedRoute>
                     <QuestionInfo />

@@ -3,7 +3,7 @@ import api from "api/axios";
 const getQuestionList = async () => {
     try {
         const response = await api.get(
-            `questions/read`,
+            `questions/read?page=1`
         );
         return response.data;
     } catch (error) {

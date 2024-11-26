@@ -10,7 +10,7 @@ const InfoCard = ({ el, index, columns }) => {
     if (window.location.pathname.includes('notebook'))
       navigate(`/notebook/info/${el.notebookId}`);
     else if (window.location.pathname.includes('question'))
-      navigate(`/question/info/${el.notebookId}`)
+      navigate(`/question/info/${el.questionId}`);
   };
 
   return (

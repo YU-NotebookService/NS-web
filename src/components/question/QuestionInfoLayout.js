@@ -24,21 +24,32 @@ function QuestionInfoLayout() {
   const fetchQuestionInfo = useCallback(async () => {
     try {
       const response = await getQuestionInfo({ questionId });
-      await new Promise((resolve) => setTimeout(resolve, 500)); // 로딩바 효과를 위해 지연
 
-      // 응답 데이터 처리
+      const questionIdParam = parseInt(questionId, 10);
+
+      // 데이터 구조를 확인하고 필요한 데이터 추출
+      const questionData = response.questions.find((q) => q.questionId === questionIdParam);
+
+      if (!response.questions || response.questions.length === 0) {
+        console.error('questions 배열이 비어 있거나 존재하지 않습니다.');
+        alert('질문 데이터가 없습니다.');
+        return;
+      }
+
       const normalizedResponse = {
-        title: response.title || '',
-        content: response.content || '',
-        state: response.state || false,
-        answer: response.answer,
+        title: questionData.title || '', // 제목
+        content: questionData.content || '', // 내용
+        state: questionData.state || false, // 상태
+        answer: questionData.answer || null, // 답변
         imgUrl: [
-          response.imageUrl || null,
-          response.imageUrl2 || null,
-          response.imageUrl3 || null,
-        ].filter(Boolean), // 이미지 URL이 null이 아닌 경우만 포함
+          questionData.imageUrl || null,
+          questionData.imageUrl2 || null,
+          questionData.imageUrl3 || null,
+        ].filter(Boolean), // null 값을 제거
+        writer: questionData.writer || '관리자', // 작성자
       };
 
+      console.log('정규화된 데이터:', normalizedResponse); // 디버깅용 로그
       setQuestionInfo(normalizedResponse);
     } catch (error) {
       console.error('질문 정보를 불러오는 데 실패했습니다:', error.message);
