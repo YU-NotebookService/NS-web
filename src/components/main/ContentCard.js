@@ -10,7 +10,6 @@ import {
 } from 'styles/Main-styled';
 
 const ContentCard = ({ content }) => {
-  console.log('읽어온 값', content);
   return (
     <CardWrapper>
       <DateBox>
