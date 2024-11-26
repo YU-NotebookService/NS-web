@@ -26,12 +26,12 @@ function QuestionListLayout() {
           // API 응답 데이터가 존재하면 상태에 저장
           setQuestionList(
             data.questions.map((question, index) => ({
-              index: index + 1, // 번호는 1부터 시작
+              index: Number(index + 1), // 번호는 1부터 시작
               questionId: question.questionId, // API에서 받은 고유 ID
               title: question.title || '제목 없음', // 기본값 설정
               writer: question.writer || '', // 작성자 기본값
               date: question.date || '날짜 없음', // 날짜 기본값
-              state: question.state || '답변 없음',
+              state: (<StateText>{question.state || '답변 없음'}</StateText>),
             })),
           );
         } else {

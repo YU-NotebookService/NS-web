@@ -12,9 +12,9 @@ function QuestionInfoLayout() {
   const [questionInfo, setQuestionInfo] = useState({
     title: '',
     content: '',
-    state: '',
+    state: false, // state는 초기값을 false로 설정
     answer: null,
-    imgUrl: [], // 초기값을 빈 배열로 설정
+    imgUrl: [], // 이미지 URL 배열로 초기화
   });
 
   const goToQuestionList = () => {
@@ -24,18 +24,24 @@ function QuestionInfoLayout() {
   const fetchQuestionInfo = useCallback(async () => {
     try {
       const response = await getQuestionInfo({ questionId });
-      await new Promise((resolve) => setTimeout(resolve, 500));
+      await new Promise((resolve) => setTimeout(resolve, 500)); // 로딩바 효과를 위해 지연
 
+      // 응답 데이터 처리
       const normalizedResponse = {
-        ...response,
-        imgUrl: Array.isArray(response.imgUrl)
-          ? response.imgUrl
-          : [response.imgUrl], // 배열로 변환
+        title: response.title || '',
+        content: response.content || '',
+        state: response.state || false,
+        answer: response.answer,
+        imgUrl: [
+          response.imageUrl || null,
+          response.imageUrl2 || null,
+          response.imageUrl3 || null,
+        ].filter(Boolean), // 이미지 URL이 null이 아닌 경우만 포함
       };
 
       setQuestionInfo(normalizedResponse);
     } catch (error) {
-      console.error('노트북 정보를 불러오는 데 실패하였습니다:', error.message);
+      console.error('질문 정보를 불러오는 데 실패했습니다:', error.message);
     }
   }, [questionId]);
 
@@ -43,7 +49,7 @@ function QuestionInfoLayout() {
     fetchQuestionInfo();
   }, [fetchQuestionInfo]);
 
-  if (!questionInfo) return <LoadingBar />;
+  if (!questionInfo.title) return <LoadingBar />; // 제목이 없으면 로딩바 표시
 
   return (
     <>

@@ -1,12 +1,16 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { CardWrapper } from 'styles/common/List-styled';
 
 const InfoCard = ({ el, index, columns }) => {
+  const location = useLocation();
   const navigate = useNavigate();
 
   const goToNotebookInfo = () => {
-    navigate(`/notebook/info/${el.notebookId}`);
+    if (window.location.pathname.includes('notebook'))
+      navigate(`/notebook/info/${el.notebookId}`);
+    else if (window.location.pathname.includes('question'))
+      navigate(`/question/info/${el.notebookId}`)
   };
 
   return (

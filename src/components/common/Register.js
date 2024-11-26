@@ -22,6 +22,7 @@ import {
   RegisterWrapper,
 } from 'styles/common/Register-styled';
 import { useForm } from 'react-hook-form';
+import { useAuth } from 'api/context/AuthProvider';
 import { useLocation } from 'react-router-dom';
 
 const Register = ({ onSubmit }) => {
@@ -104,8 +105,7 @@ const Register = ({ onSubmit }) => {
       data.append('os', formData.os);
       data.append('size', formData.size);
     }
-
-    if (window.location.pathname.includes('question')) {
+    else if (window.location.pathname.includes('question')) {
       data.append('title', formData.title);
       data.append('content', formData.content);
     }
