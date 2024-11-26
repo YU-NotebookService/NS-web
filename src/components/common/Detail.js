@@ -30,7 +30,7 @@ const Detail = ({ data, goToList, deletePost }) => {
     <DetailWrapper>
       <HeadLine>{data.title || data.model || '제목 없음'}</HeadLine>
       <DetailInfo>
-        {data.writer || '관리자'}
+        {(data.writer || '관리자') && <>작성자 {data.writer || '관리자'}</>}
         {/* manufactureDate가 있을 때만 출력 */}
         {data.manufactureDate && (
           <>&nbsp;&nbsp;|&nbsp;&nbsp;제조년월 {data.manufactureDate}</>
@@ -39,6 +39,8 @@ const Detail = ({ data, goToList, deletePost }) => {
         {data.os && <>&nbsp;&nbsp;|&nbsp;&nbsp;운영체제 {data.os}</>}
         {/* size가 있을 때만 출력 */}
         {data.size && <>&nbsp;&nbsp;|&nbsp;&nbsp;사이즈 {data.size} inch</>}
+
+        {data.date && <>&nbsp;&nbsp;|&nbsp;&nbsp;작성일 {data.date}</>}
       </DetailInfo>
       <DetailContent>
         {data.contentText || data.content ? (
