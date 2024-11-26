@@ -49,15 +49,10 @@ function QuestionListLayout() {
   if (!questionList) return <LoadingBar />;
 
 
-  if (questionList.length === 0) {
-
-    return;
-  }
-
   return (
     <>
       <List
-        itemText={`${questionList.length}개의 게시물이 등록되어 있습니다.`}
+        itemText="개의 게시물이 등록되어 있습니다."
         columns={columns}
         currentData={questionList}
         buttonText="글쓰기"

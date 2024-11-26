@@ -45,18 +45,18 @@ const Register = ({ onSubmit }) => {
     // imgUrl를 배열 형태로 변환하고 통합 관리
     const initialFiles = Array.isArray(data.imgUrl)
       ? data.imgUrl.map((url) => ({
-          name: url.split('/').pop(),
-          type: 'url',
-          value: url,
-        }))
+        name: url.split('/').pop(),
+        type: 'url',
+        value: url,
+      }))
       : data.imgUrl
         ? [
-            {
-              name: data.imgUrl.split('/').pop(),
-              type: 'url',
-              value: data.imgUrl,
-            },
-          ]
+          {
+            name: data.imgUrl.split('/').pop(),
+            type: 'url',
+            value: data.imgUrl,
+          },
+        ]
         : [];
 
     setSelectedFiles(initialFiles);
@@ -103,6 +103,11 @@ const Register = ({ onSubmit }) => {
       data.append('manufactureDate', formData.manufactureDate);
       data.append('os', formData.os);
       data.append('size', formData.size);
+    }
+
+    if (window.location.pathname.includes('question')) {
+      data.append('title', formData.title);
+      data.append('content', formData.content);
     }
 
     // 모든 이미지 데이터를 `image`로 추가

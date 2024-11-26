@@ -4,7 +4,7 @@ const postQuestionInfo = async (data, user) => {
     if (!user) {
         throw new Error('로그인이 필요합니다.');
     }
-    if (user.role !== 'ADMIN') {
+    if (user.role == 'ADMIN') {
         throw new Error('해당 요청에 대한 권한이 없습니다.');
     }
 
@@ -46,3 +46,5 @@ const postQuestionInfo = async (data, user) => {
         }
     }
 };
+
+export default postQuestionInfo;

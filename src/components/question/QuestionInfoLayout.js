@@ -7,26 +7,25 @@ import { useNavigate, useParams } from 'react-router-dom';
 
 function QuestionInfoLayout() {
   const navigate = useNavigate();
+  const { questionId } = useParams();
+
+  const [questionInfo, setQuestionInfo] = useState({
+    title: '',
+    content: '',
+    state: '',
+    answer: null,
+    imgUrl: [], // 초기값을 빈 배열로 설정
+  });
 
   const goToQuestionList = () => {
     navigate('/question/list');
   };
-
-  const { questionId } = useParams();
-  const [questionInfo, setQuestionInfo] = useState({
-    title: '',
-    content: '',
-    state: false,
-    answer: '',
-    imgUrl: [],
-  });
 
   const fetchQuestionInfo = useCallback(async () => {
     try {
       const response = await getQuestionInfo({ questionId });
       await new Promise((resolve) => setTimeout(resolve, 500));
 
-      // imgUrl이 배열이 아닐 경우 처리
       const normalizedResponse = {
         ...response,
         imgUrl: Array.isArray(response.imgUrl)
@@ -36,7 +35,7 @@ function QuestionInfoLayout() {
 
       setQuestionInfo(normalizedResponse);
     } catch (error) {
-      console.error('게시글을 불러오는 데 실패하였습니다:', error.message);
+      console.error('노트북 정보를 불러오는 데 실패하였습니다:', error.message);
     }
   }, [questionId]);
 
@@ -44,15 +43,14 @@ function QuestionInfoLayout() {
     fetchQuestionInfo();
   }, [fetchQuestionInfo]);
 
-  if (!questionInfo.model) return <LoadingBar />;
+  if (!questionInfo) return <LoadingBar />;
 
   return (
     <>
-      <Detail
-        data={questionInfo}
-        goToList={goToQuestionList}
-      />
-      <AnswerContent>답변이 없습니다</AnswerContent>
+      <Detail data={questionInfo} goToList={goToQuestionList} />
+      <AnswerContent>
+        {questionInfo.answer ? questionInfo.answer : '답변이 없습니다'}
+      </AnswerContent>
     </>
   );
 }
