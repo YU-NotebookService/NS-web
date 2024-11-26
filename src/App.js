@@ -18,11 +18,15 @@ import NoticeInfo from 'pages/notice/NoticeInfo';
 import NoticeReg from 'pages/notice/NoticeReg';
 import { AuthProvider, useAuth } from 'api/context/AuthProvider';
 import NotebookModify from 'pages/notebook/NotebookModify';
+import { LoadingBar } from 'components/common/LoadingBar';
 
 const ProtectedRoute = ({ children, requiredRole }) => {
-  const { user } = useAuth();
+  const { user, isLoading } = useAuth();
 
-  console.log('현재 사용자:', user); // 디버깅용: 로그인된 사용자 정보 확인
+  if (isLoading) {
+    console.log('사용자 인증 정보 로딩 중...');
+    return <LoadingBar />; // 로딩 UI를 표시
+  }
 
   if (!user) {
     console.log('인증되지 않은 사용자. 로그인 페이지로 이동.');
