@@ -43,23 +43,25 @@ const Register = ({ onSubmit }) => {
     const data = location.state || {};
 
     // imgUrl를 배열 형태로 변환하고 통합 관리
-    const initialFiles = Array.isArray(data.imgUrl)
-      ? data.imgUrl.map((url) => ({
-          name: url.split('/').pop(),
-          type: 'url',
-          value: url,
-        }))
-      : data.imgUrl
-        ? [
-            {
-              name: data.imgUrl.split('/').pop(),
-              type: 'url',
-              value: data.imgUrl,
-            },
-          ]
-        : [];
+    // const initialFiles = Array.isArray(data.imgUrl)
+    //   ? data.imgUrl.map((url) => ({
+    //       name: url.split('/').pop(),
+    //       type: 'url',
+    //       value: url,
+    //     }))
+    //   : data.imgUrl
+    //     ? [
+    //         {
+    //           name: data.imgUrl.split('/').pop(),
+    //           type: 'url',
+    //           value: data.imgUrl,
+    //         },
+    //       ]
+    //     : [];
 
-    setSelectedFiles(initialFiles);
+    //setSelectedFiles(initialFiles);
+    //현재 오류 발생으로 인한 주석 처리.
+    setSelectedFiles([]);
 
     setValue('title', data.model || data.title || '');
     setValue('os', data.os || '');
@@ -108,9 +110,9 @@ const Register = ({ onSubmit }) => {
     // 모든 이미지 데이터를 `image`로 추가
     selectedFiles.forEach((file) => {
       if (file.type === 'file') {
-        data.append('image', file.value); // File 객체
+        data.append('images', file.value); // File 객체
       } else if (file.type === 'url') {
-        data.append('image', file.value); // URL
+        data.append('images', file.value); // URL
       }
     });
 
