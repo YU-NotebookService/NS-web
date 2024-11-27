@@ -1,6 +1,8 @@
 import React from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { CardWrapper } from 'styles/common/List-styled';
+import { StateText } from 'styles/question/QuestionList-styled';
+
 
 const InfoCard = ({ el, index, columns }) => {
   const location = useLocation();
@@ -29,11 +31,16 @@ const InfoCard = ({ el, index, columns }) => {
             }}
             onClick={colIndex === 1 ? goToNotebookInfo : null}
           >
-            {el[column.key] === 'AVAILABLE'
-              ? '대여가능'
-              : el[column.key] === 'RESERVATION'
-                ? '대여불가'
-                : el[column.key]}
+            {column.key === 'state' ? (
+              <StateText>{el[column.key] || '답변 없음'}</StateText>
+            ) :
+              column.key === 'user' ? (
+                el[column.key] || '작성자 없음'
+              ) : el[column.key] === 'AVAILABLE'
+                ? '대여가능'
+                : el[column.key] === 'RESERVATION'
+                  ? '대여불가'
+                  : el[column.key]}
           </div>
         ),
       )}

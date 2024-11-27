@@ -24,6 +24,7 @@ function QuestionInfoLayout() {
   const fetchQuestionInfo = useCallback(async () => {
     try {
       const response = await getQuestionInfo({ questionId });
+      await new Promise((resolve) => setTimeout(resolve, 500)); // 로딩 지연
 
       const questionIdParam = parseInt(questionId, 10);
 

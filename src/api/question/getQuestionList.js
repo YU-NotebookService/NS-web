@@ -1,9 +1,9 @@
 import api from "api/axios";
 
-const getQuestionList = async () => {
+const getQuestionList = async ({ currentPage }) => {
     try {
         const response = await api.get(
-            `questions/read?page=1`
+            `questions/read?page=${currentPage}`,
         );
         return response.data;
     } catch (error) {
