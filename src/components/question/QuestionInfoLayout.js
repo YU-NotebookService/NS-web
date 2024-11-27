@@ -28,7 +28,6 @@ function QuestionInfoLayout() {
 
       const questionIdParam = parseInt(questionId, 10);
 
-      // 데이터 구조를 확인하고 필요한 데이터 추출
       const questionData = response.questions.find((q) => q.questionId === questionIdParam);
 
       if (!response.questions || response.questions.length === 0) {
@@ -38,19 +37,19 @@ function QuestionInfoLayout() {
       }
 
       const normalizedResponse = {
-        title: questionData.title || '', // 제목
-        content: questionData.content || '', // 내용
-        state: questionData.state || false, // 상태
-        answer: questionData.answer || null, // 답변
+        title: questionData.title || '',
+        content: questionData.content || '',
+        state: questionData.state || false,
+        answer: questionData.answer || null,
         imgUrl: [
           questionData.imageUrl || null,
           questionData.imageUrl2 || null,
           questionData.imageUrl3 || null,
-        ].filter(Boolean), // null 값을 제거
-        writer: questionData.writer || '관리자', // 작성자
+        ].filter(Boolean),
+        writer: questionData.writer || '관리자',
       };
 
-      console.log('정규화된 데이터:', normalizedResponse); // 디버깅용 로그
+      console.log('정규화된 데이터:', normalizedResponse);
       setQuestionInfo(normalizedResponse);
     } catch (error) {
       console.error('질문 정보를 불러오는 데 실패했습니다:', error.message);
