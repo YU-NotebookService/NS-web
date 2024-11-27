@@ -5,6 +5,7 @@ const AuthContext = createContext();
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [accessToken, setAccessToken] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     try {
@@ -12,28 +13,25 @@ export const AuthProvider = ({ children }) => {
       const storedToken = localStorage.getItem('accessToken');
 
       if (storedUser) {
-        setUser(JSON.parse(storedUser));
-        console.log('복원된 사용자 정보:', JSON.parse(storedUser));
-      } else {
-        console.log('저장된 사용자 정보 없음');
+        const parsedUser = JSON.parse(storedUser);
+        setUser(parsedUser);
+        console.log('복원된 사용자 정보:', parsedUser);
       }
 
       if (storedToken) {
         setAccessToken(storedToken);
         console.log('복원된 AccessToken:', storedToken);
-      } else {
-        console.log('저장된 AccessToken 없음');
       }
     } catch (error) {
       console.error('로컬 스토리지 데이터 파싱 중 오류:', error);
-      // 로컬 스토리지 정리가 필요할 경우
       localStorage.removeItem('user');
       localStorage.removeItem('accessToken');
+    } finally {
+      setIsLoading(false);
     }
-  }, []);
+  }, []); // 빈 배열로 유지
 
   const login = ({ user, token }) => {
-    console.log('로그인 처리 - 사용자 정보:', user, 'AccessToken:', token);
     setUser(user);
     setAccessToken(token);
     localStorage.setItem('user', JSON.stringify(user));
@@ -49,7 +47,9 @@ export const AuthProvider = ({ children }) => {
   };
 
   return (
-    <AuthContext.Provider value={{ user, accessToken, login, logout }}>
+    <AuthContext.Provider
+      value={{ user, accessToken, isLoading, login, logout }}
+    >
       {children}
     </AuthContext.Provider>
   );
