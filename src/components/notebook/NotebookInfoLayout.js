@@ -18,6 +18,7 @@ const NotebookInfoLayout = () => {
     manufactureDate: '',
     os: '',
     size: '',
+    content: '',
     imgUrl: [], // 초기값을 빈 배열로 설정
   });
 
