@@ -18,7 +18,8 @@ import NoticeInfo from 'pages/notice/NoticeInfo';
 import NoticeReg from 'pages/notice/NoticeReg';
 import { useAuth } from 'api/context/AuthProvider';
 import NotebookModify from 'pages/notebook/NotebookModify';
-import { LoadingBar } from 'components/common/LoadingBar';
+import { LoadingBar } from './components/common/LoadingBar';
+import AdminPage from 'pages/AdminPage';
 
 const ProtectedRoute = ({ children, requiredRole }) => {
   const { user, isLoading } = useAuth();
@@ -165,6 +166,15 @@ function App() {
               element={
                 <ProtectedRoute>
                   <MyPage />
+                </ProtectedRoute>
+              }
+            />
+            {/* 관리자페이지 */}
+            <Route
+              path="adminpage"
+              element={
+                <ProtectedRoute>
+                  <AdminPage />
                 </ProtectedRoute>
               }
             />
