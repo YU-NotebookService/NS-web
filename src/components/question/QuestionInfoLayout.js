@@ -1,30 +1,75 @@
+import getQuestionInfo from 'api/question/getQuestionInfo'
 import Detail from 'components/common/Detail';
-import React from 'react';
+import { LoadingBar } from 'components/common/LoadingBar';
+import React, { useCallback, useEffect, useState } from 'react';
 import { AnswerContent } from 'styles/question/QuestionList-styled';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
 function QuestionInfoLayout() {
   const navigate = useNavigate();
+  const { questionId } = useParams();
+
+  const [questionInfo, setQuestionInfo] = useState({
+    title: '',
+    content: '',
+    state: false, // state는 초기값을 false로 설정
+    answer: null,
+    imgUrl: [], // 이미지 URL 배열로 초기화
+  });
 
   const goToQuestionList = () => {
     navigate('/question/list');
   };
 
+  const fetchQuestionInfo = useCallback(async () => {
+    try {
+      const response = await getQuestionInfo({ questionId });
+      await new Promise((resolve) => setTimeout(resolve, 500)); // 로딩 지연
+
+      const questionIdParam = parseInt(questionId, 10);
+
+      const questionData = response.questions.find((q) => q.questionId === questionIdParam);
+
+      if (!response.questions || response.questions.length === 0) {
+        console.error('questions 배열이 비어 있거나 존재하지 않습니다.');
+        alert('질문 데이터가 없습니다.');
+        return;
+      }
+
+      const normalizedResponse = {
+        title: questionData.title || '',
+        content: questionData.content || '',
+        state: questionData.state || false,
+        answer: questionData.answer || null,
+        imgUrl: [
+          questionData.imageUrl || null,
+          questionData.imageUrl2 || null,
+          questionData.imageUrl3 || null,
+        ].filter(Boolean),
+        writer: questionData.writer || '관리자',
+      };
+
+      console.log('정규화된 데이터:', normalizedResponse);
+      setQuestionInfo(normalizedResponse);
+    } catch (error) {
+      console.error('질문 정보를 불러오는 데 실패했습니다:', error.message);
+    }
+  }, [questionId]);
+
+  useEffect(() => {
+    fetchQuestionInfo();
+  }, [fetchQuestionInfo]);
+
+  if (!questionInfo.title) return <LoadingBar />; // 제목이 없으면 로딩바 표시
+
   return (
     <>
-      <Detail
-        headLineText={'제품에 문제가 있습니다'}
-        writer={'tmd'}
-        createdAt={'2024-09-03 18:49'}
-        contentText={'아래와 같이 문제가 있습니다'}
-        imgUrl={imgUrl}
-        goToList={goToQuestionList}
-      />
-      <AnswerContent>답변이 없습니다</AnswerContent>
+      <Detail data={questionInfo} goToList={goToQuestionList} />
+      <AnswerContent>
+        {questionInfo.answer ? questionInfo.answer : '답변이 없습니다'}
+      </AnswerContent>
     </>
   );
 }
-
-const imgUrl = [];
 
 export default QuestionInfoLayout;

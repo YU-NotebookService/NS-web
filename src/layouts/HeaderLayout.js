@@ -20,7 +20,12 @@ const HeaderLayout = () => {
     <>
       <LogoContainer>
         <HeaderLogo src={img_Logo_YU} />
-        <Title onClick={() => navigate('/main')}>노트북대여</Title>
+        <Title onClick={() => {
+          if (location.pathname === '/' || location.pathname === '/register')
+            return;
+          else
+            navigate('/main');
+        }}>노트북대여</Title>
         <PageWrapper>
           {/* TODO: 추후 링크 연결 예정 */}
           <PageItem
