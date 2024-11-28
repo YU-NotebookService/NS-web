@@ -15,8 +15,8 @@ const NoticeBox = ({ text, data, clickHandler }) => {
           ┼
         </PlustBtn>
       </TitleBox>
-      {data.map((el) => {
-        return <ContentCard content={el} />;
+      {data.map((el, index) => {
+        return <ContentCard key={index} content={el} />;
       })}
     </NoticeBoxWrapper>
   );

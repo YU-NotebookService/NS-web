@@ -42,7 +42,7 @@ const Register = ({ onSubmit }) => {
   useEffect(() => {
     const data = location.state || {};
 
-    // imgUrl를 배열 형태로 변환하고 통합 관리
+    //imgUrl를 배열 형태로 변환하고 통합 관리
     const initialFiles = Array.isArray(data.imgUrl)
       ? data.imgUrl.map((url) => ({
           name: url.split('/').pop(),
@@ -96,26 +96,32 @@ const Register = ({ onSubmit }) => {
 
   const onFormSubmit = (formData) => {
     const data = new FormData();
+
     // 필수 필드 추가
-    // 공지사항 1:1 문의에 맞게 if문으로 작성하시면 됩니다!
     if (window.location.pathname.includes('notebook')) {
       data.append('model', formData.title);
       data.append('manufactureDate', formData.manufactureDate);
       data.append('os', formData.os);
       data.append('size', formData.size);
+      data.append('content', formData.content);
     }
 
-    // 모든 이미지 데이터를 `image`로 추가
+    // 새로운 파일 추가 (File 객체만)
     selectedFiles.forEach((file) => {
       if (file.type === 'file') {
-        data.append('image', file.value); // File 객체
-      } else if (file.type === 'url') {
-        data.append('image', file.value); // URL
+        data.append('images', file.value); // File 객체
+      }
+    });
+
+    // 기존 URL 추가 (URL만)
+    selectedFiles.forEach((file) => {
+      if (file.type === 'url') {
+        data.append('imageUrls', file.value); // URL은 별도 필드
       }
     });
 
     // FormData 디버깅 출력
-    console.log('입력받은 FormData 내용:');
+    console.log('전송되는 FormData:');
     data.forEach((value, key) => {
       console.log(`${key}:`, value);
     });

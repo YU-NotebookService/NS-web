@@ -41,7 +41,7 @@ const Detail = ({ data, goToList, deletePost }) => {
         {data.size && <>&nbsp;&nbsp;|&nbsp;&nbsp;사이즈 {data.size} inch</>}
       </DetailInfo>
       <DetailContent>
-        {data.contentText && <ContentText>{data.contentText}</ContentText>}
+        {data.content && <ContentText>{data.content}</ContentText>}
         <DetailImgWrapper>
           {data.imgUrl &&
             data.imgUrl.map((el, index) => (
