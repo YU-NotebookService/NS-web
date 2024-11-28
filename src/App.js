@@ -19,7 +19,7 @@ import NoticeReg from 'pages/notice/NoticeReg';
 import { useAuth } from 'api/context/AuthProvider';
 import NotebookModify from 'pages/notebook/NotebookModify';
 import { LoadingBar } from './components/common/LoadingBar';
-import AdminPage from 'pages/AdminPage';
+import RentalRequestList from 'pages/admin/RentalRequestList';
 
 const ProtectedRoute = ({ children, requiredRole }) => {
   const { user, isLoading } = useAuth();
@@ -169,12 +169,12 @@ function App() {
                 </ProtectedRoute>
               }
             />
-            {/* 관리자페이지 */}
+            {/* 관리자페이지의 메인은 대여 요청 조회*/}
             <Route
               path="adminpage"
               element={
                 <ProtectedRoute>
-                  <AdminPage />
+                  <RentalRequestList />
                 </ProtectedRoute>
               }
             />
