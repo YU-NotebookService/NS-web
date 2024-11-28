@@ -22,6 +22,7 @@ import {
   RegisterWrapper,
 } from 'styles/common/Register-styled';
 import { useForm } from 'react-hook-form';
+import { useAuth } from 'api/context/AuthProvider';
 import { useLocation } from 'react-router-dom';
 
 const Register = ({ onSubmit }) => {
@@ -45,18 +46,18 @@ const Register = ({ onSubmit }) => {
     //imgUrl를 배열 형태로 변환하고 통합 관리
     const initialFiles = Array.isArray(data.imgUrl)
       ? data.imgUrl.map((url) => ({
-          name: url.split('/').pop(),
-          type: 'url',
-          value: url,
-        }))
+        name: url.split('/').pop(),
+        type: 'url',
+        value: url,
+      }))
       : data.imgUrl
         ? [
-            {
-              name: data.imgUrl.split('/').pop(),
-              type: 'url',
-              value: data.imgUrl,
-            },
-          ]
+          {
+            name: data.imgUrl.split('/').pop(),
+            type: 'url',
+            value: data.imgUrl,
+          },
+        ]
         : [];
 
     setSelectedFiles(initialFiles);
@@ -103,6 +104,10 @@ const Register = ({ onSubmit }) => {
       data.append('manufactureDate', formData.manufactureDate);
       data.append('os', formData.os);
       data.append('size', formData.size);
+      data.append('content', formData.content);
+    }
+    else if (window.location.pathname.includes('question')) {
+      data.append('title', formData.title);
       data.append('content', formData.content);
     }
 

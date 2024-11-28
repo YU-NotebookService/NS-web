@@ -1,12 +1,18 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { CardWrapper } from 'styles/common/List-styled';
+import { StateText } from 'styles/question/QuestionList-styled';
+
 
 const InfoCard = ({ el, index, columns }) => {
+  const location = useLocation();
   const navigate = useNavigate();
 
   const goToNotebookInfo = () => {
-    navigate(`/notebook/info/${el.notebookId}`);
+    if (window.location.pathname.includes('notebook'))
+      navigate(`/notebook/info/${el.notebookId}`);
+    else if (window.location.pathname.includes('question'))
+      navigate(`/question/info/${el.questionId}`);
   };
 
   return (
@@ -25,11 +31,16 @@ const InfoCard = ({ el, index, columns }) => {
             }}
             onClick={colIndex === 1 ? goToNotebookInfo : null}
           >
-            {el[column.key] === 'AVAILABLE'
-              ? '대여가능'
-              : el[column.key] === 'RESERVATION'
-                ? '대여불가'
-                : el[column.key]}
+            {column.key === 'state' ? (
+              <StateText>{el[column.key] || '답변 없음'}</StateText>
+            ) :
+              column.key === 'user' ? (
+                el[column.key] || '작성자 없음'
+              ) : el[column.key] === 'AVAILABLE'
+                ? '대여가능'
+                : el[column.key] === 'RESERVATION'
+                  ? '대여불가'
+                  : el[column.key]}
           </div>
         ),
       )}

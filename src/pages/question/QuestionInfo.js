@@ -3,7 +3,7 @@ import { Wrapper, Content } from 'styles/common/List-styled';
 import Banner from 'components/common/Banner';
 import Title from 'components/common/Title';
 import questionBanner from 'assets/notebook/notebookBanner.png';
-import QuestionDetailLayout from 'components/question/QuestionInfoLayout';
+import QuestionInfoLayout from 'components/question/QuestionInfoLayout';
 
 function QuestionInfo() {
   return (
@@ -14,7 +14,7 @@ function QuestionInfo() {
           locationText={['1:1문의', '상세 페이지']}
           titleText={'1:1문의 상세 페이지'}
         />
-        <QuestionDetailLayout />
+        <QuestionInfoLayout />
       </Content>
     </Wrapper>
   );
