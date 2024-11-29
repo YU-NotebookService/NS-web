@@ -2,11 +2,8 @@ import getQuestionList from 'api/question/getQuestionList';
 import List from 'components/common/list/List';
 import { LoadingBar } from 'components/common/LoadingBar';
 import { useCallback, useEffect, useState } from 'react';
-import { useAuth } from 'api/context/AuthProvider';
 
 function QuestionListLayout() {
-  const { user } = useAuth;
-
 
   const columns = [
     { label: '번호', width: '10%' },
