@@ -13,7 +13,6 @@ const QuestionModifyLayout = () => {
             formData.forEach((value, key) => {
                 console.log(`${key}:`, value);
             });
-
             const response = await putQuestionInfo(id, formData, user); // FormData 전달
             console.log('게시글 정보 수정 성공: ', response);
             alert('게시글 정보가 성공적으로 수정되었습니다.');
