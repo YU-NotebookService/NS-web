@@ -10,7 +10,6 @@ const delQuestionInfo = async (questionId, user) => {
 
     try {
         const response = await api.delete(`questions/${questionId}/delete`);
-
         return response.data;
     } catch (error) {
         console.error('전체 에러 객체:', error);

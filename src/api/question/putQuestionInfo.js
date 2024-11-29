@@ -16,7 +16,7 @@ const putQuestionInfo = async (questionId, data, user) => {
                 headers: {
                     'Content-Type': 'multipart/form-data',
                 },
-            },
+            }
         );
 
         return response.data;
