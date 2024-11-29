@@ -1,6 +1,7 @@
 import api from "api/axios";
 
 const putQuestionInfo = async (questionId, data, user) => {
+    alert(data.content);
     if (!user) {
         throw new Error('로그인이 필요합니다.');
     }
