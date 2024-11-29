@@ -18,6 +18,7 @@ import NoticeInfo from 'pages/notice/NoticeInfo';
 import NoticeReg from 'pages/notice/NoticeReg';
 import { useAuth } from 'api/context/AuthProvider';
 import NotebookModify from 'pages/notebook/NotebookModify';
+import QuestionModify from 'pages/question/QuestionModify';
 import { LoadingBar } from './components/common/LoadingBar';
 import AdminPage from 'pages/AdminPage';
 
@@ -155,6 +156,14 @@ function App() {
                 element={
                   <ProtectedRoute>
                     <QuestionReg />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="modify/:questionId"
+                element={
+                  <ProtectedRoute>
+                    <QuestionModify />
                   </ProtectedRoute>
                 }
               />

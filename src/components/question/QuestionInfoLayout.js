@@ -1,13 +1,16 @@
+import { useAuth } from 'api/context/AuthProvider';
 import getQuestionInfo from 'api/question/getQuestionInfo'
 import Detail from 'components/common/Detail';
 import { LoadingBar } from 'components/common/LoadingBar';
 import React, { useCallback, useEffect, useState } from 'react';
+import delQuestionInfo from 'api/question/delQuestionInfo';
 import { AnswerContent } from 'styles/question/QuestionList-styled';
 import { useNavigate, useParams } from 'react-router-dom';
 
 function QuestionInfoLayout() {
   const navigate = useNavigate();
   const { questionId } = useParams();
+  const user = useAuth();
 
   const [questionInfo, setQuestionInfo] = useState({
     title: '',
@@ -60,11 +63,40 @@ function QuestionInfoLayout() {
     fetchQuestionInfo();
   }, [fetchQuestionInfo]);
 
+  const deleteQuestionInfo = async () => {
+    const confirmDelete = window.confirm('삭제하시겠습니까?');
+    if (confirmDelete) {
+      try {
+        await delQuestionInfo(questionId, user); // API 호출
+        alert('삭제되었습니다.');
+        goToQuestionList(); // 목록 페이지로 이동
+      } catch (error) {
+        console.error('삭제에 실패하였습니다:', error.message);
+
+        // 오류 메시지를 사용자에게 표시
+        if (error.message.includes('로그인')) {
+          alert('로그인이 필요합니다. 로그인 후 다시 시도해주세요.');
+        } else if (error.message.includes('권한')) {
+          alert('삭제 권한이 없습니다. 관리자에게 문의하세요.');
+        } else if (error.message.includes('네트워크')) {
+          alert(
+            '네트워크 문제 또는 서버 오류가 발생했습니다. 다시 시도해주세요.',
+          );
+        } else {
+          alert('알 수 없는 오류가 발생했습니다. 다시 시도해주세요.');
+        }
+      }
+    }
+  };
+
   if (!questionInfo.title) return <LoadingBar />; // 제목이 없으면 로딩바 표시
 
   return (
     <>
-      <Detail data={questionInfo} goToList={goToQuestionList} />
+      <Detail data={questionInfo}
+        goToList={goToQuestionList}
+        deletePost={deleteQuestionInfo}
+      />
       <AnswerContent>
         {questionInfo.answer ? questionInfo.answer : '답변이 없습니다'}
       </AnswerContent>
