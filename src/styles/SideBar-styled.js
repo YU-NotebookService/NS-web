@@ -1,6 +1,8 @@
 import styled from 'styled-components';
 
-export const SidebarContainer = styled.div`
+export const SidebarContainer = styled.div.attrs(() => ({
+  isOpen: undefined,
+}))`
   position: relative;
   display: flex;
   flex-direction: column;
@@ -15,21 +17,23 @@ export const SidebarContainer = styled.div`
   height: 100vh;
 `;
 
-export const SideButton = styled.button`
+export const SideButton = styled.button.attrs(() => ({
+  isOpen: undefined,
+}))`
   background: none;
   border: none;
-  cursor: pointer;
-  margin: 0; 
+  cursor: pointer;
+  margin: 0;
   position: absolute;
-  top: 20px; 
-  left: ${({ isOpen }) => (isOpen ? '220px' : '10px')}; 
+  top: 20px;
+  left: ${({ isOpen }) => (isOpen ? '220px' : '10px')};
   transform: translateX(-10%);
   z-index: 10;
 
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 40px; 
+  width: 40px;
   height: 40px;
 `;
 
