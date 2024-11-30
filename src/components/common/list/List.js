@@ -78,7 +78,7 @@ const List = ({
             </PagingBtn>
           ))}
         </div>
-        {window.location.pathname.includes('notebook') && user == 'ADMIN' &&
+        {window.location.pathname.includes('notebook') &&
           <WriteBtn onClick={goToRegister}>{buttonText}</WriteBtn>
         }
         {window.location.pathname.includes('notice') &&
