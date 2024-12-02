@@ -1,4 +1,6 @@
 import styled from 'styled-components';
+import Input from 'components/common/Input';
+import Button from 'components/common/Button';
 
 export const StateText = styled.span`
   color: var(--main-color);
@@ -6,6 +8,9 @@ export const StateText = styled.span`
 `;
 
 export const AnswerContent = styled.div`
+  display: flex; 
+  align-items: center; 
+  gap: 10px; 
   margin-top: -50px;
   padding: 30px;
   font-size: 18px;
@@ -14,3 +19,17 @@ export const AnswerContent = styled.div`
   line-height: normal;  
   border-bottom: 1px solid #e1e1e1;
 `;
+
+export const ReplyContent = styled(Input)`
+  padding: 20px;
+  width: 80%;
+  font-size: 15px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;  
+  border-bottom: 1px solid #e1e1e1;
+`
+export const SubmitBtn = styled(Button)`
+   padding: 16px 35px;
+   
+`

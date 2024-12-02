@@ -9,9 +9,9 @@ const postQuestionReply = async (data, user) => {
     }
 
     try {
-        const response = await api.post(`admin/questions/${questionId}/create`, data, {
+        const response = await api.post(`admin/userquestions/create`, data, {
             headers: {
-                'Content-Type': 'multipart/form-data',
+                'Content-Type': 'application/json',
             },
         });
 
@@ -40,5 +40,6 @@ const postQuestionReply = async (data, user) => {
         }
     }
 };
+
 
 export default postQuestionReply;

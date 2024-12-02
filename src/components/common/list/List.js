@@ -78,15 +78,10 @@ const List = ({
             </PagingBtn>
           ))}
         </div>
-        {window.location.pathname.includes('notebook') &&
-          <WriteBtn onClick={goToRegister}>{buttonText}</WriteBtn>
-        }
-        {window.location.pathname.includes('notice') &&
-          <WriteBtn onClick={goToRegister}>{buttonText}</WriteBtn>
-        }
-        {window.location.pathname.includes('question') && user !== 'ADMIN' && (
-          <WriteBtn onClick={goToRegister}>{buttonText}</WriteBtn>)
-        }
+
+        <WriteBtn onClick={goToRegister}>{buttonText}</WriteBtn>
+
+
         {/* TODO: 공지사항 글쓰기 기능 구현 */}
       </Bottom>
     </ListWrapper>
