@@ -5,9 +5,8 @@ import { useCallback, useEffect, useState } from 'react';
 
 function QuestionListLayout() {
 
-
   const columns = [
-    { label: '번호', width: '10%', key: 'index' },
+    { label: '번호', width: '10%' },
     { label: '제목', width: '50%', key: 'title' },
     { label: '작성자', width: '15%', key: 'writer' },
     { label: '작성일', width: '25%', key: 'date' },

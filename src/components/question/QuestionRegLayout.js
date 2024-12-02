@@ -2,7 +2,6 @@ import Register from 'components/common/Register';
 import postQuestionInfo from 'api/question/postQuestionInfo';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from 'api/context/AuthProvider';
-import { styled } from "styled-components";
 
 const QuestionRegLayout = () => {
   const { user } = useAuth();

@@ -32,15 +32,18 @@ const InfoCard = ({ el, index, columns }) => {
             onClick={colIndex === 1 ? goToNotebookInfo : null}
           >
             {column.key === 'state' ? (
-              <StateText>{el[column.key] || '답변 없음'}</StateText>
-            ) :
-              column.key === 'user' ? (
-                el[column.key] || '작성자 없음'
-              ) : el[column.key] === 'AVAILABLE'
-                ? '대여가능'
-                : el[column.key] === 'RESERVATION'
-                  ? '대여불가'
-                  : el[column.key]}
+              <StateText>
+                {el[column.key] ? '답변 완료' : '답변 없음'}
+              </StateText>
+            ) : column.key === 'user' ? (
+              el[column.key] || '작성자 없음'
+            ) : el[column.key] === 'AVAILABLE' ? (
+              '대여가능'
+            ) : el[column.key] === 'RESERVATION' ? (
+              '대여불가'
+            ) : (
+              el[column.key]
+            )}
           </div>
         ),
       )}
