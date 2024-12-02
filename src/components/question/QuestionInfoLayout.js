@@ -69,6 +69,10 @@ function QuestionInfoLayout() {
     const data = replyInputRef.current?.value;
 
     try {
+      if (!data || data.trim() === '') {
+        alert('답변을 입력해주세요');
+        return;
+      }
       const response = await postQuestionReply({ questionId: String(questionId), answer: String(data) }, user);
       alert('답변이 제출되었습니다.');
       setQuestionInfo((prev) => ({ ...prev, answer: data }));
@@ -103,7 +107,7 @@ function QuestionInfoLayout() {
         if (error.message.includes('로그인')) {
           alert('로그인이 필요합니다. 로그인 후 다시 시도해주세요.');
         } else if (error.message.includes('권한')) {
-          alert('삭제 권한이 없습니다. 관리자에게 문의하세요.');
+          alert('삭제 권한이 없습니다.');
         } else if (error.message.includes('네트워크')) {
           alert(
             '네트워크 문제 또는 서버 오류가 발생했습니다. 다시 시도해주세요.',
@@ -128,13 +132,15 @@ function QuestionInfoLayout() {
           <>
             <ReplyContent
               placeholder="답변을 입력하세요"
-              value={questionInfo.answer || null}
+              defaultValue={questionInfo.answer || ''}
               ref={replyInputRef}
             />
             <SubmitBtn onClick={handleReplySubmit}>답변</SubmitBtn>
           </>
+        ) : questionInfo.answer ? (
+          `답변 내용: ${questionInfo.answer}`
         ) : (
-          questionInfo.answer ? `답변 내용: ${questionInfo.answer}` : '답변이 없습니다'
+          '답변이 없습니다'
         )}
       </AnswerContent>
     </>
