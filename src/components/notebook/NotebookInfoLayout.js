@@ -6,6 +6,7 @@ import { LoadingBar } from 'components/common/LoadingBar';
 import React, { useCallback, useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { ApplyBtn } from 'styles/notebook/NotebookInfo-styled';
+import postRentalNotebook from 'api/notebook/postRentalNotebook';
 
 const NotebookInfoLayout = () => {
   const navigate = useNavigate();
@@ -22,7 +23,7 @@ const NotebookInfoLayout = () => {
     os: '',
     size: '',
     content: '',
-    imgUrl: [], // 초기값을 빈 배열로 설정
+    imgUrl: [],
   });
 
   const fetchNotebookInfo = useCallback(async () => {
@@ -30,7 +31,6 @@ const NotebookInfoLayout = () => {
       const response = await getNotebookInfo({ notebookId });
       await new Promise((resolve) => setTimeout(resolve, 500));
 
-      // imgUrl이 배열이 아닐 경우 처리
       const normalizedResponse = {
         ...response,
         imgUrl: Array.isArray(response.imgUrl)
@@ -52,9 +52,9 @@ const NotebookInfoLayout = () => {
     const confirmDelete = window.confirm('삭제하시겠습니까?');
     if (confirmDelete) {
       try {
-        await delNotebookInfo(notebookId, user); // API 호출
+        await delNotebookInfo(notebookId, user);
         alert('삭제되었습니다.');
-        goToNotebookList(); // 목록 페이지로 이동
+        goToNotebookList();
       } catch (error) {
         console.error('삭제에 실패하였습니다:', error.message);
 
@@ -73,7 +73,30 @@ const NotebookInfoLayout = () => {
       }
     }
   };
+  const onSubmitRental = async () => {
+    if (!notebookId) {
+      alert('노트북 ID가 없습니다.');
+      return;
+    }
 
+    const requestData = {
+      userId: user?.id || '',
+      notebookId,
+      rentalDate: new Date().toISOString(),
+    };
+
+    console.log('전송 데이터:', requestData);
+
+    try {
+      const response = await postRentalNotebook(requestData, notebookId);
+      console.log('노트북 대여 성공:', response);
+      alert('노트북이 성공적으로 대여되었습니다.');
+      navigate('/mypage');
+    } catch (error) {
+      console.error('노트북 대여 실패:', error.message);
+      alert(error.message || '대여 중 오류가 발생했습니다. 다시 시도해주세요.');
+    }
+  };
   if (!notebookInfo.model) return <LoadingBar />;
 
   return (
@@ -83,7 +106,7 @@ const NotebookInfoLayout = () => {
         goToList={goToNotebookList}
         deletePost={deleteNotebookInfo}
       />
-      <ApplyBtn>신청하기</ApplyBtn>
+      <ApplyBtn onClick={onSubmitRental}>신청하기</ApplyBtn>
     </>
   );
 };
