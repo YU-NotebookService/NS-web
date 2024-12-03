@@ -9,6 +9,7 @@ import {
 } from 'styles/common/List-styled';
 import SearchBox from 'components/common/SearchBox';
 import InfoCard from 'components/common/list/InfoCard';
+import { ListBtn } from 'styles/question/QuestionList-styled';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useAuth } from 'api/context/AuthProvider';
 
@@ -21,6 +22,8 @@ const List = ({
   setCurrentPage,
   totalPages,
   totalElements,
+  isFiltered,
+  toggleFilter,
 }) => {
   const { user } = useAuth;
   const navigate = useNavigate();
@@ -43,7 +46,13 @@ const List = ({
           </span>
           {itemText}
         </ListCount>
-        {window.location.pathname.includes('question')}
+        {window.location.pathname.includes('question') && (
+          <>
+            <ListBtn onClick={toggleFilter} style={{ marginLeft: '10px' }}>
+              {isFiltered ? '전체 보기' : '답변이 완료된 게시글'}
+            </ListBtn>
+          </>
+        )}
         <SearchBox />
       </Top>
       <HeadLine>

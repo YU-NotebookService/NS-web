@@ -18,6 +18,7 @@ function QuestionListLayout() {
   const [currentPage, setCurrentPage] = useState(0);
   const [totalPages, setTotalPages] = useState(0);
   const [totalElements, setTotalElements] = useState(0);
+  const [filtered, setFiltered] = useState(false);
 
 
   const fetchQuestionList = useCallback(async () => {
@@ -39,6 +40,10 @@ function QuestionListLayout() {
     fetchQuestionList();
   }, [fetchQuestionList]);
 
+  const filteredList = filtered
+    ? questionList.filter((item) => item.state === true)
+    : questionList;
+
   if (!questionList) return <LoadingBar />;
 
 
@@ -47,12 +52,14 @@ function QuestionListLayout() {
       <List
         itemText="개의 게시물이 등록되어 있습니다."
         columns={columns}
-        currentData={questionList}
+        currentData={filteredList}
         buttonText="글쓰기"
         currentPage={currentPage}
         setCurrentPage={setCurrentPage}
         totalPages={totalPages}
         totalElements={totalElements}
+        isFiltered={filtered}
+        toggleFilter={() => setFiltered((prev) => !prev)}
       />
     </>
   );

@@ -34,6 +34,8 @@ export const SubmitBtn = styled(Button)`
    
 `
 export const ListBtn = styled(Button)`
+  background-color: white;
   color: var(--main-color);
+  border-color: white;
   font-weight: bold;
 `
