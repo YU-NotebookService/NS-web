@@ -3,7 +3,7 @@ import React from 'react';
 import { Wrapper, Content } from 'styles/common/List-styled';
 import myPageBanner from 'assets/mypage/myPageBanner.png';
 import Title from 'components/common/Title';
-import AdminPageLayout from 'components/common/admin/AdminPageLayout';
+import MyPageLayout from 'components/mypage/MyPageLayout';
 
 const MyPage = () => {
   return (
@@ -14,7 +14,7 @@ const MyPage = () => {
           locationText={['마이 페이지']}
           titleText={'반갑습니다, 홍길동님!'}
         />
-        <AdminPageLayout />
+        <MyPageLayout />
       </Content>
     </Wrapper>
   );
