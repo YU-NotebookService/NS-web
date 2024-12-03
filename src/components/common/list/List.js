@@ -9,6 +9,7 @@ import {
 } from 'styles/common/List-styled';
 import SearchBox from 'components/common/SearchBox';
 import InfoCard from 'components/common/list/InfoCard';
+import { ListText, ListBtn, ListBtnWrapper } from 'styles/question/QuestionList-styled';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useAuth } from 'api/context/AuthProvider';
 
@@ -21,6 +22,8 @@ const List = ({
   setCurrentPage,
   totalPages,
   totalElements,
+  isFiltered,
+  toggleFilter,
 }) => {
   const { user } = useAuth;
   const navigate = useNavigate();
@@ -33,6 +36,17 @@ const List = ({
     navigate(newPath);
   };
 
+  const handleFilterChange = (e) => {
+    const filterValue = e.target.value;
+    if (filterValue === 'all') {
+      toggleFilter(null);
+    } else if (filterValue === 'false') {
+      toggleFilter(false);
+    } else if (filterValue === 'true') {
+      toggleFilter(true);
+    }
+  };
+
   return (
     <ListWrapper>
       <Top>
@@ -43,6 +57,16 @@ const List = ({
           </span>
           {itemText}
         </ListCount>
+        {window.location.pathname.includes('question') && (
+          <ListBtnWrapper>
+            <ListText>문의글 필터:</ListText>
+            <ListBtn onChange={handleFilterChange} value={isFiltered === null ? 'all' : isFiltered.toString()}>
+              <option value="all">전체</option>
+              <option value="false">답변 없음</option>
+              <option value="true">답변 완료</option>
+            </ListBtn>
+          </ListBtnWrapper>
+        )}
         <SearchBox />
       </Top>
       <HeadLine>
