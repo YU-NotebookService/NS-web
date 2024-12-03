@@ -37,6 +37,7 @@ export const SubmitBtn = styled(Button)`
 export const ListBtnWrapper = styled.div`
   display: flex;
   align-items: center;
+  margin-left: 120px;
 `
 
 export const ListText = styled.span`
