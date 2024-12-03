@@ -50,7 +50,6 @@ function QuestionListLayout() {
     : questionList.filter((item) => item.state === filtered);
 
 
-
   if (!questionList) return <LoadingBar />;
 
 

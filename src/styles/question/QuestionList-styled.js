@@ -37,7 +37,7 @@ export const SubmitBtn = styled(Button)`
 export const ListBtnWrapper = styled.div`
   display: flex;
   align-items: center;
-  margin-left: 120px;
+  margin-left: 200px;
 `
 
 export const ListText = styled.span`
@@ -47,12 +47,12 @@ export const ListText = styled.span`
   font-weight: bold;
 `
 
-export const ListBtn = styled(Button)`
- background-color: white;
-  color: ${({ isFiltered }) => (isFiltered ? 'var(--main-color)' : 'lightgrey')};
+export const ListBtn = styled.select`
+  background-color: white;
+  color: var(--main-color);
   transition: 0s; 
   font-weight: bold;
   font-size: 20px;
   margin-right: 10px;
-  padding: 5px 20px;
+  padding: 5px 10px;
 `

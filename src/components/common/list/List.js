@@ -36,6 +36,17 @@ const List = ({
     navigate(newPath);
   };
 
+  const handleFilterChange = (e) => {
+    const filterValue = e.target.value;
+    if (filterValue === 'all') {
+      toggleFilter(null);
+    } else if (filterValue === 'false') {
+      toggleFilter(false);
+    } else if (filterValue === 'true') {
+      toggleFilter(true);
+    }
+  };
+
   return (
     <ListWrapper>
       <Top>
@@ -48,16 +59,11 @@ const List = ({
         </ListCount>
         {window.location.pathname.includes('question') && (
           <ListBtnWrapper>
-            <ListText>문의글 검색: </ListText>
-            <ListBtn
-              isFiltered={isFiltered === false}
-              onClick={() => toggleFilter(false)}>
-              답변 없음
-            </ListBtn>
-            <ListBtn
-              isFiltered={isFiltered === true}
-              onClick={() => toggleFilter(true)}>
-              답변 완료
+            <ListText>문의글 필터:</ListText>
+            <ListBtn onChange={handleFilterChange} value={isFiltered === null ? 'all' : isFiltered.toString()}>
+              <option value="all">전체</option>
+              <option value="false">답변 없음</option>
+              <option value="true">답변 완료</option>
             </ListBtn>
           </ListBtnWrapper>
         )}
