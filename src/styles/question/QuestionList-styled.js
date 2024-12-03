@@ -37,7 +37,6 @@ export const SubmitBtn = styled(Button)`
 export const ListBtnWrapper = styled.div`
   display: flex;
   align-items: center;
-  margin-left: 130px;
 `
 
 export const ListText = styled.span`
@@ -53,6 +52,6 @@ export const ListBtn = styled(Button)`
   transition: 0s; 
   font-weight: bold;
   font-size: 20px;
-  margin-right: 20px;
+  margin-right: 10px;
   padding: 5px 20px;
 `
