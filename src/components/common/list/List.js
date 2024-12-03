@@ -43,6 +43,7 @@ const List = ({
           </span>
           {itemText}
         </ListCount>
+        {window.location.pathname.includes('question')}
         <SearchBox />
       </Top>
       <HeadLine>

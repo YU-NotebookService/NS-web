@@ -33,3 +33,7 @@ export const SubmitBtn = styled(Button)`
    padding: 16px 35px;
    
 `
+export const ListBtn = styled(Button)`
+  color: var(--main-color);
+  font-weight: bold;
+`
