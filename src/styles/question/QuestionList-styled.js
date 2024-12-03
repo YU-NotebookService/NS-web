@@ -33,9 +33,26 @@ export const SubmitBtn = styled(Button)`
    padding: 16px 35px;
    
 `
-export const ListBtn = styled(Button)`
-  background-color: white;
+
+export const ListBtnWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  margin-left: 130px;
+`
+
+export const ListText = styled.span`
+  margin-right: 10px;
+  font-size: 20px;
   color: var(--main-color);
-  border-color: white;
   font-weight: bold;
+`
+
+export const ListBtn = styled(Button)`
+ background-color: white;
+  color: ${({ isFiltered }) => (isFiltered ? 'var(--main-color)' : 'lightgrey')};
+  transition: 0s; 
+  font-weight: bold;
+  font-size: 20px;
+  margin-right: 20px;
+  padding: 5px 20px;
 `

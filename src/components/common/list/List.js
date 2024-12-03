@@ -9,7 +9,7 @@ import {
 } from 'styles/common/List-styled';
 import SearchBox from 'components/common/SearchBox';
 import InfoCard from 'components/common/list/InfoCard';
-import { ListBtn } from 'styles/question/QuestionList-styled';
+import { ListText, ListBtn, ListBtnWrapper } from 'styles/question/QuestionList-styled';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useAuth } from 'api/context/AuthProvider';
 
@@ -47,11 +47,19 @@ const List = ({
           {itemText}
         </ListCount>
         {window.location.pathname.includes('question') && (
-          <>
-            <ListBtn onClick={toggleFilter} style={{ marginLeft: '10px' }}>
-              {isFiltered ? '전체 보기' : '답변이 완료된 게시글'}
+          <ListBtnWrapper>
+            <ListText>문의글 검색: </ListText>
+            <ListBtn
+              isFiltered={isFiltered === false}
+              onClick={() => toggleFilter(false)}>
+              답변 없음
             </ListBtn>
-          </>
+            <ListBtn
+              isFiltered={isFiltered === true}
+              onClick={() => toggleFilter(true)}>
+              답변 완료
+            </ListBtn>
+          </ListBtnWrapper>
         )}
         <SearchBox />
       </Top>
