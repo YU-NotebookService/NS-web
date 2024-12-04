@@ -1,23 +1,35 @@
 import React from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { CardWrapper } from 'styles/common/List-styled';
 import { StateText } from 'styles/question/QuestionList-styled';
-
+import Button from '../Button';
 
 const InfoCard = ({ el, index, columns }) => {
-  const location = useLocation();
   const navigate = useNavigate();
 
-  const goToNotebookInfo = () => {
+  const goToDetailInfo = () => {
     if (window.location.pathname.includes('notebook'))
       navigate(`/notebook/info/${el.notebookId}`);
     else if (window.location.pathname.includes('question'))
       navigate(`/question/info/${el.questionId}`);
+    else if (window.location.pathname.includes('notice'))
+      navigate(`/notice/info/${el.noticeId}`);
+    else if (window.location.pathname.includes('adminpage')) return;
   };
+
+  console.log('el:', el);
+  console.log('studentNumber:', el.studentNumber);
 
   return (
     <CardWrapper>
-      <div style={{ width: columns[0].width, textAlign: 'center' }}>
+      <div
+        style={{
+          width: columns[0].width,
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+        }}
+      >
         {index}
       </div>
       {columns.map((column, colIndex) =>
@@ -26,15 +38,21 @@ const InfoCard = ({ el, index, columns }) => {
             key={colIndex}
             style={{
               width: column.width,
-              textAlign: colIndex === 1 ? 'start' : 'center',
+              justifyContent: colIndex === 1 ? 'start' : 'center',
               cursor: colIndex === 1 ? 'pointer' : null,
+              display: 'flex',
+              alignItems: 'center',
             }}
-            onClick={colIndex === 1 ? goToNotebookInfo : null}
+            onClick={colIndex === 1 ? goToDetailInfo : null}
           >
             {column.key === 'state' ? (
               <StateText>
                 {el[column.key] ? '답변 완료' : '답변 없음'}
               </StateText>
+            ) : column.key === 'button' ? (
+              <Button style={{ height: '30px', width: '50%', margin: 'auto' }}>
+                승인
+              </Button>
             ) : column.key === 'user' ? (
               el[column.key] || '작성자 없음'
             ) : el[column.key] === 'AVAILABLE' ? (

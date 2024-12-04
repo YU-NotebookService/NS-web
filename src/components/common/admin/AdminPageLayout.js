@@ -6,28 +6,23 @@ import postRentalRequest from 'api/admin/postRentalRequest';
 
 function AdminRentalRequestLayout({ user }) {
   const columns = [
-    { label: '학번', width: '13%', key: 'studentId' },
-    { label: '대여 중인 노트북', width: '23%', key: 'notebookId' },
-    { label: '연락처', width: '18%', key: 'contact' },
-    { label: '대여시작일자', width: '15%', key: 'rentalStartDate' },
-    { label: '반납예정일자', width: '15%', key: 'returnDueDate' },
-    { label: '승인 버튼', width: '15%', key: 'button' }, // 버튼 렌더링을 위한 key
+    { label: '번호', width: '10%' },
+    { label: '대여 중인 노트북', width: '30%', key: 'notebookModel' },
+    { label: '학번', width: '15%', key: 'studentNumber' },
+    { label: '연락처', width: '15%', key: 'phoneNumber' },
+    { label: '요청 일자', width: '15%', key: 'requestDate' },
+    { label: '승인', width: '15%', key: 'button' }, // 버튼 렌더링을 위한 key
   ];
 
   const [rentalRequestList, setRentalRequestList] = useState([]);
-  const [currentPage, setCurrentPage] = useState(0);
-  const [totalPages, setTotalPages] = useState(0);
-  const [totalElements, setTotalElements] = useState(0);
   const [loading, setLoading] = useState(true);
 
-  const fetchRentalRequestList = async (page) => {
+  const fetchRentalRequestList = async () => {
     setLoading(true);
     try {
-      const response = await getRentalRequest({ page });
-
-      setRentalRequestList(response.content || []);
-      setTotalPages(response.totalPages || 0);
-      setTotalElements(response.totalElements || 0);
+      const response = await getRentalRequest();
+      setRentalRequestList(response.reservationRequests || []);
+      console.log('response', response.reservationRequests);
     } catch (error) {
       console.error('대여 요청 리스트를 불러오는 데 실패하였습니다:', error);
     } finally {
@@ -39,15 +34,15 @@ function AdminRentalRequestLayout({ user }) {
     try {
       const response = await postRentalRequest({ reservationId }, user);
       alert(`대여 요청이 승인되었습니다: ${response.message}`);
-      fetchRentalRequestList(currentPage);
+      fetchRentalRequestList();
     } catch (error) {
       alert(`대여 요청 승인 실패: ${error.message}`);
     }
   };
 
   useEffect(() => {
-    fetchRentalRequestList(currentPage);
-  }, [currentPage]);
+    fetchRentalRequestList();
+  }, []);
 
   if (loading) return <LoadingBar />;
 
@@ -57,11 +52,7 @@ function AdminRentalRequestLayout({ user }) {
         itemText="개의 대여 요청이 있습니다."
         columns={columns}
         currentData={rentalRequestList}
-        buttonText="신규 등록"
-        currentPage={currentPage}
-        setCurrentPage={setCurrentPage}
-        totalPages={totalPages}
-        totalElements={totalElements}
+        totalElements={rentalRequestList.length}
         renderButton={(rowData) => (
           <button
             onClick={() => handleApproval(rowData.reservationId)}

@@ -133,13 +133,15 @@ const List = ({
       </HeadLine>
       {currentData &&
         currentData.map((el, index) => {
-          return (
+          return currentPage ? (
             <InfoCard
               key={index}
               el={el}
               index={totalElements - 10 * currentPage - index}
               columns={columns}
             />
+          ) : (
+            <InfoCard key={index} el={el} index={index + 1} columns={columns} />
           );
         })}
       <Bottom>
@@ -159,7 +161,9 @@ const List = ({
           ))}
         </div>
 
-        <WriteBtn onClick={goToRegister}>{buttonText}</WriteBtn>
+        {currentPage && (
+          <WriteBtn onClick={goToRegister}>{buttonText}</WriteBtn>
+        )}
 
         {/* TODO: 공지사항 글쓰기 기능 구현 */}
       </Bottom>
