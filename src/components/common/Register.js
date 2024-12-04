@@ -46,18 +46,18 @@ const Register = ({ onSubmit }) => {
     //imgUrl를 배열 형태로 변환하고 통합 관리
     const initialFiles = Array.isArray(data.imgUrl)
       ? data.imgUrl.map((url) => ({
-        name: url.split('/').pop(),
-        type: 'url',
-        value: url,
-      }))
+          name: url.split('/').pop(),
+          type: 'url',
+          value: url,
+        }))
       : data.imgUrl
         ? [
-          {
-            name: data.imgUrl.split('/').pop(),
-            type: 'url',
-            value: data.imgUrl,
-          },
-        ]
+            {
+              name: data.imgUrl.split('/').pop(),
+              type: 'url',
+              value: data.imgUrl,
+            },
+          ]
         : [];
 
     setSelectedFiles(initialFiles);
@@ -105,8 +105,10 @@ const Register = ({ onSubmit }) => {
       data.append('os', formData.os);
       data.append('size', formData.size);
       data.append('content', formData.content);
-    }
-    else if (window.location.pathname.includes('question')) {
+    } else if (window.location.pathname.includes('question')) {
+      data.append('title', formData.title);
+      data.append('content', formData.content);
+    } else if (window.location.pathname.includes('notice')) {
       data.append('title', formData.title);
       data.append('content', formData.content);
     }
@@ -128,7 +130,7 @@ const Register = ({ onSubmit }) => {
     // FormData 디버깅 출력
     console.log('전송되는 FormData:');
     data.forEach((value, key) => {
-      console.log(`${key}:`, value);
+      console.log(`${key}:, value`);
     });
 
     // FormData 전달
