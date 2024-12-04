@@ -98,5 +98,15 @@ export const WriteBtn = styled(Button)`
   padding: 14px 40px;
 `;
 
+export const DropDownContent = styled.div`
+  padding: 10px;
+  border: 1px solid #ccc;
+  cursor: pointer;
+
+  &:hover {
+    background-color: #f0f0f0;
+  }
+`;
+
 export const SidebarContainer = styled.div``;
 export const TitleContainer = styled.div``;

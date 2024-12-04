@@ -16,9 +16,19 @@ function NotebookListLayout() {
   const [totalPages, setTotalPages] = useState(0);
   const [totalElements, setTotalElements] = useState(0);
 
+  // 대여 상태 필터 (true: 대여 가능, false: 대여 불가)
+  const [onlyAvailable, setOnlyAvailable] = useState(false);
+
+  // 로딩 상태 추가
+  const [isLoading, setIsLoading] = useState(false);
+
   const fetchNotebookList = useCallback(async () => {
     try {
-      const response = await getNotebookList({ currentPage });
+      setIsLoading(true); // 로딩 시작
+      const response = await getNotebookList({
+        currentPage,
+        onlyAvailable,
+      });
       await new Promise((resolve) => setTimeout(resolve, 500)); // 로딩 지연
       setNotebookList(response.content);
       setTotalPages(response.totalPages);
@@ -28,27 +38,35 @@ function NotebookListLayout() {
         '노트북 리스트를 불러오는 데 실패하였습니다:',
         error.message,
       );
+    } finally {
+      setIsLoading(false); // 로딩 종료
     }
-  }, [currentPage]);
+  }, [currentPage, onlyAvailable]);
 
   useEffect(() => {
     fetchNotebookList();
   }, [fetchNotebookList]);
 
-  if (!notebookList) return <LoadingBar />;
+  if (!notebookList && isLoading) return <LoadingBar />;
 
   return (
     <>
-      <List
-        itemText="개의 노트북이 등록되어 있습니다."
-        columns={columns}
-        currentData={notebookList}
-        buttonText="신규 등록"
-        currentPage={currentPage}
-        setCurrentPage={setCurrentPage}
-        totalPages={totalPages}
-        totalElements={totalElements}
-      />
+      {isLoading ? (
+        <LoadingBar /> // 로딩 상태에서 로딩 표시
+      ) : (
+        <List
+          itemText="개의 노트북이 등록되어 있습니다."
+          columns={columns}
+          currentData={notebookList}
+          buttonText="신규 등록"
+          currentPage={currentPage}
+          setCurrentPage={setCurrentPage}
+          totalPages={totalPages}
+          totalElements={totalElements}
+          setOnlyAvailable={setOnlyAvailable}
+          onlyAvailable={onlyAvailable}
+        />
+      )}
     </>
   );
 }
