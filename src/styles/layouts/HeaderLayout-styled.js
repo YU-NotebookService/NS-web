@@ -36,6 +36,7 @@ export const DivideLine = styled.div`
 export const NavBar = styled.div`
   display: flex;
   padding-bottom: 20px;
+  justify-content: space-between;
 `;
 export const NavItem = styled.div`
   color: black;
@@ -46,6 +47,32 @@ export const NavItem = styled.div`
   font-weight: 700;
   cursor: pointer;
 
+  &:hover {
+    color: var(--main-color);
+    text-decoration: underline;
+    transition: color 0.3s ease; /* 색상 전환 애니메이션 */
+  }
+`;
+
+export const NavBtn = styled.div`
+  display: flex;
+`;
+
+export const UserName = styled.div`
+  font-size: 20px;
+  margin-top: 10px;
+  margin-left: 30px;
+  margin-right: 30px;
+  font-weight: 700;
+  color: gray;
+`;
+
+export const LogoutBtn = styled.div`
+  font-size: 15px;
+  margin: 15px 30px 0px 30px;
+  font-weight: 700;
+  color: gray;
+  cursor: pointer;
   &:hover {
     color: var(--main-color);
     text-decoration: underline;

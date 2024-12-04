@@ -9,12 +9,14 @@ import {
   DivideLine,
   NavBar,
   NavItem,
+  NavBtn,
+  UserName,
+  LogoutBtn,
 } from '../styles/layouts/HeaderLayout-styled';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useAuth } from 'api/context/AuthProvider';
-// TODO: 절대 경로 설정.
 const HeaderLayout = () => {
-  const { user } = useAuth();
+  const { user, logout } = useAuth();
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -32,7 +34,6 @@ const HeaderLayout = () => {
           노트북대여
         </Title>
         <PageWrapper>
-          {/* TODO: 추후 링크 연결 예정 */}
           <PageItem
             onClick={() => (window.location.href = 'https://nice.yu.ac.kr/lms')}
           >
@@ -51,10 +52,9 @@ const HeaderLayout = () => {
       <DivideLine>
         <hr />
       </DivideLine>
-      {location.pathname !== '/' &&
-        location.pathname !== '/register' && ( //로그인, 회원가입 페이지에만 보이지 않음
-          <NavBar>
-            {/* TODO: Navigate 구현 예정 */}
+      {location.pathname !== '/' && location.pathname !== '/register' && (
+        <NavBar>
+          <NavBtn>
             <NavItem onClick={() => navigate('/notebook/list')}>
               노트북 대여
             </NavItem>
@@ -62,15 +62,26 @@ const HeaderLayout = () => {
             <NavItem onClick={() => navigate('/question/list')}>
               1:1문의
             </NavItem>
-            {user.role === 'ADMIN' ? (
+            {user?.role === 'ADMIN' ? (
               <NavItem onClick={() => navigate('/adminpage')}>
                 관리자 페이지
               </NavItem>
             ) : (
               <NavItem onClick={() => navigate('/mypage')}>마이페이지</NavItem>
             )}
-          </NavBar>
-        )}
+          </NavBtn>
+          <NavBtn>
+            <UserName>
+              안녕하세요,
+              <span style={{ color: 'var(--main-color)' }}>{user?.name}</span>
+              님!
+            </UserName>
+            <LogoutBtn onClick={() => logout(() => navigate('/'))}>
+              로그아웃
+            </LogoutBtn>
+          </NavBtn>
+        </NavBar>
+      )}
     </>
   );
 };
