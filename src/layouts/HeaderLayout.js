@@ -9,12 +9,15 @@ import {
   DivideLine,
   NavBar,
   NavItem,
+  NavBtn,
+  UserName,
+  LogoutBtn,
 } from '../styles/layouts/HeaderLayout-styled';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useAuth } from 'api/context/AuthProvider';
 // TODO: 절대 경로 설정.
 const HeaderLayout = () => {
-  const { user } = useAuth();
+  const { user, logout } = useAuth();
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -54,21 +57,37 @@ const HeaderLayout = () => {
       {location.pathname !== '/' &&
         location.pathname !== '/register' && ( //로그인, 회원가입 페이지에만 보이지 않음
           <NavBar>
-            {/* TODO: Navigate 구현 예정 */}
-            <NavItem onClick={() => navigate('/notebook/list')}>
-              노트북 대여
-            </NavItem>
-            <NavItem onClick={() => navigate('/notice/list')}>공지사항</NavItem>
-            <NavItem onClick={() => navigate('/question/list')}>
-              1:1문의
-            </NavItem>
-            {user.role === 'ADMIN' ? (
-              <NavItem onClick={() => navigate('/adminpage')}>
-                관리자 페이지
+            <NavBtn>
+              {/* TODO: Navigate 구현 예정 */}
+              <NavItem onClick={() => navigate('/notebook/list')}>
+                노트북 대여
               </NavItem>
-            ) : (
-              <NavItem onClick={() => navigate('/mypage')}>마이페이지</NavItem>
-            )}
+              <NavItem onClick={() => navigate('/notice/list')}>
+                공지사항
+              </NavItem>
+              <NavItem onClick={() => navigate('/question/list')}>
+                1:1문의
+              </NavItem>
+              {user?.role === 'ADMIN' ? (
+                <NavItem onClick={() => navigate('/adminpage')}>
+                  관리자 페이지
+                </NavItem>
+              ) : (
+                <NavItem onClick={() => navigate('/mypage')}>
+                  마이페이지
+                </NavItem>
+              )}
+            </NavBtn>
+            <NavBtn>
+              <UserName>
+                안녕하세요,{' '}
+                <span style={{ color: 'var(--main-color)' }}>{user?.name}</span>
+                님!
+              </UserName>
+              <LogoutBtn onClick={() => logout(() => navigate('/'))}>
+                로그아웃
+              </LogoutBtn>
+            </NavBtn>
           </NavBar>
         )}
     </>
