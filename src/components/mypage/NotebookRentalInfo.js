@@ -11,11 +11,7 @@ import {
 } from 'styles/MyPage-styled';
 import postExtendNotebook from 'api/notebook/postExtendNotebook';
 
-const NotebookRentalInfo = ({
-  notebookId,
-  notebookName = '알 수 없음',
-  rentalDate = '알 수 없음',
-}) => {
+const NotebookRentalInfo = ({ myRentalInfo }) => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [hasExtended, setHasExtended] = useState(false);
 
@@ -48,16 +44,12 @@ const NotebookRentalInfo = ({
     }
   };
 
-
-
-
   const renderButtonLabel = () => {
     if (isSubmitting) return '신청 중...';
     if (hasExtended) return '신청 완료';
     return '연장 신청';
   };
 
-const NotebookRentalInfo = ({ myRentalInfo }) => {
   const rentalInfo =
     myRentalInfo && myRentalInfo.length > 0
       ? [
@@ -68,7 +60,6 @@ const NotebookRentalInfo = ({ myRentalInfo }) => {
           },
         ]
       : null;
-
 
   return (
     <MyPageNotebookInfo>
@@ -88,14 +79,13 @@ const NotebookRentalInfo = ({ myRentalInfo }) => {
                 onClick={handleExtendRequest}
                 disabled={isSubmitting || hasExtended}
               >
-              {renderButtonLabel()}
+                {renderButtonLabel()}
               </ExtendBtn>
             </ExtendBtnWrapper>
           </>
         ) : (
           <>대여중인 노트북이 없습니다.</>
         )}
-
       </InfoContent>
     </MyPageNotebookInfo>
   );
