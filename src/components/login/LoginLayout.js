@@ -40,7 +40,7 @@ function LoginLayout() {
 
       // 로그인 정보 저장
       login({ user, token: accessToken });
-      navigate('/main');
+      user.role === 'ADMIN' ? navigate('/adminpage') : navigate('/main');
     } catch (error) {
       console.error('로그인 실패:', error.message);
       alert(error.message);

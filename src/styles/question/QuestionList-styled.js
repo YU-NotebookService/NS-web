@@ -33,3 +33,26 @@ export const SubmitBtn = styled(Button)`
    padding: 16px 35px;
    
 `
+
+export const ListBtnWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  margin-left: 200px;
+`
+
+export const ListText = styled.span`
+  margin-right: 10px;
+  font-size: 20px;
+  color: var(--main-color);
+  font-weight: bold;
+`
+
+export const ListBtn = styled.select`
+  background-color: white;
+  color: var(--main-color);
+  transition: 0s; 
+  font-weight: bold;
+  font-size: 20px;
+  margin-right: 10px;
+  padding: 5px 10px;
+`

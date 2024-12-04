@@ -48,10 +48,8 @@ const NotebookRentalInfo = ({
     }
   };
 
-  const RentalInfo = [
-    { id: 'model', label: '모델명', text: notebookName },
-    { id: 'rentalDate', label: '대여 기간', text: rentalDate },
-  ];
+
+
 
   const renderButtonLabel = () => {
     if (isSubmitting) return '신청 중...';
@@ -59,24 +57,45 @@ const NotebookRentalInfo = ({
     return '연장 신청';
   };
 
+const NotebookRentalInfo = ({ myRentalInfo }) => {
+  const rentalInfo =
+    myRentalInfo && myRentalInfo.length > 0
+      ? [
+          { label: '노트북 ID', text: myRentalInfo.notbookId },
+          {
+            label: '대여 기간',
+            text: `${myRentalInfo.startDate} ~ ${myRentalInfo.endDate}`,
+          },
+        ]
+      : null;
+
+
   return (
     <MyPageNotebookInfo>
       <InfoTitle>대여 중인 노트북 정보</InfoTitle>
+
       <InfoContent>
-        {RentalInfo.map(({ id, label, text }) => (
-          <InfoLine key={id}>
-            <InfoLabel>{label}</InfoLabel>
-            <InfoText>{text}</InfoText>
-          </InfoLine>
-        ))}
-        <ExtendBtnWrapper>
-          <ExtendBtn
-            onClick={handleExtendRequest}
-            disabled={isSubmitting || hasExtended}
-          >
-            {renderButtonLabel()}
-          </ExtendBtn>
-        </ExtendBtnWrapper>
+        {rentalInfo ? (
+          <>
+            {rentalInfo.map((el, index) => (
+              <InfoLine key={index}>
+                <InfoLabel>{el.label}</InfoLabel>
+                <InfoText>{el.text}</InfoText>
+              </InfoLine>
+            ))}
+            <ExtendBtnWrapper>
+              <ExtendBtn
+                onClick={handleExtendRequest}
+                disabled={isSubmitting || hasExtended}
+              >
+              {renderButtonLabel()}
+              </ExtendBtn>
+            </ExtendBtnWrapper>
+          </>
+        ) : (
+          <>대여중인 노트북이 없습니다.</>
+        )}
+
       </InfoContent>
     </MyPageNotebookInfo>
   );
