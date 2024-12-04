@@ -23,11 +23,13 @@ import {
 } from 'styles/common/Register-styled';
 import { useForm } from 'react-hook-form';
 import { useAuth } from 'api/context/AuthProvider';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
+import postNoticeReg from 'api/notice/postNoticeReg';
 
-const Register = ({ onSubmit }) => {
+const Register = () => {
   const location = useLocation();
-
+  const navigate = useNavigate();
+  const { user } = useAuth();
   const {
     register,
     handleSubmit,
@@ -36,32 +38,27 @@ const Register = ({ onSubmit }) => {
     formState: { errors },
   } = useForm();
 
-  // 파일 및 URL 상태 관리
   const [selectedFiles, setSelectedFiles] = useState([]);
   const [id, setId] = useState();
 
   useEffect(() => {
     const data = location.state || {};
-
-    //imgUrl를 배열 형태로 변환하고 통합 관리
     const initialFiles = Array.isArray(data.imgUrl)
       ? data.imgUrl.map((url) => ({
-        name: url.split('/').pop(),
-        type: 'url',
-        value: url,
-      }))
+          name: url.split('/').pop(),
+          type: 'url',
+          value: url,
+        }))
       : data.imgUrl
         ? [
-          {
-            name: data.imgUrl.split('/').pop(),
-            type: 'url',
-            value: data.imgUrl,
-          },
-        ]
+            {
+              name: data.imgUrl.split('/').pop(),
+              type: 'url',
+              value: data.imgUrl,
+            },
+          ]
         : [];
-
     setSelectedFiles(initialFiles);
-
     setValue('title', data.model || data.title || '');
     setValue('os', data.os || '');
     setValue('manufactureDate', data.manufactureDate || '');
@@ -70,69 +67,52 @@ const Register = ({ onSubmit }) => {
     setId(data.id);
   }, [location.state, setValue]);
 
-  const title = watch('title', '');
-  const os = watch('os', '');
-  const content = watch('content', '');
-
-  // 파일 선택 처리
   const handleFileChange = (event) => {
     const files = Array.from(event.target.files).map((file) => ({
       name: file.name,
       type: 'file',
-      value: file, // 실제 File 객체
+      value: file,
     }));
-
     setSelectedFiles((prevFiles) => [...prevFiles, ...files]);
   };
 
-  // 파일 삭제 처리
   const handleDeleteFile = (index) => {
     setSelectedFiles((prevFiles) => prevFiles.filter((_, i) => i !== index));
   };
 
-  // 파일 첨부 버튼 클릭 처리
   const handleFileClick = () => {
     document.getElementById('fileInput').click();
   };
 
-  const onFormSubmit = (formData) => {
+  const onFormSubmit = async (formData) => {
     const data = new FormData();
-
-    // 필수 필드 추가
     if (window.location.pathname.includes('notebook')) {
       data.append('model', formData.title);
       data.append('manufactureDate', formData.manufactureDate);
       data.append('os', formData.os);
       data.append('size', formData.size);
       data.append('content', formData.content);
-    }
-    else if (window.location.pathname.includes('question')) {
+    } else if (window.location.pathname.includes('question')) {
       data.append('title', formData.title);
       data.append('content', formData.content);
     }
 
-    // 새로운 파일 추가 (File 객체만)
     selectedFiles.forEach((file) => {
-      if (file.type === 'file') {
-        data.append('images', file.value); // File 객체
-      }
+      file.type === 'file'
+        ? data.append('images', file.value)
+        : data.append('imageUrls', file.value);
     });
 
-    // 기존 URL 추가 (URL만)
-    selectedFiles.forEach((file) => {
-      if (file.type === 'url') {
-        data.append('imageUrls', file.value); // URL은 별도 필드
-      }
-    });
-
-    // FormData 디버깅 출력
-    console.log('전송되는 FormData:');
-    data.forEach((value, key) => {
-      console.log(`${key}:`, value);
-    });
-
-    // FormData 전달
-    onSubmit(data, id);
+    try {
+      const payload = { title: formData.title, content: formData.content };
+      const response = await postNoticeReg(payload, user);
+      console.log('API 응답:', response);
+      alert('공지사항이 성공적으로 등록되었습니다!');
+      navigate('/notice/list');
+    } catch (error) {
+      console.error('공지사항 등록 중 오류:', error);
+      alert(error.message || '공지사항 등록에 실패했습니다.');
+    }
   };
 
   return (
@@ -143,7 +123,9 @@ const Register = ({ onSubmit }) => {
             제목<span style={{ color: 'var(--gray-color)' }}>(30자 이하)</span>
           </InputTitle>
           <ErrorWrapper>
-            <Count $isError={!!errors.title}>{title.length}/30</Count>
+            <Count $isError={!!errors.title}>
+              {watch('title', '').length}/30
+            </Count>
             <PostInput
               placeholder="제목을 입력해 주세요."
               $isError={!!errors.title}
@@ -167,7 +149,9 @@ const Register = ({ onSubmit }) => {
                 <span style={{ color: 'var(--gray-color)' }}>(30자 이하)</span>
               </InputTitle>
               <ErrorWrapper>
-                <Count $isError={!!errors.os}>{os.length}/30</Count>
+                <Count $isError={!!errors.os}>
+                  {watch('os', '').length}/30
+                </Count>
                 <PostInput
                   placeholder="운영체제를 입력해 주세요."
                   $isError={!!errors.os}
@@ -183,7 +167,7 @@ const Register = ({ onSubmit }) => {
               </ErrorWrapper>
             </InputWrapper>
             <InputWrapper>
-              <InputTitle style={{ paddingTop: '16px' }}>제조년월</InputTitle>
+              <InputTitle>제조년월</InputTitle>
               <ErrorWrapper>
                 <PostInput
                   placeholder="제조년월을 입력해 주세요. (YYYY-MM)"
@@ -198,7 +182,7 @@ const Register = ({ onSubmit }) => {
               </ErrorWrapper>
             </InputWrapper>
             <InputWrapper>
-              <InputTitle style={{ paddingTop: '16px' }}>화면 크기</InputTitle>
+              <InputTitle>화면 크기</InputTitle>
               <ErrorWrapper>
                 <PostInput
                   placeholder="화면 크기를 입력해 주세요. ex) 17"
@@ -212,12 +196,15 @@ const Register = ({ onSubmit }) => {
             </InputWrapper>
           </>
         )}
+
         <ContentInputWrapper>
           <ContentInputTitle>
             내용<span style={{ color: 'var(--gray-color)' }}>(500자 이하)</span>
           </ContentInputTitle>
           <ErrorWrapper>
-            <Count $isError={!!errors.content}>{content.length}/500</Count>
+            <Count $isError={!!errors.content}>
+              {watch('content', '').length}/500
+            </Count>
             <ContentInput
               placeholder="내용을 입력해 주세요."
               $isError={!!errors.content}
@@ -232,6 +219,7 @@ const Register = ({ onSubmit }) => {
             {errors.content && <Error>{errors.content.message}</Error>}
           </ErrorWrapper>
         </ContentInputWrapper>
+
         <InputWrapper>
           <PicTitle>사진 첨부</PicTitle>
           <PicWrapper>
