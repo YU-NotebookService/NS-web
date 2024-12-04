@@ -1,6 +1,38 @@
 # NS-web
 ### 2024 소프트웨어공학 프로젝트 : 영남대학교 노트북 대여 웹 개발
 
+# 🕹️기능 정리
+### 1. 회원가입
+- 회원 가입시 기본적으로 `사용자` 권한으로 가입
+- `관리자` 권한 계정은 아래에 기재
+
+<div style="display: flex; flex-direction: row; gap: 10px; align-items: flex-start;">
+  <img src="https://github.com/user-attachments/assets/96ad1b81-22fe-4223-a788-203d0676cbe7" alt="회원가입 이미지1" width="48%">
+  <img src="https://github.com/user-attachments/assets/40ee4f76-4158-47a3-a48e-97f39d7ad7f5" alt="회원가입 이미지2" width="48%">
+</div>
+
+### 2. 로그인
+- 관리자용 계정
+  - ID : 22012120
+  - PW : 123456789abc
+![image](https://github.com/user-attachments/assets/66aa1f6b-59ec-4c7b-8a0a-9fbd6173177c)
+
+
+### 3. 메인화면
+![image](https://github.com/user-attachments/assets/06fa42f8-ed15-4197-9932-658cc8bcd8a5)
+
+### 4. 노트북
+
+#### 4.1 리스트 조회
+
+#### 4.2 세부 정보 조회
+
+#### 4.3 신규 등록(관리자)
+
+#### 4.4 수정 or 삭제(관리자)
+
+### 
+
 
 ## 📌 컨벤션
 
