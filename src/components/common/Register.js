@@ -108,6 +108,9 @@ const Register = ({ onSubmit }) => {
     } else if (window.location.pathname.includes('question')) {
       data.append('title', formData.title);
       data.append('content', formData.content);
+    } else if (window.location.pathname.includes('notice')) {
+      data.append('title', formData.title);
+      data.append('content', formData.content);
     }
 
     // 새로운 파일 추가 (File 객체만)
