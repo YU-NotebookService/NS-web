@@ -39,6 +39,7 @@ const Register = () => {
   } = useForm();
 
   const [selectedFiles, setSelectedFiles] = useState([]);
+  // eslint-disable-next-line no-unused-vars
   const [id, setId] = useState();
 
   useEffect(() => {
