@@ -11,8 +11,10 @@ import {
   NavItem,
 } from '../styles/layouts/HeaderLayout-styled';
 import { useLocation, useNavigate } from 'react-router-dom';
+import { useAuth } from 'api/context/AuthProvider';
 // TODO: 절대 경로 설정.
 const HeaderLayout = () => {
+  const { user } = useAuth();
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -20,12 +22,15 @@ const HeaderLayout = () => {
     <>
       <LogoContainer>
         <HeaderLogo src={img_Logo_YU} />
-        <Title onClick={() => {
-          if (location.pathname === '/' || location.pathname === '/register')
-            return;
-          else
-            navigate('/main');
-        }}>노트북대여</Title>
+        <Title
+          onClick={() => {
+            if (location.pathname === '/' || location.pathname === '/register')
+              return;
+            else navigate('/main');
+          }}
+        >
+          노트북대여
+        </Title>
         <PageWrapper>
           {/* TODO: 추후 링크 연결 예정 */}
           <PageItem
@@ -57,7 +62,13 @@ const HeaderLayout = () => {
             <NavItem onClick={() => navigate('/question/list')}>
               1:1문의
             </NavItem>
-            <NavItem onClick={() => navigate('/mypage')}>마이페이지</NavItem>
+            {user.role === 'ADMIN' ? (
+              <NavItem onClick={() => navigate('/adminpage')}>
+                관리자 페이지
+              </NavItem>
+            ) : (
+              <NavItem onClick={() => navigate('/mypage')}>마이페이지</NavItem>
+            )}
           </NavBar>
         )}
     </>
