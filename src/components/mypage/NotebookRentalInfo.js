@@ -16,7 +16,7 @@ const NotebookRentalInfo = ({ myRentalInfo }) => {
   const [hasExtended, setHasExtended] = useState(false);
 
   const handleExtendRequest = async () => {
-    if (!notebookId) {
+    if (!myRentalInfo.notebookId) {
       alert('노트북 ID가 유효하지 않습니다.');
       return;
     }
@@ -27,9 +27,12 @@ const NotebookRentalInfo = ({ myRentalInfo }) => {
 
     try {
       const requestData = { requestDate: new Date().toISOString() };
-      console.log('API 호출 준비:', requestData, notebookId);
+      console.log('API 호출 준비:', requestData, myRentalInfo.notebookId);
 
-      const response = await postExtendNotebook(requestData, notebookId);
+      const response = await postExtendNotebook(
+        requestData,
+        myRentalInfo.notebookId,
+      );
       console.log('연장 신청 성공:', response);
       alert('연장 신청이 성공적으로 완료되었습니다.');
       setHasExtended(true);

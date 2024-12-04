@@ -21,7 +21,7 @@ import { useState } from 'react';
 const List = ({
   itemText,
   columns,
-  currentData,
+  currentData = [],
   buttonText,
   currentPage,
   setCurrentPage,
@@ -131,16 +131,17 @@ const List = ({
           );
         })}
       </HeadLine>
-      {currentData.map((el, index) => {
-        return (
-          <InfoCard
-            key={index}
-            el={el}
-            index={totalElements - 10 * currentPage - index}
-            columns={columns}
-          />
-        );
-      })}
+      {currentData &&
+        currentData.map((el, index) => {
+          return (
+            <InfoCard
+              key={index}
+              el={el}
+              index={totalElements - 10 * currentPage - index}
+              columns={columns}
+            />
+          );
+        })}
       <Bottom>
         <div
           style={{ display: 'flex', justifyContent: 'center', margin: 'auto' }}
