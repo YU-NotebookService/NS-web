@@ -1,10 +1,8 @@
 import api from 'api/axios';
 
-const getRentalRequest = async ({ page = 0 }) => {
+const getRentalRequest = async () => {
   try {
-    const response = await api.get('/admin/request/rental', {
-      params: { page },
-    });
+    const response = await api.get('/admin/request/rental');
     return response.data;
   } catch (error) {
     console.error('대여 요청 리스트 API 호출 실패:', error);
