@@ -16,7 +16,6 @@ import {
   ListBtnWrapper,
 } from 'styles/question/QuestionList-styled';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { useAuth } from 'api/context/AuthProvider';
 import { useState } from 'react';
 
 const List = ({
@@ -31,9 +30,7 @@ const List = ({
   isFiltered,
   toggleFilter,
   setOnlyAvailable,
-  onlyAvailable,
 }) => {
-  const { user } = useAuth;
   const navigate = useNavigate();
   const location = useLocation();
   const [dropdownVisible, setDropdownVisible] = useState(false); // 드롭다운 표시 상태
@@ -70,9 +67,7 @@ const List = ({
       <Top>
         <ListCount>
           총&nbsp;
-          <span style={{ color: 'var(--main-color)' }}>
-            {currentData.length}
-          </span>
+          <span style={{ color: 'var(--main-color)' }}>{totalElements}</span>
           {itemText}
         </ListCount>
         {window.location.pathname.includes('question') && (
