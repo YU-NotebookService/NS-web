@@ -16,9 +16,15 @@ function NotebookListLayout() {
   const [totalPages, setTotalPages] = useState(0);
   const [totalElements, setTotalElements] = useState(0);
 
+  // 대여 상태 필터 (true: 대여 가능, false: 대여 불가)
+  const [onlyAvailable, setOnlyAvailable] = useState(false);
+
   const fetchNotebookList = useCallback(async () => {
     try {
-      const response = await getNotebookList({ currentPage });
+      const response = await getNotebookList({
+        currentPage,
+        onlyAvailable,
+      });
       await new Promise((resolve) => setTimeout(resolve, 500)); // 로딩 지연
       setNotebookList(response.content);
       setTotalPages(response.totalPages);
@@ -29,7 +35,7 @@ function NotebookListLayout() {
         error.message,
       );
     }
-  }, [currentPage]);
+  }, [currentPage, onlyAvailable]);
 
   useEffect(() => {
     fetchNotebookList();
@@ -48,6 +54,8 @@ function NotebookListLayout() {
         setCurrentPage={setCurrentPage}
         totalPages={totalPages}
         totalElements={totalElements}
+        setOnlyAvailable={setOnlyAvailable}
+        onlyAvailable={onlyAvailable}
       />
     </>
   );
