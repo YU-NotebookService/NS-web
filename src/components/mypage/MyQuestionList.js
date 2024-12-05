@@ -53,7 +53,6 @@ const MyQuestionList = () => {
               <InfoList>
                 {new Date(question.date).toLocaleDateString("ko-KR")}
               </InfoList>
-              {/* 답변 상태 */}
               <InfoList>
                 {question.state ? "답변 완료" : "답변 없음"}
               </InfoList>
