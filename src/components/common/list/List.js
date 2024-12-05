@@ -133,7 +133,7 @@ const List = ({
       </HeadLine>
       {currentData &&
         currentData.map((el, index) => {
-          return currentPage ? (
+          return currentPage !== null ? (
             <InfoCard
               key={index}
               el={el}
