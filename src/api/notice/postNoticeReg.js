@@ -9,12 +9,7 @@ const postNoticeReg = async (data, user) => {
   }
 
   try {
-    const response = await api.post(`admin/notices/create`, data, {
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization-Access': `Bearer ${user.token}`, // user 객체에 token 속성이 있다고 가정
-      },
-    });
+    const response = await api.post(`admin/notices/create`, data);
 
     return response.data;
   } catch (error) {
