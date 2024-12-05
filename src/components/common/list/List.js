@@ -10,11 +10,6 @@ import {
 } from 'styles/common/List-styled';
 import SearchBox from 'components/common/SearchBox';
 import InfoCard from 'components/common/list/InfoCard';
-import {
-  ListText,
-  ListBtn,
-  ListBtnWrapper,
-} from 'styles/question/QuestionList-styled';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 
@@ -42,24 +37,26 @@ const List = ({
     navigate(newPath);
   };
 
-  const handleDropdownClick = () => {
-    setDropdownVisible(!dropdownVisible); // 드롭다운 열고 닫기
+  const handleDropdownClick = (key) => {
+    // 특정 드롭다운만 열고 닫기
+    setDropdownVisible((prev) => ({
+      ...prev,
+      [key]: !prev[key],
+    }));
   };
 
-  const handleOptionSelect = (value) => {
-    setOnlyAvailable(value === 'true'); // 선택한 값으로 상태 업데이트
-    setDropdownVisible(false); // 드롭다운 닫기
-  };
-
-  const handleFilterChange = (e) => {
-    const filterValue = e.target.value;
-    if (filterValue === 'all') {
-      toggleFilter(null);
-    } else if (filterValue === 'false') {
-      toggleFilter(false);
-    } else if (filterValue === 'true') {
-      toggleFilter(true);
+  const handleOptionSelect = (key, value) => {
+    if (key === 'rentalStatus') {
+      setOnlyAvailable(value === 'true'); // rentalStatus 필터 업데이트
+    } else if (key === 'state') {
+      toggleFilter(value === 'true' ? true : value === 'false' ? false : null); // state 필터 업데이트
     }
+
+    // 드롭다운 닫기
+    setDropdownVisible((prev) => ({
+      ...prev,
+      [key]: false,
+    }));
   };
 
   return (
@@ -70,19 +67,6 @@ const List = ({
           <span style={{ color: 'var(--main-color)' }}>{totalElements}</span>
           {itemText}
         </ListCount>
-        {window.location.pathname.includes('question') && (
-          <ListBtnWrapper>
-            <ListText>문의글 필터:</ListText>
-            <ListBtn
-              onChange={handleFilterChange}
-              value={isFiltered === null ? 'all' : isFiltered.toString()}
-            >
-              <option value="all">전체</option>
-              <option value="false">답변 없음</option>
-              <option value="true">답변 완료</option>
-            </ListBtn>
-          </ListBtnWrapper>
-        )}
         <SearchBox />
       </Top>
       <HeadLine>
@@ -95,11 +79,11 @@ const List = ({
               >
                 <span
                   style={{ cursor: 'pointer' }}
-                  onClick={handleDropdownClick}
+                  onClick={() => handleDropdownClick('rentalStatus')}
                 >
                   {column.label} ▼
                 </span>
-                {dropdownVisible && (
+                {dropdownVisible.rentalStatus && (
                   <div
                     style={{
                       position: 'absolute',
@@ -111,11 +95,13 @@ const List = ({
                       boxShadow: '0px 4px 6px rgba(0, 0, 0, 0.1)',
                     }}
                   >
-                    <DropDownContent onClick={() => handleOptionSelect('true')}>
+                    <DropDownContent
+                      onClick={() => handleOptionSelect('rentalStatus', 'true')}
+                    >
                       대여가능
                     </DropDownContent>
                     <DropDownContent
-                      onClick={() => handleOptionSelect('false')}
+                      onClick={() => handleOptionSelect('rentalStatus', 'false')}
                     >
                       대여불가
                     </DropDownContent>
@@ -124,6 +110,52 @@ const List = ({
               </div>
             );
           }
+
+          if (column.key === 'state') {
+            return (
+              <div
+                key={index}
+                style={{ width: column.width, position: 'relative' }}
+              >
+                <span
+                  style={{ cursor: 'pointer' }}
+                  onClick={() => handleDropdownClick('state')}
+                >
+                  {column.label} ▼
+                </span>
+                {dropdownVisible.state && (
+                  <div
+                    style={{
+                      position: 'absolute',
+                      backgroundColor: '#fff',
+                      border: '1px solid #ccc',
+                      marginTop: '5px',
+                      zIndex: 100,
+                      width: '100%',
+                      boxShadow: '0px 4px 6px rgba(0, 0, 0, 0.1)',
+                    }}
+                  >
+                    <DropDownContent
+                      onClick={() => handleOptionSelect('state', 'true')}
+                    >
+                      답변 완료
+                    </DropDownContent>
+                    <DropDownContent
+                      onClick={() => handleOptionSelect('state', 'false')}
+                    >
+                      답변 없음
+                    </DropDownContent>
+                    <DropDownContent
+                      onClick={() => handleOptionSelect('state', 'all')}
+                    >
+                      전체
+                    </DropDownContent>
+                  </div>
+                )}
+              </div>
+            );
+          }
+
           return (
             <div key={index} style={{ width: column.width }}>
               {column.label}
@@ -160,7 +192,6 @@ const List = ({
             </PagingBtn>
           ))}
         </div>
-
         {!window.location.pathname.includes('admin') && (
           <WriteBtn onClick={goToRegister}>{buttonText}</WriteBtn>
         )}

@@ -1,7 +1,8 @@
 import React, { useEffect, useState, useCallback } from 'react';
-import { MyPageWrapper } from 'styles/MyPage-styled';
+import { MyPageWrapper, MyPageTopSection } from 'styles/MyPage-styled';
 import UserInfo from 'components/mypage/UserInfo';
 import NotebookRentalInfo from 'components/mypage/NotebookRentalInfo';
+import MyQuestionList from 'components/mypage/MyQuestionList';
 import getMyRental from 'api/mypage/getMyRental';
 
 const MyPageLayout = () => {
@@ -25,8 +26,11 @@ const MyPageLayout = () => {
 
   return (
     <MyPageWrapper>
-      <UserInfo name="홍길동" sid="22011475" phoneNum="010-9147-5631" />
-      <NotebookRentalInfo myRentalInfo={myRental} />
+      <MyPageTopSection>
+        <UserInfo name="홍길동" sid="22011475" phoneNum="010-9147-5631" />
+        <NotebookRentalInfo myRentalInfo={myRental} />
+      </MyPageTopSection>
+      <MyQuestionList />
     </MyPageWrapper>
   );
 };

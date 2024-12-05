@@ -2,7 +2,7 @@ import api from "api/axios";
 
 const getQuestionList = async () => {
   try {
-    const response = await api.get(`question/${id}/read`);
+    const response = await api.get(`my/questions`);
     return response.data;
   } catch (error) {
     console.error('API 요청 중 오류 발생', error);
