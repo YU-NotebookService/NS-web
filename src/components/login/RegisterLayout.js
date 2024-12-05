@@ -119,29 +119,50 @@ function Register() {
             <Text>휴대폰 번호</Text>
             <NumInput
               value={input.NumText1}
-              onChange={onChangeInput}
+              onChange={(e) => {
+                onChangeInput(e); // 기존 onChange 로직 호출
+                if (e.target.value.length === 3) {
+                  // 입력이 완료되면 다음 입력란으로 포커스 이동
+                  document.getElementsByName('NumText2')[0].focus();
+                }
+              }}
               name="NumText1"
               isError={!!errors.num}
+              maxLength={3} // 3자리까지만 입력
               style={{
                 left: '120px',
                 width: '33px',
               }}
             />
+
             <NumText>-</NumText>
+
+            {/* 두 번째 입력란 */}
             <NumInput
               value={input.NumText2}
-              onChange={onChangeInput}
+              onChange={(e) => {
+                onChangeInput(e); // 기존 onChange 로직 호출
+                if (e.target.value.length === 4) {
+                  // 입력이 완료되면 다음 입력란으로 포커스 이동
+                  document.getElementsByName('NumText3')[0].focus();
+                }
+              }}
               name="NumText2"
               isError={!!errors.num}
-              maxLength={4}
+              maxLength={4} // 4자리까지만 입력
+              disabled={!input.NumText1} // 첫 번째 입력이 완료되지 않으면 비활성화
             />
+
             <NumText>-</NumText>
+
+            {/* 세 번째 입력란 */}
             <NumInput
               value={input.NumText3}
-              onChange={onChangeInput}
+              onChange={onChangeInput} // 기존 onChange 로직
               name="NumText3"
               isError={!!errors.num}
-              maxLength={4}
+              maxLength={4} // 4자리까지만 입력
+              disabled={!input.NumText2} // 두 번째 입력이 완료되지 않으면 비활성화
             />
           </FormItem>
           {errors.num && <ErrorMessage>{errors.num.message}</ErrorMessage>}
