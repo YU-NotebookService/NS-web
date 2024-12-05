@@ -1,6 +1,6 @@
 import api from "api/axios";
 
-const getQuestion = async () => {
+const getQuestionList = async () => {
   try {
     const response = await api.get(`question/${id}/read`);
     return response.data;
@@ -22,3 +22,5 @@ const getQuestion = async () => {
     }
   }
 };
+
+export default getQuestionList;

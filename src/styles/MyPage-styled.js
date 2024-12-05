@@ -66,4 +66,6 @@ export const ExtendBtnWrapper = styled.div`
   justify-content: flex-end;
 `;
 
-export const ExtendBtn = styled(Button)``;
+export const ExtendBtn = styled(Button)`
+
+`;
