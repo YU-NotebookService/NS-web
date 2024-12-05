@@ -56,10 +56,7 @@ export const InfoContent = styled.div`
 
 export const InfoLine = styled.div`
   display: flex;
-  justify-content: space-between; 
-  align-items: center; 
-  gap: 15px; 
-  margin-bottom: 15px;
+  white-space: nowrap;
 `;
 
 export const ListData = styled.div`
