@@ -119,9 +119,15 @@ function Register() {
             <Text>휴대폰 번호</Text>
             <NumInput
               value={input.NumText1}
-              onChange={onChangeInput}
+              onChange={(e) => {
+                onChangeInput(e);
+                if (e.target.value.length === 3) {
+                  document.getElementsByName('NumText2')[0].focus();
+                }
+              }}
               name="NumText1"
               isError={!!errors.num}
+              maxLength={3}
               style={{
                 left: '120px',
                 width: '33px',
@@ -130,7 +136,12 @@ function Register() {
             <NumText>-</NumText>
             <NumInput
               value={input.NumText2}
-              onChange={onChangeInput}
+              onChange={(e) => {
+                onChangeInput(e);
+                if (e.target.value.length === 4) {
+                  document.getElementsByName('NumText3')[0].focus();
+                }
+              }}
               name="NumText2"
               isError={!!errors.num}
               maxLength={4}
