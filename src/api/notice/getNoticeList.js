@@ -1,8 +1,8 @@
 import api from 'api/axios';
 
-const getNoticeList = async () => {
+const getNoticeList = async ({ currentPage }) => {
   try {
-    const response = await api.get(`/noticeList`);
+    const response = await api.get(`noticeList?page=${currentPage}`);
     return response.data;
   } catch (error) {
     console.error('API 요청 중 오류 발생', error);

@@ -161,11 +161,9 @@ const List = ({
           ))}
         </div>
 
-        {currentPage && (
+        {!window.location.pathname.includes('admin') && (
           <WriteBtn onClick={goToRegister}>{buttonText}</WriteBtn>
         )}
-
-        {/* TODO: 공지사항 글쓰기 기능 구현 */}
       </Bottom>
     </ListWrapper>
   );
