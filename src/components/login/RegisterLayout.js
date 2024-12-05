@@ -145,7 +145,6 @@ function Register() {
               name="NumText2"
               isError={!!errors.num}
               maxLength={4}
-              disabled={!input.NumText1}
             />
             <NumText>-</NumText>
             <NumInput
@@ -154,7 +153,6 @@ function Register() {
               name="NumText3"
               isError={!!errors.num}
               maxLength={4}
-              disabled={!input.NumText2}
             />
           </FormItem>
           {errors.num && <ErrorMessage>{errors.num.message}</ErrorMessage>}
