@@ -18,7 +18,7 @@ const SideBar = () => {
           <SidebarCategory>노트북</SidebarCategory>
           <SidebarList>
             <SidebarItem>
-              <NavItem onClick={() => navigate('/rental/request')}>
+              <NavItem onClick={() => navigate('/adminpage')}>
                 대여 요청 조회
               </NavItem>
             </SidebarItem>
@@ -33,7 +33,7 @@ const SideBar = () => {
           <SidebarCategory>회원관리</SidebarCategory>
           <SidebarList>
             <SidebarItem>
-              <NavItem onClick={() => navigate('/user/management')}>
+              <NavItem onClick={() => navigate('users')}>
                 전체 사용자 조회
               </NavItem>
             </SidebarItem>
