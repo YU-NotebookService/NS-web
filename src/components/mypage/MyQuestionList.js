@@ -1,4 +1,4 @@
-import { useEffect, useState, useCallback } from "react";
+import { useEffect, useState, useCallback } from 'react';
 import getQuestionList from 'api/mypage/getQuestionList';
 import {
   MyPageQuestionInfo,
@@ -7,8 +7,8 @@ import {
   InfoText,
   ListData,
   InfoList,
-} from "styles/MyPage-styled";
-import { useNavigate } from "react-router-dom";
+} from 'styles/MyPage-styled';
+import { useNavigate } from 'react-router-dom';
 
 const MyQuestionList = () => {
   const [questionList, setQuestionList] = useState([]);
@@ -18,10 +18,10 @@ const MyQuestionList = () => {
   const fetchQuestionList = useCallback(async () => {
     try {
       setIsLoading(true);
-      const response = await getQuestionList(); // API 호출
-      setQuestionList(response || []); // 데이터 저장
+      const response = await getQuestionList();
+      setQuestionList(response || []);
     } catch (error) {
-      console.error("문의 리스트를 불러오는 데 실패했습니다:", error.message);
+      console.error('문의 리스트를 불러오는 데 실패했습니다:', error.message);
     } finally {
       setIsLoading(false);
     }
@@ -32,7 +32,7 @@ const MyQuestionList = () => {
   }, [fetchQuestionList]);
 
   const handleTitleClick = (questionId) => {
-    navigate(`/question/info/${questionId}`); // 상세 페이지 경로로 이동
+    navigate(`/question/info/${questionId}`);
   };
 
   return (
@@ -45,17 +45,15 @@ const MyQuestionList = () => {
           questionList.map((question, index) => (
             <ListData key={index}>
               <InfoList
-                onClick={() => handleTitleClick(question.questionId)} // 제목 클릭 시 상세 페이지로 이동
-                style={{ cursor: "pointer" }}
+                onClick={() => handleTitleClick(question.questionId)}
+                style={{ cursor: 'pointer' }}
               >
                 {question.title}
               </InfoList>
               <InfoList>
-                {new Date(question.date).toLocaleDateString("ko-KR")}
+                {new Date(question.date).toLocaleDateString('ko-KR')}
               </InfoList>
-              <InfoList>
-                {question.state ? "답변 완료" : "답변 없음"}
-              </InfoList>
+              <InfoList>{question.state ? '답변 완료' : '답변 없음'}</InfoList>
             </ListData>
           ))
         ) : (
@@ -67,5 +65,3 @@ const MyQuestionList = () => {
 };
 
 export default MyQuestionList;
-
-

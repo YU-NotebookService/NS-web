@@ -2,21 +2,19 @@ import api from 'api/axios';
 
 const registerApi = async (data) => {
   try {
-    const response = await api.post('register', data); // 회원가입 API 호출
+    const response = await api.post('register', data);
     return response.data;
   } catch (error) {
     console.error('전체 에러 객체:', error);
 
     if (error.response) {
-      // 상태 코드 및 예외 처리
-      const errorCode = error.response.data?.code; // 예외 코드 가져오기
-      const errorMessage = error.response.data?.message; // 예외 메시지 가져오기
+      const errorCode = error.response.data?.code;
+      const errorMessage = error.response.data?.message;
 
       console.error('응답 상태 코드:', error.response.status);
       console.error('응답 에러 코드:', errorCode);
       console.error('응답 에러 메시지:', errorMessage);
 
-      // 명세서에 따른 예외 처리
       switch (errorCode) {
         case 'UE1':
           throw new Error('잘못된 이메일 형식입니다.');

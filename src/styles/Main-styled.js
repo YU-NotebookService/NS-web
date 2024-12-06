@@ -4,6 +4,7 @@ import Button from 'components/common/Button';
 
 export const Wrapper = styled.div`
   background-color: #f1f4fb;
+  min-height: 70vh;
 `;
 
 export const Content = styled.div``;
@@ -15,6 +16,7 @@ export const MainBanner = styled.div`
   justify-content: center;
   padding-top: 130px;
   padding-bottom: 35px;
+  margin-top: 50px;
 `;
 
 export const BannerContent = styled.div`

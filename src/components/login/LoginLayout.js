@@ -31,14 +31,6 @@ function LoginLayout() {
       const response = await loginApi(formData);
       const { accessToken, ...user } = response;
 
-      console.log(
-        '로그인 성공! 반환된 사용자 정보:',
-        user,
-        'AccessToken:',
-        accessToken,
-      );
-
-      // 로그인 정보 저장
       login({ user, token: accessToken });
       user.role === 'ADMIN' ? navigate('/adminpage') : navigate('/main');
     } catch (error) {

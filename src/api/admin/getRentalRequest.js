@@ -6,7 +6,6 @@ const getRentalRequest = async () => {
     return response.data;
   } catch (error) {
     console.error('대여 요청 리스트 API 호출 실패:', error);
-
     if (error.response) {
       console.error('응답 오류:', error.response.data);
       throw new Error('서버 오류 발생');

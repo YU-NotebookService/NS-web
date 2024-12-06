@@ -5,7 +5,6 @@ const getNotebookList = async ({ currentPage, onlyAvailable }) => {
     const response = await api.get(
       `notebooks/read/${currentPage}?filterBy=none&selected=&onlyAvailable=${onlyAvailable}`,
     );
-
     return response.data;
   } catch (error) {
     console.error('API 요청 중 오류 발생', error);

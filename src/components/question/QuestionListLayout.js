@@ -21,27 +21,27 @@ function QuestionListLayout() {
 
   const fetchQuestionList = useCallback(async () => {
     try {
-      setIsLoading(true); // 로딩 시작
-      const response = await getQuestionList({ currentPage }); // API 호출
-      await new Promise((resolve) => setTimeout(resolve, 500)); // 로딩 지연
+      setIsLoading(true);
+      const response = await getQuestionList({ currentPage });
+      await new Promise((resolve) => setTimeout(resolve, 500));
       setQuestionList(response.content);
       setTotalPages(response.totalPages);
       setTotalElements(response.totalElements);
     } catch (error) {
       console.error('게시물 리스트를 불러오는 데 실패했습니다:', error.message);
     } finally {
-      setIsLoading(false); // 로딩 종료
+      setIsLoading(false);
     }
-  }, [currentPage, filtered]);
+  }, [currentPage]);
 
   useEffect(() => {
     fetchQuestionList();
   }, [fetchQuestionList]);
 
-  const filteredList = filtered === null
-    ? questionList // 필터링 없음
-    : questionList.filter((item) => item.state === filtered);
-
+  const filteredList =
+    filtered === null
+      ? questionList
+      : questionList.filter((item) => item.state === filtered);
 
   const toggleFilter = (filter) => {
     setFiltered((prev) => (prev === filter ? null : filter));

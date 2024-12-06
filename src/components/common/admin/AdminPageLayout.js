@@ -11,7 +11,7 @@ function AdminRentalRequestLayout({ user }) {
     { label: '학번', width: '15%', key: 'studentNumber' },
     { label: '연락처', width: '15%', key: 'phoneNumber' },
     { label: '요청 일자', width: '15%', key: 'requestDate' },
-    { label: '승인', width: '15%', key: 'button' }, // 버튼 렌더링을 위한 key
+    { label: '승인', width: '15%', key: 'button' },
   ];
 
   const [rentalRequestList, setRentalRequestList] = useState([]);
@@ -22,7 +22,6 @@ function AdminRentalRequestLayout({ user }) {
     try {
       const response = await getRentalRequest();
       setRentalRequestList(response.reservationRequests || []);
-      console.log('response', response.reservationRequests);
     } catch (error) {
       console.error('대여 요청 리스트를 불러오는 데 실패하였습니다:', error);
     } finally {

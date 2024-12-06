@@ -15,10 +15,12 @@ import {
 import { ReactComponent as ModifyIcon } from 'assets/common/modifyIcon.svg';
 import { ReactComponent as DeleteIcon } from 'assets/common/deleteIcon.svg';
 import { useLocation, useNavigate } from 'react-router-dom';
+import { useAuth } from 'api/context/AuthProvider';
 
 const Detail = ({ data, goToList, deletePost }) => {
   const navigate = useNavigate();
   const location = useLocation();
+  const { user } = useAuth();
 
   const goToModify = () => {
     const currentPath = location.pathname;
@@ -31,13 +33,10 @@ const Detail = ({ data, goToList, deletePost }) => {
       <HeadLine>{data.title || data.model || '제목 없음'}</HeadLine>
       <DetailInfo>
         {(data.writer || '관리자') && <>작성자 {data.writer || '관리자'}</>}
-        {/* manufactureDate가 있을 때만 출력 */}
         {data.manufactureDate && (
           <>&nbsp;&nbsp;|&nbsp;&nbsp;제조년월 {data.manufactureDate}</>
         )}
-        {/* os가 있을 때만 출력 */}
         {data.os && <>&nbsp;&nbsp;|&nbsp;&nbsp;운영체제 {data.os}</>}
-        {/* size가 있을 때만 출력 */}
         {data.size && <>&nbsp;&nbsp;|&nbsp;&nbsp;사이즈 {data.size} inch</>}
 
         {data.date && <>&nbsp;&nbsp;|&nbsp;&nbsp;작성일 {data.date}</>}
@@ -56,17 +55,31 @@ const Detail = ({ data, goToList, deletePost }) => {
         </DetailImgWrapper>
         <BtnWrapper>
           <ListBtn onClick={goToList}>목록</ListBtn>
-          <PostBtnWrapper>
-            <PostBtn onClick={goToModify}>
-              글 수정
-              <ModifyIcon />
-            </PostBtn>
-            |
-            <PostBtn onClick={deletePost}>
-              글 삭제
-              <DeleteIcon />
-            </PostBtn>
-          </PostBtnWrapper>
+          {user.role === 'ADMIN' ? (
+            <PostBtnWrapper>
+              <PostBtn onClick={goToModify}>
+                글 수정
+                <ModifyIcon />
+              </PostBtn>
+              |
+              <PostBtn onClick={deletePost}>
+                글 삭제
+                <DeleteIcon />
+              </PostBtn>
+            </PostBtnWrapper>
+          ) : window.location.pathname.includes('question') ? (
+            <PostBtnWrapper>
+              <PostBtn onClick={goToModify}>
+                글 수정
+                <ModifyIcon />
+              </PostBtn>
+              |
+              <PostBtn onClick={deletePost}>
+                글 삭제
+                <DeleteIcon />
+              </PostBtn>
+            </PostBtnWrapper>
+          ) : null}
         </BtnWrapper>
       </DetailContent>
     </DetailWrapper>

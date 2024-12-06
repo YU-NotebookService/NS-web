@@ -10,10 +10,7 @@ function QuestionList() {
     <Wrapper>
       <Banner data={questionBanner} text="1:1문의" />
       <Content className="Content">
-        <Title 
-        locationText={['1:1문의']} 
-        titleText={'1:1문의'} 
-        />
+        <Title locationText={['1:1문의']} titleText={'1:1문의'} />
         <QuestionListLayout />
       </Content>
     </Wrapper>

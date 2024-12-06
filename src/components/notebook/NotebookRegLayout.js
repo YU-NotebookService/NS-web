@@ -1,7 +1,7 @@
 import postNotebookInfo from 'api/notebook/postNotebookInfo';
 import Register from 'components/common/Register';
 import React from 'react';
-import { useAuth } from 'api/context/AuthProvider'; // AuthProvider import
+import { useAuth } from 'api/context/AuthProvider';
 import { useNavigate } from 'react-router-dom';
 
 const NotebookRegLayout = () => {
@@ -15,8 +15,7 @@ const NotebookRegLayout = () => {
         console.log(`${key}:`, value);
       });
 
-      const response = await postNotebookInfo(formData, user); // FormData 전달
-      console.log('노트북 정보 등록 성공: ', response);
+      await postNotebookInfo(formData, user);
       alert('노트북 정보가 성공적으로 등록되었습니다.');
       navigate('/notebook/list');
     } catch (error) {

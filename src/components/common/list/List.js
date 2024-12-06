@@ -8,10 +8,10 @@ import {
   Top,
   WriteBtn,
 } from 'styles/common/List-styled';
-import SearchBox from 'components/common/SearchBox';
 import InfoCard from 'components/common/list/InfoCard';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
+import { useAuth } from 'api/context/AuthProvider';
 
 const List = ({
   itemText,
@@ -22,13 +22,13 @@ const List = ({
   setCurrentPage,
   totalPages,
   totalElements,
-  isFiltered,
   toggleFilter,
   setOnlyAvailable,
 }) => {
   const navigate = useNavigate();
   const location = useLocation();
-  const [dropdownVisible, setDropdownVisible] = useState(false); // 드롭다운 표시 상태
+  const { user } = useAuth();
+  const [dropdownVisible, setDropdownVisible] = useState(false);
 
   const goToRegister = () => {
     const currentPath = location.pathname;
@@ -38,7 +38,6 @@ const List = ({
   };
 
   const handleDropdownClick = (key) => {
-    // 특정 드롭다운만 열고 닫기
     setDropdownVisible((prev) => ({
       ...prev,
       [key]: !prev[key],
@@ -47,12 +46,11 @@ const List = ({
 
   const handleOptionSelect = (key, value) => {
     if (key === 'rentalStatus') {
-      setOnlyAvailable(value === 'true'); // rentalStatus 필터 업데이트
+      setOnlyAvailable(value === 'true');
     } else if (key === 'state') {
-      toggleFilter(value === 'true' ? true : value === 'false' ? false : null); // state 필터 업데이트
+      toggleFilter(value === 'true' ? true : value === 'false' ? false : null);
     }
 
-    // 드롭다운 닫기
     setDropdownVisible((prev) => ({
       ...prev,
       [key]: false,
@@ -67,7 +65,6 @@ const List = ({
           <span style={{ color: 'var(--main-color)' }}>{totalElements}</span>
           {itemText}
         </ListCount>
-        <SearchBox />
       </Top>
       <HeadLine>
         {columns.map((column, index) => {
@@ -194,9 +191,12 @@ const List = ({
             </PagingBtn>
           ))}
         </div>
-        {!window.location.pathname.includes('admin') && (
+        {!window.location.pathname.includes('admin') &&
+        user.role === 'ADMIN' ? (
           <WriteBtn onClick={goToRegister}>{buttonText}</WriteBtn>
-        )}
+        ) : window.location.pathname.includes('question') ? (
+          <WriteBtn onClick={goToRegister}>{buttonText}</WriteBtn>
+        ) : null}
       </Bottom>
     </ListWrapper>
   );
