@@ -1,6 +1,6 @@
 import api from 'api/axios';
 
-const delNoticeInfo = async (id, user) => {
+const delNoticeInfo = async (noticeId, user) => {
   if (!user) {
     throw new Error('로그인이 필요합니다.');
   }
@@ -9,7 +9,7 @@ const delNoticeInfo = async (id, user) => {
   }
 
   try {
-    const response = await api.delete(`admin/notices/${id}/delete`);
+    const response = await api.delete(`admin/notices/${noticeId}/delete`);
 
     return response.data;
   } catch (error) {
