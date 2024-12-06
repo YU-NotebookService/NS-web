@@ -115,7 +115,7 @@ function App() {
                 }
               />
               <Route
-                path="info"
+                path="info/:noticeId"
                 element={
                   <ProtectedRoute>
                     <NoticeInfo />
