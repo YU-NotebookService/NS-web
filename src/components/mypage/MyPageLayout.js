@@ -4,14 +4,17 @@ import UserInfo from 'components/mypage/UserInfo';
 import NotebookRentalInfo from 'components/mypage/NotebookRentalInfo';
 import MyQuestionList from 'components/mypage/MyQuestionList';
 import getMyRental from 'api/mypage/getMyRental';
+import { useAuth } from 'api/context/AuthProvider';
 
 const MyPageLayout = () => {
+  const { user } = useAuth();
+  console.log(user);
   const [myRental, setMyRental] = useState();
 
   const fetchMyRental = useCallback(async () => {
     try {
       const response = await getMyRental();
-      setMyRental(response);
+      setMyRental(response[0]);
     } catch (error) {
       console.error(
         '나의 대여 정보를 불러오는 데 실패하였습니다:',
@@ -22,12 +25,17 @@ const MyPageLayout = () => {
 
   useEffect(() => {
     fetchMyRental();
+    console.log(myRental);
   }, [fetchMyRental]); // fetchMyRental을 의존성 배열에 추가
 
   return (
     <MyPageWrapper>
       <MyPageTopSection>
-        <UserInfo name="홍길동" sid="22011475" phoneNum="010-9147-5631" />
+        <UserInfo
+          name={user.name}
+          sid={user.studentNumber}
+          phoneNum={user.phoneNumber}
+        />
         <NotebookRentalInfo myRentalInfo={myRental} />
       </MyPageTopSection>
       <MyQuestionList />

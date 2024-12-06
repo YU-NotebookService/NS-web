@@ -3,9 +3,12 @@ import { useNavigate } from 'react-router-dom';
 import { CardWrapper } from 'styles/common/List-styled';
 import { StateText } from 'styles/question/QuestionList-styled';
 import Button from '../Button';
+import { useAuth } from 'api/context/AuthProvider';
+import postRentalRequest from 'api/admin/postRentalRequest';
 
 const InfoCard = ({ el, index, columns }) => {
   const navigate = useNavigate();
+  const { user } = useAuth();
 
   const goToDetailInfo = () => {
     if (window.location.pathname.includes('notebook'))
@@ -16,6 +19,8 @@ const InfoCard = ({ el, index, columns }) => {
       navigate(`/notice/info/${el.noticeId}`);
     else if (window.location.pathname.includes('adminpage')) return;
   };
+
+  const reservationId = el.reservationId;
 
   console.log('el:', el);
   console.log('studentNumber:', el.studentNumber);
@@ -50,15 +55,20 @@ const InfoCard = ({ el, index, columns }) => {
                 {el[column.key] ? '답변 완료' : '답변 없음'}
               </StateText>
             ) : column.key === 'button' ? (
-              <Button style={{ height: '30px', width: '50%', margin: 'auto' }}>
+              <Button
+                style={{ height: '30px', width: '50%', margin: 'auto' }}
+                onClick={() => postRentalRequest({ reservationId, user })}
+              >
                 승인
               </Button>
             ) : column.key === 'user' ? (
               el[column.key] || '작성자 없음'
             ) : el[column.key] === 'AVAILABLE' ? (
               '대여가능'
+            ) : el[column.key] === 'RENTAL' ? (
+              '예약중'
             ) : el[column.key] === 'RESERVATION' ? (
-              '대여불가'
+              '대여중'
             ) : (
               el[column.key]
             )}

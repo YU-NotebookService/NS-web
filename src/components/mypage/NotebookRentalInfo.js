@@ -14,9 +14,10 @@ import postExtendNotebook from 'api/notebook/postExtendNotebook';
 const NotebookRentalInfo = ({ myRentalInfo }) => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [hasExtended, setHasExtended] = useState(false);
+  console.log(myRentalInfo);
 
   const handleExtendRequest = async () => {
-    if (!myRentalInfo.notebookId) {
+    if (!myRentalInfo?.notebookId) {
       alert('노트북 ID가 유효하지 않습니다.');
       return;
     }
@@ -53,16 +54,20 @@ const NotebookRentalInfo = ({ myRentalInfo }) => {
     return '연장 신청';
   };
 
-  const rentalInfo =
-    myRentalInfo && myRentalInfo.length > 0
-      ? [
-          { label: '노트북 ID', text: myRentalInfo.notbookId },
-          {
-            label: '대여 기간',
-            text: `${myRentalInfo.startDate} ~ ${myRentalInfo.endDate}`,
-          },
-        ]
-      : null;
+  console.log('myRentalInfo', myRentalInfo);
+  console.log(myRentalInfo.notebookId);
+
+  const rentalInfo = myRentalInfo
+    ? [
+        { label: '노트북 ID', text: myRentalInfo.notebookId },
+        {
+          label: '대여 기간',
+          text: `${myRentalInfo.startDate} ~ ${myRentalInfo.endDate}`,
+        },
+      ]
+    : null;
+
+  console.log(rentalInfo);
 
   return (
     <MyPageNotebookInfo>
