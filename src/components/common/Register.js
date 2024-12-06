@@ -116,7 +116,11 @@ const Register = ({ onSubmit }) => {
     // 새로운 파일 추가 (File 객체만)
     selectedFiles.forEach((file) => {
       if (file.type === 'file') {
-        data.append('images', file.value); // File 객체
+        if (window.location.pathname.includes('notice')) {
+          data.append('newImages', file.value);
+        } else {
+          data.append('images', file.value);
+        } // File 객체
       }
     });
 
