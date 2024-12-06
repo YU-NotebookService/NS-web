@@ -10,8 +10,7 @@ const NoticeRegLayout = () => {
 
   const onSubmit = async (formData) => {
     try {
-      const response = await postNoticeReg(formData, user);
-      console.log('API 응답:', response);
+      await postNoticeReg(formData, user);
       alert('공지사항이 성공적으로 등록되었습니다!');
       navigate('/notice/list');
     } catch (error) {

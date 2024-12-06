@@ -24,7 +24,6 @@ import RentalRequestList from 'pages/admin/RentalRequestList';
 import AllUserList from 'pages/admin/AllUserList';
 import NoticeModify from 'pages/notice/NoticeModify';
 
-
 const ProtectedRoute = ({ children, requiredRole }) => {
   const { user, isLoading } = useAuth();
 
@@ -53,13 +52,9 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route element={<Layout />}>
-            {/* 로그인 및 회원가입 */}
             <Route path="/" element={<Login />} />
             <Route path="register" element={<Register />} />
 
-            {/* 레이아웃 적용된 라우트 */}
-
-            {/* 메인 페이지 */}
             <Route
               path="main"
               element={
@@ -68,8 +63,6 @@ function App() {
                 </ProtectedRoute>
               }
             />
-
-            {/* 노트북 관리 */}
             <Route path="notebook">
               <Route
                 path="list"
@@ -91,7 +84,6 @@ function App() {
                 path="reg"
                 element={
                   <ProtectedRoute requiredRole="ADMIN">
-                    {/* ADMIN 전용 */}
                     <NotebookReg />
                   </ProtectedRoute>
                 }
@@ -100,14 +92,12 @@ function App() {
                 path="modify/:notebookId"
                 element={
                   <ProtectedRoute requiredRole="ADMIN">
-                    {/* ADMIN 전용 */}
                     <NotebookModify />
                   </ProtectedRoute>
                 }
               />
             </Route>
 
-            {/* 공지 관리 */}
             <Route path="notice">
               <Route
                 path="list"
@@ -129,7 +119,6 @@ function App() {
                 path="reg"
                 element={
                   <ProtectedRoute requiredRole="ADMIN">
-                    {/* ADMIN 전용 */}
                     <NoticeReg />
                   </ProtectedRoute>
                 }
@@ -145,7 +134,6 @@ function App() {
               />
             </Route>
 
-            {/* 질문 관리 */}
             <Route path="question">
               <Route
                 path="list"
@@ -181,7 +169,6 @@ function App() {
               />
             </Route>
 
-            {/* 마이페이지 */}
             <Route
               path="mypage"
               element={
@@ -190,7 +177,6 @@ function App() {
                 </ProtectedRoute>
               }
             />
-            {/* 관리자페이지의 메인은 대여 요청 조회*/}
             <Route path="adminpage">
               <Route
                 path=""
@@ -210,7 +196,6 @@ function App() {
               />
             </Route>
 
-            {/* 에러 페이지 */}
             <Route path="*" element={<Error />} />
           </Route>
         </Routes>

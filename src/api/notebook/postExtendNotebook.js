@@ -8,7 +8,7 @@ const postExtendNotebook = async (data, notebookId) => {
       },
     });
 
-    return response.data; // 성공 시 응답 데이터 반환
+    return response.data;
   } catch (error) {
     console.error('전체 에러 객체:', error);
 
@@ -21,7 +21,6 @@ const postExtendNotebook = async (data, notebookId) => {
         메시지: data?.message || '없음',
       });
 
-      // 에러 코드별 메시지 처리
       const errorMessage =
         {
           AE1: '권한이 없습니다. 관리자에게 문의하세요.',

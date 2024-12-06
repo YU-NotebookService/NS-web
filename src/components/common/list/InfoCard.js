@@ -22,9 +22,6 @@ const InfoCard = ({ el, index, columns }) => {
 
   const reservationId = el.reservationId;
 
-  console.log('el:', el);
-  console.log('studentNumber:', el.studentNumber);
-
   return (
     <CardWrapper>
       <div

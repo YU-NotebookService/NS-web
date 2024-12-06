@@ -9,13 +9,7 @@ const QuestionRegLayout = () => {
 
   const onSubmit = async (formData) => {
     try {
-      console.log('전달하는 FormData 내용:');
-      formData.forEach((value, key) => {
-        console.log(`${key}:`, value);
-      });
-
-      const response = await postQuestionInfo(formData, user); // FormData 전달
-      console.log('게시글 등록 성공: ', response);
+      await postQuestionInfo(formData, user);
       alert('게시글 성공적으로 등록되었습니다.');
       navigate('/question/list');
     } catch (error) {
@@ -26,6 +20,5 @@ const QuestionRegLayout = () => {
 
   return <Register onSubmit={onSubmit} />;
 };
-
 
 export default QuestionRegLayout;

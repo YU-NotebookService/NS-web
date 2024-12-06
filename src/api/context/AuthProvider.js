@@ -15,12 +15,10 @@ export const AuthProvider = ({ children }) => {
       if (storedUser) {
         const parsedUser = JSON.parse(storedUser);
         setUser(parsedUser);
-        console.log('복원된 사용자 정보:', parsedUser);
       }
 
       if (storedToken) {
         setAccessToken(storedToken);
-        console.log('복원된 AccessToken:', storedToken);
       }
     } catch (error) {
       console.error('로컬 스토리지 데이터 파싱 중 오류:', error);
@@ -29,7 +27,7 @@ export const AuthProvider = ({ children }) => {
     } finally {
       setIsLoading(false);
     }
-  }, []); // 빈 배열로 유지
+  }, []);
 
   const login = ({ user, token }) => {
     setUser(user);

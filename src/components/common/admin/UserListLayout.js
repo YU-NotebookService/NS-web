@@ -12,7 +12,7 @@ const UserListLayout = () => {
     { label: '연락처', width: '20%', key: 'phoneNumber' },
     { label: '이메일', width: '25%', key: 'email' },
     { label: '권한', width: '10%', key: 'role' },
-    { label: '대여 상태', width: '10%', key: 'userRentalStatus' }, // 버튼 렌더링을 위한 key
+    { label: '대여 상태', width: '10%', key: 'userRentalStatus' },
   ];
 
   const [userList, setUserList] = useState();
@@ -23,11 +23,11 @@ const UserListLayout = () => {
 
   const fetchuserList = useCallback(async () => {
     try {
-      setIsLoading(true); // 로딩 시작
+      setIsLoading(true);
       const response = await getAllUserList({
         currentPage,
       });
-      await new Promise((resolve) => setTimeout(resolve, 500)); // 로딩 지연
+      await new Promise((resolve) => setTimeout(resolve, 500));
       setUserList(response.content);
       setTotalPages(response.totalPages);
       setTotalElements(response.totalElements);
@@ -37,7 +37,7 @@ const UserListLayout = () => {
         error.message,
       );
     } finally {
-      setIsLoading(false); // 로딩 종료
+      setIsLoading(false);
     }
   }, [currentPage]);
 
@@ -50,7 +50,7 @@ const UserListLayout = () => {
   return (
     <>
       {isLoading ? (
-        <LoadingBar /> // 로딩 상태에서 로딩 표시
+        <LoadingBar />
       ) : (
         <List
           itemText="개의 사용자가 등록되어 있습니다."

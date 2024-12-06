@@ -1,9 +1,6 @@
 import api from 'api/axios';
 
 const postRentalRequest = async ({ reservationId, user }) => {
-  console.log('reservationId', reservationId);
-  console.log('user', user);
-
   if (!user) {
     throw new Error('로그인이 필요합니다.');
   }
@@ -15,7 +12,6 @@ const postRentalRequest = async ({ reservationId, user }) => {
     const response = await api.post(`admin/approve/${reservationId}`, {
       type: 'RENTAL',
     });
-    console.log(response);
     alert(response.data.message);
     window.location.reload();
   } catch (error) {

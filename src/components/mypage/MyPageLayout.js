@@ -21,12 +21,11 @@ const MyPageLayout = () => {
         error.message,
       );
     }
-  }, []); // 빈 배열로 인해 메모이제이션됨
+  }, []);
 
   useEffect(() => {
     fetchMyRental();
-    console.log(myRental);
-  }, [fetchMyRental]); // fetchMyRental을 의존성 배열에 추가
+  }, [fetchMyRental]);
 
   return (
     <MyPageWrapper>

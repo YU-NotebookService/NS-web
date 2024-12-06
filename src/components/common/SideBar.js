@@ -22,11 +22,6 @@ const SideBar = () => {
                 대여 요청 조회
               </NavItem>
             </SidebarItem>
-            <SidebarItem>
-              <NavItem onClick={() => navigate('/extension/request')}>
-                연장 요청 조회
-              </NavItem>
-            </SidebarItem>
           </SidebarList>
         </SidebarItem>
         <SidebarItem>

@@ -9,7 +9,6 @@ import {
   Address,
   TelItem,
 } from '../styles/layouts/FooterLayout-styled';
-// TODO: 절대경로 설정
 
 const FooterLayout = () => {
   return (
@@ -17,7 +16,6 @@ const FooterLayout = () => {
       <FooterContainer>
         <FooterWrapper>
           <FooterLogo src={img_Logo_YU_Footer} />
-          {/* TODO: 로고이미지 클릭시 학교 홈페이지 이동 구현 */}
           <Content>
             <Address>
               우)38541, 경상북도 경산시 대학로 280 영남대학교 IT관(E21) 1층

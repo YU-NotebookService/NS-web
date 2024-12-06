@@ -22,7 +22,6 @@ import {
   RegisterWrapper,
 } from 'styles/common/Register-styled';
 import { useForm } from 'react-hook-form';
-import { useAuth } from 'api/context/AuthProvider';
 import { useLocation } from 'react-router-dom';
 
 const Register = ({ onSubmit }) => {
@@ -36,14 +35,12 @@ const Register = ({ onSubmit }) => {
     formState: { errors },
   } = useForm();
 
-  // 파일 및 URL 상태 관리
   const [selectedFiles, setSelectedFiles] = useState([]);
   const [id, setId] = useState();
 
   useEffect(() => {
     const data = location.state || {};
 
-    //imgUrl를 배열 형태로 변환하고 통합 관리
     const initialFiles = Array.isArray(data.imgUrl)
       ? data.imgUrl.map((url) => ({
           name: url.split('/').pop(),
@@ -74,23 +71,20 @@ const Register = ({ onSubmit }) => {
   const os = watch('os', '');
   const content = watch('content', '');
 
-  // 파일 선택 처리
   const handleFileChange = (event) => {
     const files = Array.from(event.target.files).map((file) => ({
       name: file.name,
       type: 'file',
-      value: file, // 실제 File 객체
+      value: file,
     }));
 
     setSelectedFiles((prevFiles) => [...prevFiles, ...files]);
   };
 
-  // 파일 삭제 처리
   const handleDeleteFile = (index) => {
     setSelectedFiles((prevFiles) => prevFiles.filter((_, i) => i !== index));
   };
 
-  // 파일 첨부 버튼 클릭 처리
   const handleFileClick = () => {
     document.getElementById('fileInput').click();
   };
@@ -98,7 +92,6 @@ const Register = ({ onSubmit }) => {
   const onFormSubmit = (formData) => {
     const data = new FormData();
 
-    // 필수 필드 추가
     if (window.location.pathname.includes('notebook')) {
       data.append('model', formData.title);
       data.append('manufactureDate', formData.manufactureDate);
@@ -113,31 +106,27 @@ const Register = ({ onSubmit }) => {
       data.append('content', formData.content);
     }
 
-    // 새로운 파일 추가 (File 객체만)
     selectedFiles.forEach((file) => {
       if (file.type === 'file') {
         if (window.location.pathname.includes('notice')) {
           data.append('newImages', file.value);
         } else {
           data.append('images', file.value);
-        } // File 객체
+        }
       }
     });
 
-    // 기존 URL 추가 (URL만)
     selectedFiles.forEach((file) => {
       if (file.type === 'url') {
-        data.append('imageUrls', file.value); // URL은 별도 필드
+        data.append('imageUrls', file.value);
       }
     });
 
-    // FormData 디버깅 출력
     console.log('전송되는 FormData:');
     data.forEach((value, key) => {
       console.log(`${key}:, value`);
     });
 
-    // FormData 전달
     onSubmit(data, id);
   };
 

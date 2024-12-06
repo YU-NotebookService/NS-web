@@ -1,10 +1,14 @@
 import { useAuth } from 'api/context/AuthProvider';
-import getQuestionInfo from 'api/question/getQuestionInfo'
+import getQuestionInfo from 'api/question/getQuestionInfo';
 import Detail from 'components/common/Detail';
 import { LoadingBar } from 'components/common/LoadingBar';
 import React, { useCallback, useEffect, useState, useRef } from 'react';
 import delQuestionInfo from 'api/question/delQuestionInfo';
-import { AnswerContent, ReplyContent, SubmitBtn } from 'styles/question/QuestionList-styled';
+import {
+  AnswerContent,
+  ReplyContent,
+  SubmitBtn,
+} from 'styles/question/QuestionList-styled';
 import { useNavigate, useParams } from 'react-router-dom';
 import postQuestionReply from 'api/question/postQuestionReply';
 
@@ -17,9 +21,9 @@ function QuestionInfoLayout() {
   const [questionInfo, setQuestionInfo] = useState({
     title: '',
     content: '',
-    state: false, // state는 초기값을 false로 설정
+    state: false,
     answer: null,
-    imgUrl: [], // 이미지 URL 배열로 초기화
+    imgUrl: [],
   });
 
   const goToQuestionList = () => {
@@ -29,11 +33,13 @@ function QuestionInfoLayout() {
   const fetchQuestionInfo = useCallback(async () => {
     try {
       const response = await getQuestionInfo({ questionId });
-      await new Promise((resolve) => setTimeout(resolve, 500)); // 로딩 지연
+      await new Promise((resolve) => setTimeout(resolve, 500));
 
       const questionIdParam = parseInt(questionId, 10);
 
-      const questionData = response.questions.find((q) => q.questionId === questionIdParam);
+      const questionData = response.questions.find(
+        (q) => q.questionId === questionIdParam,
+      );
 
       if (!response.questions || response.questions.length === 0) {
         console.error('questions 배열이 비어 있거나 존재하지 않습니다.');
@@ -73,7 +79,10 @@ function QuestionInfoLayout() {
         alert('답변을 입력해주세요');
         return;
       }
-      const response = await postQuestionReply({ questionId: String(questionId), answer: String(data) }, user);
+      await postQuestionReply(
+        { questionId: String(questionId), answer: String(data) },
+        user,
+      );
       alert('답변이 제출되었습니다.');
       setQuestionInfo((prev) => ({ ...prev, answer: data }));
     } catch (error) {
@@ -82,7 +91,9 @@ function QuestionInfoLayout() {
       if (error.response) {
         console.error('서버 응답 데이터:', error.response.data);
         console.error('응답 상태 코드:', error.response.status);
-        alert(`서버 오류: ${error.response.data.message || '알 수 없는 오류입니다.'}`);
+        alert(
+          `서버 오류: ${error.response.data.message || '알 수 없는 오류입니다.'}`,
+        );
       } else if (error.request) {
         console.error('요청 자체가 전송되지 않음:', error.request);
         alert('네트워크 문제로 요청이 실패했습니다.');
@@ -97,13 +108,12 @@ function QuestionInfoLayout() {
     const confirmDelete = window.confirm('삭제하시겠습니까?');
     if (confirmDelete) {
       try {
-        await delQuestionInfo(questionId, user); // API 호출
+        await delQuestionInfo(questionId, user);
         alert('삭제되었습니다.');
-        goToQuestionList(); // 목록 페이지로 이동
+        goToQuestionList();
       } catch (error) {
         console.error('삭제에 실패하였습니다:', error.message);
 
-        // 오류 메시지를 사용자에게 표시
         if (error.message.includes('로그인')) {
           alert('로그인이 필요합니다. 로그인 후 다시 시도해주세요.');
         } else if (error.message.includes('권한')) {
@@ -119,16 +129,16 @@ function QuestionInfoLayout() {
     }
   };
 
-  if (!questionInfo.title) return <LoadingBar />; // 제목이 없으면 로딩바 표시
-
+  if (!questionInfo.title) return <LoadingBar />;
   return (
     <>
-      <Detail data={questionInfo}
+      <Detail
+        data={questionInfo}
         goToList={goToQuestionList}
         deletePost={deleteQuestionInfo}
       />
       <AnswerContent>
-        {user?.role == 'ADMIN' ? (
+        {user?.role === 'ADMIN' ? (
           <>
             <ReplyContent
               placeholder="답변을 입력하세요"

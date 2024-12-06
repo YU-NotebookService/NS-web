@@ -8,11 +8,8 @@ const loginApi = async (data) => {
     console.error('전체 에러 객체:', error);
 
     if (error.response) {
-      // 상태 코드와 응답 데이터 출력
       console.error('응답 상태 코드:', error.response.status);
       console.error('응답 데이터:', error.response.data);
-
-      // 상태 코드에 따른 에러 처리
       if (error.response.status === 401) {
         throw new Error('아이디 또는 비밀번호가 잘못되었습니다.');
       } else if (error.response.status >= 500) {

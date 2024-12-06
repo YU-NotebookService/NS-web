@@ -31,12 +31,12 @@ const NoticeInfoLayout = () => {
     try {
       const response = await getNoticeInfo({ noticeId });
 
-      await new Promise((resolve) => setTimeout(resolve, 500)); // 로딩 시뮬레이션
+      await new Promise((resolve) => setTimeout(resolve, 500));
 
       const normalizedResponse = {
         ...response,
-        date: formatDate(response.date || new Date().toISOString()), // 날짜 포맷 변환
-        imgUrl: response.imageUrl || [], // 이미지 URL 배열 처리
+        date: formatDate(response.date || new Date().toISOString()),
+        imgUrl: response.imageUrl || [],
       };
 
       setNoticeInfo(normalizedResponse);
@@ -52,7 +52,7 @@ const NoticeInfoLayout = () => {
     if (noticeId) {
       fetchNoticeInfo();
     }
-  }, [noticeId]);
+  }, [noticeId, fetchNoticeInfo]);
 
   const deleteNoticeInfo = async () => {
     const confirmDelete = window.confirm('삭제하시겠습니까?');
@@ -64,7 +64,6 @@ const NoticeInfoLayout = () => {
       } catch (error) {
         console.error('삭제에 실패하였습니다:', error.message);
 
-        // 오류 메시지를 사용자에게 표시
         if (error.message.includes('로그인')) {
           alert('로그인이 필요합니다. 로그인 후 다시 시도해주세요.');
         } else if (error.message.includes('권한')) {
@@ -83,11 +82,13 @@ const NoticeInfoLayout = () => {
   if (!noticeInfo.title) return <LoadingBar />;
 
   return (
-
     <>
-      <Detail data={noticeInfo} goToList={goToNoticeList} />
+      <Detail
+        data={noticeInfo}
+        goToList={goToNoticeList}
+        deletPost={deleteNoticeInfo}
+      />
     </>
-
   );
 };
 

@@ -35,7 +35,7 @@ const NotebookInfoLayout = () => {
         ...response,
         imgUrl: Array.isArray(response.imgUrl)
           ? response.imgUrl
-          : [response.imgUrl], // 배열로 변환
+          : [response.imgUrl],
       };
 
       setNotebookInfo(normalizedResponse);
@@ -58,7 +58,6 @@ const NotebookInfoLayout = () => {
       } catch (error) {
         console.error('삭제에 실패하였습니다:', error.message);
 
-        // 오류 메시지를 사용자에게 표시
         if (error.message.includes('로그인')) {
           alert('로그인이 필요합니다. 로그인 후 다시 시도해주세요.');
         } else if (error.message.includes('권한')) {
@@ -84,8 +83,6 @@ const NotebookInfoLayout = () => {
       notebookId,
       rentalDate: new Date().toISOString(),
     };
-
-    console.log('전송 데이터:', requestData);
 
     try {
       const response = await postRentalNotebook(requestData, notebookId);

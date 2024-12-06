@@ -15,21 +15,17 @@ function NotebookListLayout() {
   const [currentPage, setCurrentPage] = useState(0);
   const [totalPages, setTotalPages] = useState(0);
   const [totalElements, setTotalElements] = useState(0);
-
-  // 대여 상태 필터 (true: 대여 가능, false: 대여 불가)
   const [onlyAvailable, setOnlyAvailable] = useState(false);
-
-  // 로딩 상태 추가
   const [isLoading, setIsLoading] = useState(false);
 
   const fetchNotebookList = useCallback(async () => {
     try {
-      setIsLoading(true); // 로딩 시작
+      setIsLoading(true);
       const response = await getNotebookList({
         currentPage,
         onlyAvailable,
       });
-      await new Promise((resolve) => setTimeout(resolve, 500)); // 로딩 지연
+      await new Promise((resolve) => setTimeout(resolve, 500));
       setNotebookList(response.content);
       setTotalPages(response.totalPages);
       setTotalElements(response.totalElements);
@@ -39,7 +35,7 @@ function NotebookListLayout() {
         error.message,
       );
     } finally {
-      setIsLoading(false); // 로딩 종료
+      setIsLoading(false);
     }
   }, [currentPage, onlyAvailable]);
 
@@ -52,7 +48,7 @@ function NotebookListLayout() {
   return (
     <>
       {isLoading ? (
-        <LoadingBar /> // 로딩 상태에서 로딩 표시
+        <LoadingBar />
       ) : (
         <List
           itemText="개의 노트북이 등록되어 있습니다."

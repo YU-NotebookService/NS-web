@@ -10,16 +10,13 @@ const loadingAnimation = keyframes`
 `;
 
 export const LoadingBar = styled.div`
-  width: 50%; /* 로딩 바의 너비를 50%로 설정하여 중앙에 위치하도록 */
+  width: 50%;
   height: 4px;
   background-color: #e0e0e0;
-  position: fixed; /* 화면 중앙에 고정 */
+  position: fixed;
   top: 50%;
   left: 50%;
-  transform: translate(
-    -50%,
-    -50%
-  ); /* 화면 정중앙에 위치시키기 위한 transform */
+  transform: translate(-50%, -50%);
   overflow: hidden;
 
   &::before {
