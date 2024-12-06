@@ -12,7 +12,7 @@ const NoticeInfoLayout = () => {
     title: '',
     content: '',
     date: new Date().toISOString(),
-    imgUrls: [],
+    imgUrl: [],
   });
 
   const goToNoticeList = () => {
@@ -33,7 +33,7 @@ const NoticeInfoLayout = () => {
       const normalizedResponse = {
         ...response,
         date: formatDate(response.date || new Date().toISOString()), // 날짜 포맷 변환
-        imgUrls: response.imageUrls || [], // 이미지 URL 배열 처리
+        imgUrl: response.imageUrl || [], // 이미지 URL 배열 처리
       };
 
       setNoticeInfo(normalizedResponse);
@@ -56,20 +56,6 @@ const NoticeInfoLayout = () => {
   return (
     <>
       <Detail data={noticeInfo} goToList={goToNoticeList} />
-      {/* TODO:수정 예정 */}
-      <div>
-        {noticeInfo.imgUrls.length > 0 ? (
-          noticeInfo.imgUrls.map((url, index) => (
-            <img
-              key={index}
-              src={url}
-              style={{ maxWidth: '100%', marginTop: '10px' }}
-            />
-          ))
-        ) : (
-          <p>이미지를 불러올 수 없습니다</p>
-        )}
-      </div>
     </>
   );
 };
