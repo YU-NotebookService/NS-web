@@ -101,7 +101,9 @@ const List = ({
                       대여가능
                     </DropDownContent>
                     <DropDownContent
-                      onClick={() => handleOptionSelect('rentalStatus', 'false')}
+                      onClick={() =>
+                        handleOptionSelect('rentalStatus', 'false')
+                      }
                     >
                       대여불가
                     </DropDownContent>
@@ -165,7 +167,7 @@ const List = ({
       </HeadLine>
       {currentData &&
         currentData.map((el, index) => {
-          return currentPage !== null ? (
+          return !window.location.pathname.includes('admin') ? (
             <InfoCard
               key={index}
               el={el}

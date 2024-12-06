@@ -1,6 +1,9 @@
 import api from 'api/axios';
 
-const postRentalRequest = async (data, user) => {
+const postRentalRequest = async ({ reservationId, user }) => {
+  console.log('reservationId', reservationId);
+  console.log('user', user);
+
   if (!user) {
     throw new Error('로그인이 필요합니다.');
   }
@@ -9,13 +12,12 @@ const postRentalRequest = async (data, user) => {
   }
 
   try {
-    const response = await api.post(`admin/approve/{reservationId}`, data, {
-      headers: {
-        'Content-Type': 'multipart/form-data',
-      },
+    const response = await api.post(`admin/approve/${reservationId}`, {
+      type: 'RENTAL',
     });
-
-    return response.data;
+    console.log(response);
+    alert(response.data.message);
+    window.location.reload();
   } catch (error) {
     console.error('전체 에러 객체:', error);
 
