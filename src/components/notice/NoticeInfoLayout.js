@@ -1,35 +1,75 @@
 import Detail from 'components/common/Detail';
-import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useCallback, useEffect, useState } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
+import getNoticeInfo from 'api/notice/getNoticeInfo';
+import { LoadingBar } from 'components/common/LoadingBar';
 
 const NoticeInfoLayout = () => {
   const navigate = useNavigate();
+  const { noticeId } = useParams();
+
+  const [noticeInfo, setNoticeInfo] = useState({
+    title: '',
+    content: '',
+    date: new Date().toISOString(),
+    imgUrls: [],
+  });
 
   const goToNoticeList = () => {
     navigate('/notice/list');
   };
 
-  const formatText = (text) => {
-    return text.split('\n').map((line, index) => (
-      <span key={index}>
-        {line}
-        <br />
-      </span>
-    ));
+  const formatDate = (isoDate) => {
+    const date = new Date(isoDate);
+    return `${date.getFullYear()}.${String(date.getMonth() + 1).padStart(2, '0')}.${String(date.getDate()).padStart(2, '0')}`;
   };
 
-  const text =
-    '재학생 학생증 수령 안내 \n\n학생증은 발급순으로 학부 행정실에 도착하며 대상 학생에게 SMS/PUSH로 수령안내하고 있습니다.\n따라서 SMS/PUSH 수신 확인을 잘 해주시기 바랍니다.\n학부 행정실에서 따로 안내 받지 않은 경우 학생증 발급 여부는 학부 행정실에서 알 수 없습니다.\n\n학생증 수령 장소 : 컴퓨터학부 행정실 IT관(E21)\n\n122호학생증 수령 시 신분증 혹은 모바일 신분증 확인 필수입니다.\n신분증 없이 학생증 수령 어렵습니다.';
+  const fetchNoticeInfo = useCallback(async () => {
+    try {
+      const response = await getNoticeInfo({ noticeId });
+
+      await new Promise((resolve) => setTimeout(resolve, 500)); // 로딩 시뮬레이션
+
+      const normalizedResponse = {
+        ...response,
+        date: formatDate(response.date || new Date().toISOString()), // 날짜 포맷 변환
+        imgUrls: response.imageUrls || [], // 이미지 URL 배열 처리
+      };
+
+      setNoticeInfo(normalizedResponse);
+    } catch (error) {
+      console.error(
+        '공지사항 정보를 불러오는 데 실패하였습니다',
+        error.message,
+      );
+    }
+  }, [noticeId]);
+
+  useEffect(() => {
+    if (noticeId) {
+      fetchNoticeInfo();
+    }
+  }, [noticeId]);
+
+  if (!noticeInfo.title) return <LoadingBar />;
 
   return (
     <>
-      <Detail
-        headLineText={'★☆ 컴퓨터학부 노트북 대여 시 주의사항 ☆★'}
-        writer={'관리자'}
-        createdAt={'2024-09-03 18:49'}
-        contentText={formatText(text)}
-        goToList={goToNoticeList}
-      />
+      <Detail data={noticeInfo} goToList={goToNoticeList} />
+      {/* TODO:수정 예정 */}
+      <div>
+        {noticeInfo.imgUrls.length > 0 ? (
+          noticeInfo.imgUrls.map((url, index) => (
+            <img
+              key={index}
+              src={url}
+              style={{ maxWidth: '100%', marginTop: '10px' }}
+            />
+          ))
+        ) : (
+          <p>이미지를 불러올 수 없습니다</p>
+        )}
+      </div>
     </>
   );
 };
