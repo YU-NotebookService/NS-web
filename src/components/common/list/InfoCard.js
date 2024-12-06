@@ -63,6 +63,12 @@ const InfoCard = ({ el, index, columns }) => {
               </Button>
             ) : column.key === 'user' ? (
               el[column.key] || '작성자 없음'
+            ) : typeof el[column.key] === 'boolean' ? (
+              el[column.key] ? (
+                'True'
+              ) : (
+                'False'
+              )
             ) : el[column.key] === 'AVAILABLE' ? (
               '대여가능'
             ) : el[column.key] === 'RENTAL' ? (

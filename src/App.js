@@ -21,7 +21,9 @@ import NotebookModify from 'pages/notebook/NotebookModify';
 import QuestionModify from 'pages/question/QuestionModify';
 import { LoadingBar } from './components/common/LoadingBar';
 import RentalRequestList from 'pages/admin/RentalRequestList';
+import AllUserList from 'pages/admin/AllUserList';
 import NoticeModify from 'pages/notice/NoticeModify';
+
 
 const ProtectedRoute = ({ children, requiredRole }) => {
   const { user, isLoading } = useAuth();
@@ -189,14 +191,24 @@ function App() {
               }
             />
             {/* 관리자페이지의 메인은 대여 요청 조회*/}
-            <Route
-              path="adminpage"
-              element={
-                <ProtectedRoute>
-                  <RentalRequestList />
-                </ProtectedRoute>
-              }
-            />
+            <Route path="adminpage">
+              <Route
+                path=""
+                element={
+                  <ProtectedRoute requiredRole="ADMIN">
+                    <RentalRequestList />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="users"
+                element={
+                  <ProtectedRoute requiredRole="ADMIN">
+                    <AllUserList />
+                  </ProtectedRoute>
+                }
+              />
+            </Route>
 
             {/* 에러 페이지 */}
             <Route path="*" element={<Error />} />
