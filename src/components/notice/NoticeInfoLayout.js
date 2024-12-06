@@ -83,11 +83,11 @@ const NoticeInfoLayout = () => {
   if (!noticeInfo.title) return <LoadingBar />;
 
   return (
-    <Detail
-      data={noticeInfo}
-      goToList={goToNoticeList}
-      deletePost={deleteNoticeInfo}
-    />
+
+    <>
+      <Detail data={noticeInfo} goToList={goToNoticeList} />
+    </>
+
   );
 };
 
