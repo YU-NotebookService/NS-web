@@ -11,7 +11,7 @@ import {
 } from 'styles/MyPage-styled';
 import postExtendNotebook from 'api/notebook/postExtendNotebook';
 
-const NotebookRentalInfo = ({ myRentalInfo }) => {
+const NotebookRentalInfo = ({ myRentalInfo = {} }) => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [hasExtended, setHasExtended] = useState(false);
   console.log(myRentalInfo);
@@ -28,7 +28,7 @@ const NotebookRentalInfo = ({ myRentalInfo }) => {
 
     try {
       const requestData = { requestDate: new Date().toISOString() };
-      console.log('API 호출 준비:', requestData, myRentalInfo.notebookId);
+      console.log('API 호출 준비:', requestData, myRentalInfo?.notebookId);
 
       const response = await postExtendNotebook(
         requestData,
@@ -57,15 +57,16 @@ const NotebookRentalInfo = ({ myRentalInfo }) => {
   console.log('myRentalInfo', myRentalInfo);
   console.log(myRentalInfo.notebookId);
 
-  const rentalInfo = myRentalInfo
-    ? [
-        { label: '노트북 ID', text: myRentalInfo.notebookId },
-        {
-          label: '대여 기간',
-          text: `${myRentalInfo.startDate} ~ ${myRentalInfo.endDate}`,
-        },
-      ]
-    : null;
+  const rentalInfo =
+    myRentalInfo && Object.keys(myRentalInfo).length > 0
+      ? [
+          { label: '노트북 ID', text: myRentalInfo?.notebookId || '정보 없음' },
+          {
+            label: '대여 기간',
+            text: `${myRentalInfo?.startDate || '미정'} ~ ${myRentalInfo?.endDate || '미정'}`,
+          },
+        ]
+      : null;
 
   console.log(rentalInfo);
 
