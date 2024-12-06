@@ -22,3 +22,23 @@ export const Content = styled.div`
   padding: 10px;
   border-radius: 8px;
 `;
+
+export const Img = styled.img`
+  width: 24px;
+  height: 24px;
+`;
+
+export const MenuBtn = styled.button`
+  background: none;
+  border: none;
+  cursor: pointer;
+  margin: 0;
+  top: 20px;
+  display: flex;
+  align-items: center;
+`;
+
+export const MenuContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
