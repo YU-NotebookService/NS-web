@@ -21,6 +21,7 @@ import NotebookModify from 'pages/notebook/NotebookModify';
 import QuestionModify from 'pages/question/QuestionModify';
 import { LoadingBar } from './components/common/LoadingBar';
 import RentalRequestList from 'pages/admin/RentalRequestList';
+import NoticeModify from 'pages/notice/NoticeModify';
 
 const ProtectedRoute = ({ children, requiredRole }) => {
   const { user, isLoading } = useAuth();
@@ -128,6 +129,15 @@ function App() {
                   <ProtectedRoute requiredRole="ADMIN">
                     {/* ADMIN 전용 */}
                     <NoticeReg />
+                  </ProtectedRoute>
+                }
+              />
+
+              <Route
+                path="modify/:noticeId"
+                element={
+                  <ProtectedRoute>
+                    <NoticeModify />
                   </ProtectedRoute>
                 }
               />
