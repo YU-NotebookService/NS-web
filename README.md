@@ -2,42 +2,53 @@
 ### 2024 소프트웨어공학 프로젝트 : 영남대학교 노트북 대여 웹 개발
 
 # 🕹️기능 정리
+> 권장 테스트 환경 : 1920 x 1080 px, 크롬 브라우저 기준 확대율 100%
+> 테스트 하다가 문의 사항 발생 시 010-9147-5631 로 연락 주세요!!
 ### 1. 회원가입
-- 회원 가입시 기본적으로 `사용자` 권한으로 가입
-- `관리자` 권한 계정은 아래에 기재
-
-<div style="display: flex; flex-direction: row; gap: 10px; align-items: flex-start;">
-  <img src="https://github.com/user-attachments/assets/96ad1b81-22fe-4223-a788-203d0676cbe7" alt="회원가입 이미지1" width="48%">
-  <img src="https://github.com/user-attachments/assets/40ee4f76-4158-47a3-a48e-97f39d7ad7f5" alt="회원가입 이미지2" width="48%">
-</div>
+- 회원 가입시 기본적으로 `USER` 권한으로 가입
+![chrome-capture-2024-12-7](https://github.com/user-attachments/assets/f4d540e2-5a10-4717-ad4f-4f95a0d8800a)
 
 ### 2. 로그인
 - 관리자용 계정
   - ID : 22012120
   - PW : 123456789abc
-![image](https://github.com/user-attachments/assets/66aa1f6b-59ec-4c7b-8a0a-9fbd6173177c)
-
-
+- 사용자용 계정
+  - 신규 회원가입 진행하시면 됩니다!
+  - 
 ### 3. 메인화면
-![image](https://github.com/user-attachments/assets/06fa42f8-ed15-4197-9932-658cc8bcd8a5)
+- 관리자 로그인
+![chrome-capture-2024-12-7 (1)](https://github.com/user-attachments/assets/e655ea5f-67dd-4b2a-b1ce-6879ba4e71bb)
+- 사용자 로그인
+![chrome-capture-2024-12-7 (2)](https://github.com/user-attachments/assets/8684f4e9-2ce5-4793-bd88-2f98e1f925a0)
 
-### 4. 노트북
+### 4. 리스트 및 세부 정보 조회(노트북, 공지 사항, 1:1 문의)
+- 노트북은 드롭다운 메뉴로 대여불가, 대여가능 정렬 가능
+![chrome-capture-2024-12-7 (3)](https://github.com/user-attachments/assets/dcb429d8-e23d-4803-a816-05583aa8fd80)
 
-#### 4.1 리스트 조회
+### 5. 수정 및 삭제(노트북, 공지 사항)
+- 관리자 계정으로 로그인 했을 때만 가능
+- 1:1 문의 수정 및 삭제는 작성한 사용자가 가능
+![chrome-capture-2024-12-7 (4)](https://github.com/user-attachments/assets/b9b9f21f-80ab-47b5-85e0-2a0b855c166f)
 
-#### 4.2 세부 정보 조회
+### 6. 대여 신청(사용자)
+![chrome-capture-2024-12-7 (7)](https://github.com/user-attachments/assets/ca13184a-58cb-4f6b-a25d-28e6544bad18)
 
-#### 4.3 신규 등록(관리자)
+### 7. 대여 신청 승인(관리자)
+![chrome-capture-2024-12-7 (6)](https://github.com/user-attachments/assets/594bebd8-1400-460d-a72a-4a12f53b24c0)
 
-#### 4.4 수정 or 삭제(관리자)
+### 8. 1:1 문의 답변(관리자)
+![chrome-capture-2024-12-7 (10)](https://github.com/user-attachments/assets/ba241c3a-9589-4e33-b2c8-e0e1131034b5)
 
-### 
+### 9. 마이페이지(사용자)
+![chrome-capture-2024-12-7 (8)](https://github.com/user-attachments/assets/152c4785-39e8-47a7-922d-a7cc4d99c8e3)
+
+### 10. 관리자페이지
+![chrome-capture-2024-12-7 (9)](https://github.com/user-attachments/assets/4b519599-9dd1-4629-b6ad-3b18120f0f0f)
 
 
-## 📌 컨벤션
+# 📌 컨벤션
 
 ### 브랜치 네이밍
-
 ```
 main ── feature/{작업명}
 ex) feature/loginDesign
