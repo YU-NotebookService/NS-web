@@ -15,7 +15,6 @@
   - PW : 123456789abc
 - 사용자용 계정
   - 신규 회원가입 진행하시면 됩니다!
-  - 
 ### 3. 메인화면
 - 관리자 로그인
 ![chrome-capture-2024-12-7 (1)](https://github.com/user-attachments/assets/e655ea5f-67dd-4b2a-b1ce-6879ba4e71bb)
